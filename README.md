@@ -25,7 +25,7 @@ ETL pipeline for data processing
 REST API for backend communication  
 Dashboard tools such as React, Streamlit, or Dash  
 
-Team Workflow:
+Team Workflow:  
 Person 1: Data generation and ingestion  
 Person 2: Database design and fraud detection logic  
 Person 3: API development and dashboard visualization  
