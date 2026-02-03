@@ -47,3 +47,4 @@ Fraud detection is a relevant real-world problem that provides insight into how 
 Project Timeline:  
 The project follows a structured 15-week timeline covering planning, data ingestion, analysis, model development, system integration, and final presentation.
 Each phase builds toward a fully integrated end-to-end fraud detection platform.
+<insert timeline here>
