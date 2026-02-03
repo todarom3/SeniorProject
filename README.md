@@ -45,7 +45,84 @@ We wanted to apply our knowledge of Java and SQL in a realistic project while al
 Fraud detection is a relevant real-world problem that provides insight into how modern data pipelines and analytics systems are used in industry.
 
 Project Timeline:  
-The project follows a structured 15-week timeline covering planning, data ingestion, analysis, model development, system integration, and final presentation.  
-Each phase builds toward a fully integrated end-to-end fraud detection platform.  
-  
-insert timeline here
+This is the proposed timeline for our project, things can and will change along the way, but this serves as a rough idea of how we will be approaching it  
+
+Proposed 15-Week Timeline:
+
+Week 1: Project Planning & Setup:  
+Finalize project scope and requirements  
+Define transaction data schema  
+Create GitHub repository and README  
+Assign team roles and responsibilities  
+
+Week 2: Data Research & Design:  
+Research transaction data formats and fraud patterns  
+Design synthetic data structure  
+Explore public datasets for reference  
+Finalize database schema  
+
+Week 3: Synthetic Data Generation:  
+Generate realistic synthetic transaction data  
+Create training, validation, and test datasets  
+Validate data quality and consistency  
+
+Week 4: Database Implementation:
+Set up SQL database (Postgres or SQLite)  
+Create tables and relationships  
+Load synthetic data into the database  
+Write basic validation queries  
+
+Week 5: Java Ingestion Pipeline:  
+Build Java program to ingest raw data  
+Perform data cleaning and normalization  
+Insert processed data into the database  
+
+Week 6: ETL Pipeline Integration:  
+Automate ingestion and transformation process  
+Add logging and error handling  
+Test ingestion pipeline end-to-end    
+
+Week 7: Exploratory Data Analysis:  
+Write SQL queries to explore transaction patterns  
+Identify basic fraud indicators  
+Summarize trends and anomalies  
+
+Week 8: Rule-Based Fraud Detection:  
+Implement simple fraud detection rules  
+Flag suspicious transactions  
+Evaluate rule-based results  
+
+Week 9: Machine Learning Preparation:  
+Prepare datasets for machine learning  
+Select appropriate fraud detection models  
+Define evaluation metrics  
+
+Week 10: Machine Learning Model Development:  
+Train and test initial ML models  
+Compare model performance  
+Select final model approach  
+
+Week 11: Model Integration:  
+Integrate ML results with database  
+Store fraud predictions and scores  
+Validate model outputs  
+
+Week 12: API Development:  
+Build REST API to access fraud results  
+Connect database to backend services  
+Test API endpoints  
+
+Week 13: Dashboard Development:  
+Design and implement dashboard UI  
+Visualize fraud trends and flagged transactions  
+Connect dashboard to API  
+
+Week 14: System Integration & Testing:  
+Run full pipeline end-to-end  
+Fix bugs and performance issues  
+Finalize documentation  
+
+Week 15: Final Polish & Presentation:  
+Prepare final demo and presentation  
+Clean up code and repository  
+Submit final deliverables  
