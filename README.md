@@ -66,7 +66,7 @@ Generate realistic synthetic transaction data
 Create training, validation, and test datasets  
 Validate data quality and consistency  
 
-Week 4: Database Implementation:
+Week 4: Database Implementation:  
 Set up SQL database (Postgres or SQLite)  
 Create tables and relationships  
 Load synthetic data into the database  
