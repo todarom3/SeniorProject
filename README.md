@@ -45,6 +45,7 @@ We wanted to apply our knowledge of Java and SQL in a realistic project while al
 Fraud detection is a relevant real-world problem that provides insight into how modern data pipelines and analytics systems are used in industry.
 
 Project Timeline:  
-The project follows a structured 15-week timeline covering planning, data ingestion, analysis, model development, system integration, and final presentation.
-Each phase builds toward a fully integrated end-to-end fraud detection platform.
-<insert timeline here>
+The project follows a structured 15-week timeline covering planning, data ingestion, analysis, model development, system integration, and final presentation.  
+Each phase builds toward a fully integrated end-to-end fraud detection platform.  
+  
+insert timeline here
