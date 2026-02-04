@@ -32,12 +32,12 @@ Analyze data and detect potential fraud
 Visualize results in a dashboard
 
 Technologies Used:  
-Java for data ingestion and backend pipeline components  
-Python for data analysis and machine learning  
-SQL using Postgres or SQLite for database design and querying  
-ETL pipeline for data processing  
-REST API for backend communication  
-Dashboard tools such as React, Streamlit, or Dash  
+Java for synthetic data generation and data ingestion into the database  
+Python for data analysis and machine learning using Pandas and scikit-learn  
+SQLite for relational database design and SQL querying  
+Custom ETL pipeline for data cleaning, transformation, and loading  
+FastAPI for building a REST API to expose fraud detection results  
+Streamlit for creating an interactive dashboard to visualize fraud trends and flagged transactions  
 
 Motivation:  
 The motivation for this project comes from our interest in building a system that combines skills we have already learned with new, practical technologies.
