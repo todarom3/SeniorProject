@@ -4,7 +4,7 @@ End-to-End Data Analytics Fraud Detection Platform
 Group Members: John Cavanaugh, Matt Todaro, Derek Mendez  
 
 Project Overview:  
-This project is an end-to-end data analytics platform focused on detecting fraudulent credit card transactions.  
+This project is an end-to-end data analytics platform focused on detecting financial fraud, in particilar, fraudulent credit card transactions.  
 The system ingests transaction data, cleans and stores it in a relational database, applies rule-based analysis and machine learning techniques to identify potentially fraudulent behavior, and visualizes the results in a dashboard.  
 The goal is to simulate a real-world fraud detection system by building a complete data pipeline rather than relying on isolated scripts or notebooks.  
 
