@@ -63,7 +63,7 @@ Start coding the realistic synthetic transaction data generator
 Finalize database schema  
 
 Week 3: Synthetic Data Generation:  
-Finish coding the realistic synthetic transaction data generator 
+Finish coding the realistic synthetic transaction data generator  
 Create training, validation, and test datasets  
 Validate data quality and consistency  
 Start setting up the SQL database  
