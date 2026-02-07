@@ -59,6 +59,7 @@ Week 2: Data Research & Design:
 Research transaction data formats and fraud patterns  
 Design synthetic data structure  
 Explore public datasets for reference  
+Start coding the realistic synthetic transaction data generator  
 Finalize database schema  
 
 Week 3: Synthetic Data Generation:  
