@@ -63,12 +63,13 @@ Start coding the realistic synthetic transaction data generator
 Finalize database schema  
 
 Week 3: Synthetic Data Generation:  
-Generate realistic synthetic transaction data  
+Finish coding the realistic synthetic transaction data generator 
 Create training, validation, and test datasets  
 Validate data quality and consistency  
+Start setting up the SQL database  
 
 Week 4: Database Implementation:  
-Set up SQL database (Postgres or SQLite)  
+FInish setting up SQL database (SQLite)  
 Create tables and relationships  
 Load synthetic data into the database  
 Write basic validation queries  
