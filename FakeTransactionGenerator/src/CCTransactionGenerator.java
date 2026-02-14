@@ -83,13 +83,16 @@ public class CCTransactionGenerator {
 
                         LocalDateTime burstTime = time.plusSeconds(j * 30);
 
+                        double burstAmount = 1500 + rand.nextDouble() * 500;
+                        burstAmount = Math.round(burstAmount * 100.0) / 100.0;
+
                         writer.append(transactionId + j + ","
                                 + cardNumber + ","
                                 + burstTime.format(
                                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + ","
                                 + merchant + ","
                                 + location + ","
-                                + (1500 + rand.nextDouble() * 500) + ","
+                                + String.format("%.2f", burstAmount) + ","
                                 + 1 + "\n");
                     }
                 }
@@ -104,7 +107,7 @@ public class CCTransactionGenerator {
                         + formattedTime + ","
                         + merchant + ","
                         + location + ","
-                        + amount + ","
+                        + String.format("%.2f", amount) + ","
                         + isPotentialFraud + "\n");
             }
 
