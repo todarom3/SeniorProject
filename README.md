@@ -58,37 +58,19 @@ Assign team roles and responsibilities
 Week 2: Data Research & Design:  
 Begin coding realistic synthetic transaction data generator  
 Implement basic transaction fields (amount, merchant, timestamp, location)  
-Add normal spending behavior patterns  
-
-Design and finalize SQL database schema  
-Define tables (transactions, customers, merchants, fraud_flags)  
-Plan primary/foreign keys and indexing strategy  
-Create initial SQLite database file  
-
 Research transaction data formats and fraud patterns  
-Identify common fraud indicators (rapid purchases, geo mismatch, high-value spikes)  
+Identify common fraud indicators
 Document rules that generator should simulate  
 Explore public datasets for realism reference  
 
 Week 3: Synthetic Data Generation:  
-Finish coding synthetic data generator  
-Implement fraud scenarios (stolen card bursts, unusual locations, merchant anomalies)  
-Generate large sample dataset  
-
-Set up SQL database environment (SQLite)  
-Create tables and relationships  
-Optimize schema if needed  
-Prepare import scripts for dataset loading  
-
-Create training, validation, and test dataset splits  
-Validate data quality and realism  
-Run statistical summaries (avg spend, fraud rate, etc.)  
-Document dataset characteristics  
-
+Update the synthetic data generator to purposely generate fraudelent transactions based on patterns  
+Begin working on a toy model in which a transaction can be checked for fraud based on patterns  
+Start working on setting up the database  
 // More detail will be added to future weeks as we do them  
 
 Week 4: Database Implementation:  
-FInish setting up SQL database (SQLite)  
+Setting up SQL database (SQLite)  
 Create tables and relationships  
 Load synthetic data into the database  
 Write basic validation queries  
