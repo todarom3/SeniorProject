@@ -10,9 +10,9 @@ model = joblib.load(MODEL_PATH)
 #Connect to the transaction.csv file 
 DATA_PATH = "transactions.csv"
 data = pd.read_csv(DATA_PATH)
-data_sample = data.head(5)
+data_sample = data.head(5).copy()
 
-features = data.drop(columns=["transaction_id", "is_fraud"], errors="ignore")
+features = data_sample.drop(columns=["transaction_id", "is_fraud"], errors="ignore")
 
 #test the model on the first 5 rows of the data and print the predictions and probabilities
 predictions = model.predict(features)

@@ -1,4 +1,5 @@
 import pandas as pd
+from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -44,18 +45,39 @@ model = LogisticRegression(max_iter=2000, class_weight="balanced")
 
 clf = Pipeline(steps=[("preprocess", preprocess), ("model", model)])
 
-X_train, X_test, y_train, y_test = train_test_split(
+# ---- 3) 80/10/10 split (train/validation/test) ----
+# First split: 80% train, 20% temp
+X_train, X_temp, y_train, y_temp = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
+# Second split of temp: 10% validation, 10% test
+X_val, X_test, y_val, y_test = train_test_split(
+    X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp
+)
+
+print(f"Training data size: {len(X_train)}")
+print(f"Validation data size: {len(X_val)}")
+print(f"Testing data size: {len(X_test)}")
+
 clf.fit(X_train, y_train)
 
-# Predictions + evaluation
-proba = clf.predict_proba(X_test)[:, 1]
-pred = (proba >= 0.5).astype(int)
+# Validation evaluation
+val_proba = clf.predict_proba(X_val)[:, 1]
+val_pred = (val_proba >= 0.5).astype(int)
 
-print(classification_report(y_test, pred, digits=4))
-print("PR-AUC:", average_precision_score(y_test, proba))
+print("\nValidation metrics")
+print(classification_report(y_val, val_pred, digits=4))
+print("Validation PR-AUC:", average_precision_score(y_val, val_proba))
 
+# Test evaluation
+test_proba = clf.predict_proba(X_test)[:, 1]
+test_pred = (test_proba >= 0.5).astype(int)
+
+print("\nTest metrics")
+print(classification_report(y_test, test_pred, digits=4))
+print("Test PR-AUC:", average_precision_score(y_test, test_proba))
+
+Path(MODEL_OUT).parent.mkdir(parents=True, exist_ok=True)
 joblib.dump(clf, MODEL_OUT)
 print(f"Saved model to {MODEL_OUT}")
