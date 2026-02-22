@@ -1,0 +1,28 @@
+Training data size: 836
+Validation data size: 104
+Testing data size: 105
+
+Validation metrics
+              precision    recall  f1-score   support
+
+           0     0.9600    1.0000    0.9796        24
+           1     1.0000    0.9875    0.9937        80
+
+    accuracy                         0.9904       104
+   macro avg     0.9800    0.9938    0.9867       104
+weighted avg     0.9908    0.9904    0.9905       104
+
+Validation PR-AUC: 1.0
+
+Test metrics
+              precision    recall  f1-score   support
+
+           0     0.8929    1.0000    0.9434        25
+           1     1.0000    0.9625    0.9809        80
+
+    accuracy                         0.9714       105
+   macro avg     0.9464    0.9812    0.9621       105
+weighted avg     0.9745    0.9714    0.9720       105
+
+Test PR-AUC: 0.9999999999999999
+Saved model to ml/model.joblib
