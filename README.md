@@ -80,11 +80,10 @@ Update the dashboard to reflect the rceent work done
 Update the database with more info  
 Improve the toy model  
 
-// Future weeks will be updated to reflect what was actually done 
-Week 6: ETL Pipeline Integration:  
-Automate ingestion and transformation process  
-Add logging and error handling  
-Test ingestion pipeline end-to-end    
+// Future weeks will be updated to reflect what was actually done  
+
+Week 6: Bringing everything together for the midterm:  
+Start to make sure we connect the data ingestion, model, dashboard, and database together to be able to show for the midterm  
 
 Week 7: Exploratory Data Analysis:  
 Write SQL queries to explore transaction patterns  
