@@ -67,19 +67,20 @@ Week 3: Synthetic Data Generation:
 Update the synthetic data generator to purposely generate fraudelent transactions based on patterns  
 Begin working on a toy model in which a transaction can be checked for fraud based on patterns  
 Start working on setting up the database  
-// More detail will be added to future weeks as we do them  
 
-Week 4: Database Implementation:  
-Setting up SQL database (SQLite)  
+Week 4: Database and Toy Model Implementation:  
+Finish setting up SQL database (SQLite)  
 Create tables and relationships  
-Load synthetic data into the database  
-Write basic validation queries  
+Load transaction data into the database  
+Continue working on the toy model  
 
-Week 5: Java Ingestion Pipeline:  
-Build Java program to ingest raw data  
-Perform data cleaning and normalization  
-Insert processed data into the database  
+Week 5: Improvements and Updates:  
+Improve the transaction generator and checker to account for more fraud patterns  
+Update the dashboard to reflect the rceent work done  
+Update the database with more info  
+Improve the toy model  
 
+// Future weeks will be updated to reflect what was actually done 
 Week 6: ETL Pipeline Integration:  
 Automate ingestion and transformation process  
 Add logging and error handling  
