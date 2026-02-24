@@ -18,7 +18,7 @@ export default function App() {
   const [page, setPage] = useState(1);
   const pageSize = 100;
 
-  // Helper: safely parse timestamps like "2026-02-13 18:28:11"
+  // Safely parse timestamps
   function tsToMillis(ts) {
     if (!ts) return 0;
 
@@ -54,7 +54,7 @@ export default function App() {
     return `${hours}:${minutes} ${ampm}`;
   }
 
-  // Metrics (based on ALL rows)
+  // Metrics
   const totalTransactions = rows.length;
   const fraudCount = rows.filter((r) => r.is_potential_fraud).length;
   const fraudRate = totalTransactions
@@ -62,7 +62,7 @@ export default function App() {
     : "0.00";
   const totalAmount = rows.reduce((sum, r) => sum + (r.amount || 0), 0);
 
-  // ✅ NEW: Total transactions per state (all transactions, not just fraud)
+  // Total transactions per state, all transactions, not just fraud
   const transactionsByState = useMemo(() => {
     const acc = {};
     for (const r of rows) {
@@ -155,14 +155,12 @@ export default function App() {
     );
   }
 
-  // Styles
   const outerWrapStyle = {
     display: "flex",
     justifyContent: "center",
     width: "100%",
   };
 
-  // Centered content area
   const contentStyle = {
     width: "100%",
     maxWidth: 1100,
@@ -251,7 +249,7 @@ export default function App() {
             <p>{totalTransactions}</p>
           </div>
 
-          {/* ✅ NEW CARD */}
+          {/*  */}
           <div style={wideCardStyle}>
             <h3>Transactions by State (Total)</h3>
             <p style={{ margin: 0, lineHeight: 1.5 }}>
@@ -320,7 +318,7 @@ export default function App() {
           </button>
         </div>
 
-        {/* Full width table */}
+        {/* */}
         <div style={tableWrapStyle}>
           <table border="1" cellPadding="8" style={tableStyle}>
             <thead>
