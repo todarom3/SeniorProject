@@ -5,88 +5,129 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.*;
 
 public class FraudProbabilityChecker {
 
     public static void main(String[] args) {
 
-        String inputFilePath = "transactions.csv";
+        String inputFilePath = "transactions2.csv";
         String outputFilePath = "suspicious_transactions.txt";
 
-        String line;
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        // Track history per card
+        // Track per-card behavior
         HashMap<Long, LocalDateTime> lastTime = new HashMap<>();
         HashMap<Long, String> lastLocation = new HashMap<>();
+        HashMap<Long, List<Double>> recentSmallCharges = new HashMap<>();
+        HashMap<Long, LinkedList<LocalDateTime>> recentTimes = new HashMap<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(inputFilePath));
              FileWriter writer = new FileWriter(outputFilePath)) {
 
-            // Skip header
-            br.readLine();
-
+            br.readLine(); // skip header
             writer.write("Likely Fraud Transactions:\n\n");
 
+            String line;
             while ((line = br.readLine()) != null) {
 
                 String[] data = line.split(",");
-
                 int transactionId = Integer.parseInt(data[0]);
                 long cardNumber = Long.parseLong(data[1]);
-                LocalDateTime time =
-                        LocalDateTime.parse(data[2], formatter);
+                LocalDateTime time = LocalDateTime.parse(data[2], formatter);
                 String merchant = data[3];
                 String location = data[4];
                 double amount = Double.parseDouble(data[5]);
 
                 double fraudScore = 0.0;
+                List<String> reasons = new ArrayList<>();
 
-                //  PATTERN CHECKS 
+                // Initialize per-card tracking
+                recentSmallCharges.putIfAbsent(cardNumber, new ArrayList<>());
+                recentTimes.putIfAbsent(cardNumber, new LinkedList<>());
 
-                // 1. High amount
-                if (amount > 1700) {
+                LinkedList<LocalDateTime> times = recentTimes.get(cardNumber);
+                times.add(time);
+
+                // Keep last 5 transactions only
+                if (times.size() > 5) times.removeFirst();
+
+                // ---------------- HIGH AMOUNT ----------------
+                if (amount > 1500) {
                     fraudScore += 0.3;
+                    reasons.add("Unusually high purchase amount");
                 }
 
-                // 2. Rapid transactions
+                // ---------------- RAPID TRANSACTIONS ----------------
                 if (lastTime.containsKey(cardNumber)) {
+                    long minutes = Duration.between(lastTime.get(cardNumber), time).toMinutes();
 
-                    long minutes =
-                            Duration.between(lastTime.get(cardNumber), time)
-                                    .toMinutes();
+                    if (minutes >= 0 && minutes < 3) {
+                        fraudScore += 0.6;
+                        reasons.add("Rapid consecutive transactions");
+                    }
 
-                    if (minutes < 3) {
-                        fraudScore += 0.5;
+                    // ---------------- LOCATION JUMP ----------------
+                    if (minutes >= 0 && minutes < 1 &&
+                            lastLocation.containsKey(cardNumber) &&
+                            !lastLocation.get(cardNumber).equals(location)) {
+
+                        fraudScore += 0.6;
+                        reasons.add("Location jump within short time");
                     }
                 }
 
-                // 3. Location change
-                if (lastLocation.containsKey(cardNumber)) {
-
-                    String prevLoc = lastLocation.get(cardNumber);
-
-                    if (!prevLoc.equals(location)) {
-                        fraudScore += 0.3;
+                // ---------------- LATE NIGHT RAPID ----------------
+                if (time.getHour() >= 0 && time.getHour() <= 5) {
+                    if (times.size() >= 2) {
+                        long diff = Duration.between(times.get(times.size() - 2), time).toMinutes();
+                        if (diff >= 0 && diff < 3) {
+                            fraudScore += 0.5;
+                            reasons.add("Late night rapid spending");
+                        }
                     }
                 }
 
-                // Save history
+                // ---------------- TEST CHARGE PATTERN ----------------
+                List<Double> smalls = recentSmallCharges.get(cardNumber);
+
+                if (amount < 5) {
+                    smalls.add(amount);
+                } else if (!smalls.isEmpty() && smalls.size() >= 2 && amount > 800) {
+                    fraudScore += 0.7;
+                    reasons.add("Small test charges followed by large purchase");
+                    smalls.clear(); // reset after detection
+                } else {
+                    // clear if random unrelated charge occurs
+                    if (smalls.size() > 3) smalls.clear();
+                }
+
+                // ---------------- BURST DETECTION ----------------
+                if (times.size() >= 5) {
+                    long diff = Duration.between(times.getFirst(), times.getLast()).toMinutes();
+                    if (diff >= 0 && diff < 2) {
+                        fraudScore += 0.6;
+                        reasons.add("Multiple transactions in short burst");
+                    }
+                }
+
+                // Update last transaction info
                 lastTime.put(cardNumber, time);
                 lastLocation.put(cardNumber, location);
 
-                // Convert to %
-                double probability = fraudScore * 100;
+                // Convert score to percent
+                double probability = Math.min(fraudScore * 100, 100);
 
-                // Only print/save suspicious ones
-                if (probability >= 50) {
-                    String outputLine = "Transaction ID: " + transactionId +
-                            " | Card: " + cardNumber +
-                            " | Amount: $" + String.format("%.2f", amount) +
-                            " | Location: " + location +
-                            " | Fraud Probability: " + probability + "%\n";
+                if (probability >= 30) {
+                    String outputLine =
+                            "Transaction ID: " + transactionId +
+                                    " | Card: " + cardNumber +
+                                    " | Amount: $" + String.format("%.2f", amount) +
+                                    " | Location: " + location +
+                                    " | Fraud Probability: " + probability + "%\n" +
+                                    "Reason(s): " + String.join(", ", reasons) +
+                                    "\n\n";
 
                     System.out.print(outputLine);
                     writer.write(outputLine);

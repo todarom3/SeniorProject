@@ -12,7 +12,7 @@ public class CSVToDatabaseImporter {
     public static void main(String[] args) {
         createTable();
         clearTable();        // optional but prevents duplicates
-        importCSV("transactions.csv");
+        importCSV("transactions2.csv");
     }
 
     private static Connection connect() throws Exception {
