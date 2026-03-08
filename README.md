@@ -82,50 +82,48 @@ Improve the toy model
 
 // Future weeks will be updated to reflect what was actually done  
 
-Week 6: Bringing everything together for the midterm:  
-Start to make sure we connect the data ingestion, model, dashboard, and database together to be able to show for the midterm  
+Week 6: Start to bring everything together for the midterm:  
+Start to develop the user interface  
+Start to make the user interface serve as a connection between the data generation/ingestion, toy model, dashboard, and database  
+Start to make the midterm presentation  
 
-Week 7: Exploratory Data Analysis:  
-Write SQL queries to explore transaction patterns  
-Identify basic fraud indicators  
-Summarize trends and anomalies  
+Week 7: Completing Midterm Preperations and User Interface:  
+Complete setting up the first version of the user interface  
+Make sure all components of the project are connected and ready for the midterm  
+Finish making the midterm presentation  
+Prepare to present in person on 3/17  
 
-Week 8: Rule-Based Fraud Detection:  
-Implement simple fraud detection rules  
-Flag suspicious transactions  
-Evaluate rule-based results  
-
-Week 9: Machine Learning Preparation:  
+Week 8: Machine Learning Preparation:  
 Prepare datasets for machine learning  
 Select appropriate fraud detection models  
 Define evaluation metrics  
 
-Week 10: Machine Learning Model Development:  
+Week 9: Machine Learning Model Development:  
 Train and test initial ML models  
 Compare model performance  
 Select final model approach  
 
-Week 11: Model Integration:  
+Week 10: Model Integration:  
 Integrate ML results with database  
 Store fraud predictions and scores  
 Validate model outputs  
 
-Week 12: API Development:  
+Week 11: API Development:  
 Build REST API to access fraud results  
 Connect database to backend services  
 Test API endpoints  
 
-Week 13: Dashboard Development:  
+Week 12: Dashboard Development:  
 Design and implement dashboard UI  
 Visualize fraud trends and flagged transactions  
 Connect dashboard to API  
 
-Week 14: System Integration & Testing:  
+Week 13: System Integration & Testing:  
 Run full pipeline end-to-end  
 Fix bugs and performance issues  
 Finalize documentation  
 
-Week 15: Final Polish & Presentation:  
+Week 14: Final Polish & Presentation:  
 Prepare final demo and presentation  
 Clean up code and repository  
 Submit final deliverables  
