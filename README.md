@@ -65,20 +65,20 @@ Explore public datasets for realism reference
 
 Week 3: Synthetic Data Generation:  
 Update the synthetic data generator to purposely generate fraudelent transactions based on patterns  
-Begin working on a toy model in which a transaction can be checked for fraud based on patterns  
+Begin working on a toy model in which a transaction can be checked for fraud using machine learning
 Start working on setting up the database  
 
 Week 4: Database and Toy Model Implementation:  
 Finish setting up SQL database (SQLite)  
 Create tables and relationships  
 Load transaction data into the database  
-Continue working on the toy model  
+Continue working on the machine learning toy model
 
 Week 5: Improvements and Updates:  
 Improve the transaction generator and checker to account for more fraud patterns  
 Update the dashboard to reflect the rceent work done  
 Update the database with more info  
-Improve the toy model   
+Finish working on the first version of the toy model   
 
 Week 6: Start to bring everything together for the midterm:  
 Start to develop the user interface  
@@ -93,10 +93,9 @@ Prepare to present in person on 3/17
 
 // Future weeks will be updated to reflect what was actually done, as alot has changed since we first made the schedule (we did alot of things earlier than listed)  
 
-Week 8: Machine Learning Preparation:  
-Prepare datasets for machine learning  
-Select appropriate fraud detection models  
-Define evaluation metrics  
+Week 8: Midterm Presentation and New Improvements :  
+Present the Midterm  
+Other work TBD  
 
 Week 9: Machine Learning Model Development:  
 Train and test initial ML models  
