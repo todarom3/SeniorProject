@@ -1,47 +1,485 @@
 Likely Fraud Transactions:
 
-Transaction ID: 50 | Card: 4650497598445519 | Amount: $1580.88 | Location: FL | Fraud Probability: 50.0%
-Transaction ID: 51 | Card: 4650497598445519 | Amount: $1937.06 | Location: FL | Fraud Probability: 80.0%
-Transaction ID: 52 | Card: 4650497598445519 | Amount: $1848.51 | Location: FL | Fraud Probability: 80.0%
-Transaction ID: 53 | Card: 4650497598445519 | Amount: $1626.75 | Location: FL | Fraud Probability: 50.0%
-Transaction ID: 49 | Card: 4650497598445519 | Amount: $880.12 | Location: FL | Fraud Probability: 50.0%
-Transaction ID: 149 | Card: 4306046028311885 | Amount: $1976.34 | Location: TX | Fraud Probability: 80.0%
-Transaction ID: 150 | Card: 4306046028311885 | Amount: $1631.69 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 151 | Card: 4306046028311885 | Amount: $1574.38 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 152 | Card: 4306046028311885 | Amount: $1613.59 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 148 | Card: 4306046028311885 | Amount: $913.60 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 214 | Card: 4280623610958525 | Amount: $1540.87 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 215 | Card: 4280623610958525 | Amount: $1966.84 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 216 | Card: 4280623610958525 | Amount: $1646.16 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 217 | Card: 4280623610958525 | Amount: $1799.57 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 213 | Card: 4280623610958525 | Amount: $1999.68 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 294 | Card: 4189178357295652 | Amount: $1964.72 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 295 | Card: 4189178357295652 | Amount: $1748.11 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 296 | Card: 4189178357295652 | Amount: $1649.25 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 297 | Card: 4189178357295652 | Amount: $1800.63 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 293 | Card: 4189178357295652 | Amount: $1581.92 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 326 | Card: 4655692527721840 | Amount: $1545.24 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 327 | Card: 4655692527721840 | Amount: $1630.79 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 328 | Card: 4655692527721840 | Amount: $1558.40 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 329 | Card: 4655692527721840 | Amount: $1732.97 | Location: TX | Fraud Probability: 80.0%
-Transaction ID: 325 | Card: 4655692527721840 | Amount: $1915.81 | Location: TX | Fraud Probability: 80.0%
-Transaction ID: 465 | Card: 4653882843200367 | Amount: $1911.69 | Location: CA | Fraud Probability: 80.0%
-Transaction ID: 466 | Card: 4653882843200367 | Amount: $1659.48 | Location: CA | Fraud Probability: 50.0%
-Transaction ID: 467 | Card: 4653882843200367 | Amount: $1945.45 | Location: CA | Fraud Probability: 80.0%
-Transaction ID: 468 | Card: 4653882843200367 | Amount: $1711.21 | Location: CA | Fraud Probability: 80.0%
-Transaction ID: 464 | Card: 4653882843200367 | Amount: $691.03 | Location: CA | Fraud Probability: 50.0%
-Transaction ID: 764 | Card: 4152943534533006 | Amount: $1696.90 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 765 | Card: 4152943534533006 | Amount: $1943.46 | Location: NY | Fraud Probability: 80.0%
-Transaction ID: 766 | Card: 4152943534533006 | Amount: $1698.94 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 767 | Card: 4152943534533006 | Amount: $1515.65 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 763 | Card: 4152943534533006 | Amount: $843.99 | Location: NY | Fraud Probability: 50.0%
-Transaction ID: 816 | Card: 4963719272613098 | Amount: $1530.33 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 817 | Card: 4963719272613098 | Amount: $1809.30 | Location: TX | Fraud Probability: 80.0%
-Transaction ID: 818 | Card: 4963719272613098 | Amount: $1738.68 | Location: TX | Fraud Probability: 80.0%
-Transaction ID: 819 | Card: 4963719272613098 | Amount: $1536.90 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 815 | Card: 4963719272613098 | Amount: $1359.02 | Location: TX | Fraud Probability: 50.0%
-Transaction ID: 818 | Card: 4565008822262800 | Amount: $1783.73 | Location: NJ | Fraud Probability: 80.0%
-Transaction ID: 819 | Card: 4565008822262800 | Amount: $1965.66 | Location: NJ | Fraud Probability: 80.0%
-Transaction ID: 820 | Card: 4565008822262800 | Amount: $1979.22 | Location: NJ | Fraud Probability: 80.0%
-Transaction ID: 821 | Card: 4565008822262800 | Amount: $1688.29 | Location: NJ | Fraud Probability: 50.0%
-Transaction ID: 817 | Card: 4565008822262800 | Amount: $1931.33 | Location: NJ | Fraud Probability: 80.0%
+Transaction ID: 7 | Card: 4749055879948260 | Amount: $1.81 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 8 | Card: 4749055879948260 | Amount: $2900.84 | Location: OK | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 23 | Card: 4088343750478143 | Amount: $434.34 | Location: LA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 37 | Card: 4088369121357256 | Amount: $3.20 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 38 | Card: 4088369121357256 | Amount: $3.26 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 39 | Card: 4088369121357256 | Amount: $2830.67 | Location: OK | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 62 | Card: 4939005737196452 | Amount: $337.42 | Location: MO | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 67 | Card: 4094480514997350 | Amount: $163.92 | Location: WV | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 68 | Card: 4094480514997350 | Amount: $331.00 | Location: WV | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 69 | Card: 4094480514997350 | Amount: $92.67 | Location: WV | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 70 | Card: 4094480514997350 | Amount: $275.11 | Location: WV | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 72 | Card: 4826020968290429 | Amount: $2.94 | Location: OR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 73 | Card: 4826020968290429 | Amount: $1796.92 | Location: OR | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 91 | Card: 4805184076126166 | Amount: $2.41 | Location: AR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 92 | Card: 4805184076126166 | Amount: $3135.47 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 95 | Card: 4935356560424983 | Amount: $3.17 | Location: FL | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 96 | Card: 4935356560424983 | Amount: $4.04 | Location: FL | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 97 | Card: 4935356560424983 | Amount: $3246.14 | Location: FL | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 129 | Card: 4924297184197801 | Amount: $460.60 | Location: WY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 140 | Card: 4304504487460403 | Amount: $240.79 | Location: MD | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 142 | Card: 4083034076578073 | Amount: $248.77 | Location: OH | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 158 | Card: 4947666549401246 | Amount: $1768.15 | Location: MT | Fraud Probability: 30.0%
+Reason(s): Unusually high purchase amount
+
+Transaction ID: 206 | Card: 4088369121357256 | Amount: $170.69 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 207 | Card: 4088369121357256 | Amount: $259.63 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 208 | Card: 4088369121357256 | Amount: $137.02 | Location: OK | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 209 | Card: 4088369121357256 | Amount: $201.59 | Location: OK | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 212 | Card: 4572282281380621 | Amount: $324.26 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 213 | Card: 4572282281380621 | Amount: $74.48 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 214 | Card: 4572282281380621 | Amount: $259.36 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 215 | Card: 4572282281380621 | Amount: $56.39 | Location: TX | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 233 | Card: 4392690575096353 | Amount: $2030.80 | Location: IN | Fraud Probability: 30.0%
+Reason(s): Unusually high purchase amount
+
+Transaction ID: 241 | Card: 4796663554984726 | Amount: $102.96 | Location: NJ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 242 | Card: 4796663554984726 | Amount: $280.17 | Location: NJ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 243 | Card: 4796663554984726 | Amount: $142.79 | Location: NJ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 244 | Card: 4796663554984726 | Amount: $231.98 | Location: NJ | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 250 | Card: 4027472541466198 | Amount: $94.45 | Location: WY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 251 | Card: 4027472541466198 | Amount: $96.23 | Location: WY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 252 | Card: 4027472541466198 | Amount: $132.68 | Location: WY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 253 | Card: 4027472541466198 | Amount: $168.85 | Location: WY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 256 | Card: 4582874839782361 | Amount: $375.88 | Location: AL | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 316 | Card: 4840612704005585 | Amount: $4.74 | Location: PA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 317 | Card: 4840612704005585 | Amount: $2155.77 | Location: PA | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 322 | Card: 4082209510731325 | Amount: $2.16 | Location: WA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 323 | Card: 4082209510731325 | Amount: $2209.79 | Location: WA | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 328 | Card: 4978162831950364 | Amount: $4.62 | Location: WI | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 329 | Card: 4978162831950364 | Amount: $2700.91 | Location: WI | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 331 | Card: 4753915639685433 | Amount: $83.03 | Location: MA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 332 | Card: 4753915639685433 | Amount: $322.94 | Location: MA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 333 | Card: 4753915639685433 | Amount: $172.42 | Location: MA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 334 | Card: 4753915639685433 | Amount: $296.70 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 361 | Card: 4326107420136705 | Amount: $4.30 | Location: VT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 362 | Card: 4326107420136705 | Amount: $1.24 | Location: VT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 363 | Card: 4326107420136705 | Amount: $2775.23 | Location: VT | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 365 | Card: 4858802356473473 | Amount: $162.30 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 368 | Card: 4857691578445707 | Amount: $397.44 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 379 | Card: 4445207364395831 | Amount: $281.40 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 380 | Card: 4445207364395831 | Amount: $271.79 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 381 | Card: 4445207364395831 | Amount: $232.77 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 382 | Card: 4445207364395831 | Amount: $315.44 | Location: WA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 391 | Card: 4047673967850430 | Amount: $2.18 | Location: AZ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 392 | Card: 4047673967850430 | Amount: $4.53 | Location: AZ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 393 | Card: 4047673967850430 | Amount: $2248.44 | Location: AZ | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 400 | Card: 4663105079780494 | Amount: $433.76 | Location: IN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 419 | Card: 4703083161276847 | Amount: $330.46 | Location: CT | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 420 | Card: 4703083161276847 | Amount: $344.64 | Location: CT | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 421 | Card: 4703083161276847 | Amount: $200.09 | Location: CT | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 422 | Card: 4703083161276847 | Amount: $245.96 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 437 | Card: 4631581763624622 | Amount: $203.91 | Location: MN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 444 | Card: 4813873612477251 | Amount: $158.65 | Location: DE | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 445 | Card: 4813873612477251 | Amount: $286.52 | Location: DE | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 446 | Card: 4813873612477251 | Amount: $198.70 | Location: DE | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 447 | Card: 4813873612477251 | Amount: $99.89 | Location: DE | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 515 | Card: 4864124742234378 | Amount: $300.96 | Location: VA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 517 | Card: 4428586252505462 | Amount: $2.45 | Location: IN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 518 | Card: 4428586252505462 | Amount: $1822.41 | Location: IN | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 520 | Card: 4306000618830449 | Amount: $458.16 | Location: KY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 526 | Card: 4628346611692946 | Amount: $2.27 | Location: WY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 527 | Card: 4628346611692946 | Amount: $3435.74 | Location: WY | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 535 | Card: 4479334604170778 | Amount: $74.55 | Location: MN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 539 | Card: 4978438825564626 | Amount: $166.81 | Location: VA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 552 | Card: 4807865198143072 | Amount: $82.64 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 618 | Card: 4345531112875600 | Amount: $228.33 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 619 | Card: 4345531112875600 | Amount: $83.28 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 620 | Card: 4345531112875600 | Amount: $319.71 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 621 | Card: 4345531112875600 | Amount: $151.93 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending, Multiple transactions in short burst
+
+Transaction ID: 638 | Card: 4824494679370748 | Amount: $98.01 | Location: ID | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 640 | Card: 4233260328370616 | Amount: $271.94 | Location: KS | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 641 | Card: 4233260328370616 | Amount: $263.06 | Location: KS | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 642 | Card: 4233260328370616 | Amount: $93.57 | Location: KS | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 643 | Card: 4233260328370616 | Amount: $189.96 | Location: KS | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 653 | Card: 4083751284090119 | Amount: $437.62 | Location: KS | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 657 | Card: 4028055637186577 | Amount: $3.37 | Location: LA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 658 | Card: 4028055637186577 | Amount: $1886.48 | Location: LA | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 666 | Card: 4082209510731325 | Amount: $264.49 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 667 | Card: 4082209510731325 | Amount: $60.06 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 668 | Card: 4082209510731325 | Amount: $105.53 | Location: WA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 669 | Card: 4082209510731325 | Amount: $317.66 | Location: WA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 674 | Card: 4121604810326586 | Amount: $2.82 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 675 | Card: 4121604810326586 | Amount: $2522.00 | Location: TX | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 680 | Card: 4631581763624622 | Amount: $469.20 | Location: OR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 692 | Card: 4094480514997350 | Amount: $4.45 | Location: WV | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 693 | Card: 4094480514997350 | Amount: $2.73 | Location: WV | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 694 | Card: 4094480514997350 | Amount: $1771.39 | Location: WV | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 713 | Card: 4688712058907610 | Amount: $3.48 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 714 | Card: 4688712058907610 | Amount: $3.14 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 715 | Card: 4688712058907610 | Amount: $2734.58 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 724 | Card: 4582823272692007 | Amount: $4.58 | Location: NH | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 725 | Card: 4582823272692007 | Amount: $3.50 | Location: NH | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 726 | Card: 4582823272692007 | Amount: $2988.13 | Location: NH | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 729 | Card: 4281007408191070 | Amount: $2.22 | Location: NE | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 730 | Card: 4281007408191070 | Amount: $3458.93 | Location: NE | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 737 | Card: 4796344423821800 | Amount: $258.44 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 738 | Card: 4796344423821800 | Amount: $233.44 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 739 | Card: 4796344423821800 | Amount: $228.90 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 740 | Card: 4796344423821800 | Amount: $337.46 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending, Multiple transactions in short burst
+
+Transaction ID: 742 | Card: 4248261703993188 | Amount: $453.65 | Location: MN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 759 | Card: 4631581763624622 | Amount: $4.52 | Location: NY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 760 | Card: 4631581763624622 | Amount: $1577.94 | Location: NY | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 764 | Card: 4230549394464647 | Amount: $4.58 | Location: TN | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 765 | Card: 4230549394464647 | Amount: $2971.72 | Location: TN | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 769 | Card: 4136394431478212 | Amount: $5.00 | Location: IA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 770 | Card: 4136394431478212 | Amount: $4.64 | Location: IA | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 771 | Card: 4136394431478212 | Amount: $1583.90 | Location: IA | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 778 | Card: 4248261703993188 | Amount: $364.85 | Location: NY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 786 | Card: 4211716716747137 | Amount: $216.11 | Location: NY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 787 | Card: 4211716716747137 | Amount: $64.32 | Location: NY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 788 | Card: 4211716716747137 | Amount: $286.72 | Location: NY | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 789 | Card: 4211716716747137 | Amount: $136.66 | Location: NY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 790 | Card: 4083632780021031 | Amount: $2482.20 | Location: IA | Fraud Probability: 30.0%
+Reason(s): Unusually high purchase amount
+
+Transaction ID: 799 | Card: 4600928611262685 | Amount: $52.67 | Location: OR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 800 | Card: 4600928611262685 | Amount: $202.92 | Location: OR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 801 | Card: 4600928611262685 | Amount: $94.44 | Location: OR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 802 | Card: 4600928611262685 | Amount: $86.60 | Location: OR | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 814 | Card: 4864124742234378 | Amount: $4.57 | Location: AR | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 815 | Card: 4864124742234378 | Amount: $2815.66 | Location: AR | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 822 | Card: 4049798507524995 | Amount: $305.87 | Location: NM | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 844 | Card: 4864179938507713 | Amount: $214.27 | Location: TX | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 848 | Card: 4861567165722935 | Amount: $182.89 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 849 | Card: 4861567165722935 | Amount: $215.68 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 850 | Card: 4861567165722935 | Amount: $192.71 | Location: TX | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 851 | Card: 4861567165722935 | Amount: $108.71 | Location: TX | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
+Transaction ID: 854 | Card: 4985305572561972 | Amount: $497.97 | Location: MA | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time, Late night rapid spending
+
+Transaction ID: 864 | Card: 4306000618830449 | Amount: $4.37 | Location: AZ | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 865 | Card: 4306000618830449 | Amount: $1725.29 | Location: AZ | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 884 | Card: 4955574963834828 | Amount: $159.45 | Location: NY | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 894 | Card: 4394906472816960 | Amount: $505.72 | Location: OK | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Location jump within short time
+
+Transaction ID: 904 | Card: 4681685223507285 | Amount: $1600.49 | Location: HI | Fraud Probability: 30.0%
+Reason(s): Unusually high purchase amount
+
+Transaction ID: 914 | Card: 4157565816729241 | Amount: $2754.41 | Location: LA | Fraud Probability: 30.0%
+Reason(s): Unusually high purchase amount
+
+Transaction ID: 933 | Card: 4039793152205280 | Amount: $3.42 | Location: MI | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 934 | Card: 4039793152205280 | Amount: $2.21 | Location: MI | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Late night rapid spending
+
+Transaction ID: 935 | Card: 4039793152205280 | Amount: $1791.44 | Location: MI | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Late night rapid spending, Small test charges followed by large purchase
+
+Transaction ID: 955 | Card: 4685503469931283 | Amount: $4.10 | Location: CT | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 956 | Card: 4685503469931283 | Amount: $2.65 | Location: CT | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 957 | Card: 4685503469931283 | Amount: $2478.14 | Location: CT | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 961 | Card: 4562173800494206 | Amount: $4.57 | Location: CO | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 962 | Card: 4562173800494206 | Amount: $3.58 | Location: CO | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 963 | Card: 4562173800494206 | Amount: $2794.39 | Location: CO | Fraud Probability: 100.0%
+Reason(s): Unusually high purchase amount, Rapid consecutive transactions, Small test charges followed by large purchase
+
+Transaction ID: 996 | Card: 4544254054327111 | Amount: $230.75 | Location: FL | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 997 | Card: 4544254054327111 | Amount: $261.32 | Location: FL | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 998 | Card: 4544254054327111 | Amount: $334.48 | Location: FL | Fraud Probability: 60.0%
+Reason(s): Rapid consecutive transactions
+
+Transaction ID: 999 | Card: 4544254054327111 | Amount: $50.69 | Location: FL | Fraud Probability: 100.0%
+Reason(s): Rapid consecutive transactions, Multiple transactions in short burst
+
