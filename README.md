@@ -49,6 +49,11 @@ This is the proposed timeline for our project, things can and will change along 
 
 Proposed 15-Week Timeline:
 
+Week 0: The Beginning:  
+Decide on Project Group  
+Start thinking on project ideas  
+Decide on a project  
+
 Week 1: Project Planning & Setup:  
 Finalize project scope and requirements  
 Define transaction data schema  
