@@ -78,9 +78,7 @@ Week 5: Improvements and Updates:
 Improve the transaction generator and checker to account for more fraud patterns  
 Update the dashboard to reflect the rceent work done  
 Update the database with more info  
-Improve the toy model  
-
-// Future weeks will be updated to reflect what was actually done  
+Improve the toy model   
 
 Week 6: Start to bring everything together for the midterm:  
 Start to develop the user interface  
@@ -92,6 +90,8 @@ Complete setting up the first version of the user interface
 Make sure all components of the project are connected and ready for the midterm  
 Finish making the midterm presentation  
 Prepare to present in person on 3/17  
+
+// Future weeks will be updated to reflect what was actually done, as alot has changed since we first made the schedule (we did alot of things earlier than listed)  
 
 Week 8: Machine Learning Preparation:  
 Prepare datasets for machine learning  
