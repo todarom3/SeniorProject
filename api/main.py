@@ -4,7 +4,7 @@ from typing import Any, Optional
 
 import joblib
 import pandas as pd
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -73,6 +73,10 @@ def _load_transactions() -> pd.DataFrame:
     return pd.read_csv(TRANSACTIONS_PATH)
 
 
+def _prepare_features(data: pd.DataFrame) -> pd.DataFrame:
+    return data.drop(columns=["transaction_id", "is_fraud"], errors="ignore")
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -100,7 +104,7 @@ def predict_sample(limit: int = Query(default=10, ge=1, le=100)) -> dict[str, An
     model = _load_model()
     data = _load_transactions().head(limit).copy()
 
-    features = data.drop(columns=["transaction_id", "is_fraud", "is_potential_fraud"], errors="ignore")
+    features = _prepare_features(data)
 
     predictions = model.predict(features)
     probabilities = model.predict_proba(features)[:, 1]
@@ -119,12 +123,58 @@ def transactions_with_predictions(limit: int = Query(default=200, ge=1, le=5000)
     model = _load_model()
     data = _load_transactions().head(limit).copy()
 
-    features = data.drop(columns=["transaction_id", "is_fraud", "is_potential_fraud"], errors="ignore")
+    features = _prepare_features(data)
 
     data["predicted_is_fraud"] = model.predict(features)
     data["predicted_probability"] = model.predict_proba(features)[:, 1]
 
     return {
         "count": len(data),
+        "rows": data.to_dict(orient="records"),
+    }
+
+
+@app.post("/transactions/upload")
+async def upload_transactions(file: UploadFile = File(...)) -> dict[str, Any]:
+    if not file.filename or not file.filename.lower().endswith(".csv"):
+        raise HTTPException(status_code=400, detail="Only CSV files are allowed.")
+
+    try:
+        data = pd.read_csv(file.file).copy()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Could not read CSV file: {str(e)}")
+
+    if data.empty:
+        raise HTTPException(status_code=400, detail="Uploaded CSV is empty.")
+
+    model = _load_model()
+
+    features = _prepare_features(data)
+
+    try:
+        data["predicted_is_fraud"] = model.predict(features)
+        data["predicted_probability"] = model.predict_proba(features)[:, 1]
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Prediction failed. Check that the uploaded CSV has the correct columns and data types. Error: {str(e)}"
+        )
+
+    fraud_count = int(data["predicted_is_fraud"].sum())
+    total_count = int(len(data))
+    fraud_rate = float((fraud_count / total_count) * 100) if total_count > 0 else 0.0
+
+    total_amount = 0.0
+    if "amount" in data.columns:
+        total_amount = float(pd.to_numeric(data["amount"], errors="coerce").fillna(0).sum())
+
+    return {
+        "count": total_count,
+        "summary": {
+            "total_transactions": total_count,
+            "fraud_count": fraud_count,
+            "fraud_rate": fraud_rate,
+            "total_amount": total_amount,
+        },
         "rows": data.to_dict(orient="records"),
     }
