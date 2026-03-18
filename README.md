@@ -90,47 +90,26 @@ Start to develop the user interface
 Start to make the user interface serve as a connection between the data generation/ingestion, toy model, dashboard, and database  
 Start to make the midterm presentation  
 
-Week 7: Completing Midterm Preperations and User Interface:  
-Complete setting up the first version of the user interface  
-Make sure all components of the project are connected and ready for the midterm  
+Week 7: Completing Midterm Preperations:  
 Finish making the midterm presentation  
 Prepare to present in person on 3/17  
 
 // Future weeks will be updated to reflect what was actually done, as alot has changed since we first made the schedule (we did alot of things earlier than listed)  
 
-Week 8: Midterm Presentation and New Improvements :  
+Week 8: Midterm Presentation and New Improvements:  
 Present the Midterm  
-Other work TBD  
+Work on finishing the API that connects the machine learning model and the dashboard  
 
-Week 9: Machine Learning Model Development:  
-Train and test initial ML models  
-Compare model performance  
-Select final model approach  
+// Future weeks work TBD we will document as we go:  
 
-Week 10: Model Integration:  
-Integrate ML results with database  
-Store fraud predictions and scores  
-Validate model outputs  
+Week 9: API and Project Updates:  
+Complete the API connection  
+Have the dashboard display the results of the model  
 
-Week 11: API Development:  
-Build REST API to access fraud results  
-Connect database to backend services  
-Test API endpoints  
+Week 10: 
+More updates to transaction generator  
+more updates to machine learning model  
 
-Week 12: Dashboard Development:  
-Design and implement dashboard UI  
-Visualize fraud trends and flagged transactions  
-Connect dashboard to API  
-
-Week 13: System Integration & Testing:  
-Run full pipeline end-to-end  
-Fix bugs and performance issues  
-Finalize documentation  
-
-Week 14: Final Polish & Presentation:  
-Prepare final demo and presentation  
-Clean up code and repository  
-Submit final deliverables  
 
 ## Toy Model Setup & Run
 
