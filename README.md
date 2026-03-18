@@ -94,8 +94,6 @@ Week 7: Completing Midterm Preperations:
 Finish making the midterm presentation  
 Prepare to present in person on 3/17  
 
-// Future weeks will be updated to reflect what was actually done, as alot has changed since we first made the schedule (we did alot of things earlier than listed)  
-
 Week 8: Midterm Presentation and New Improvements:  
 Present the Midterm  
 Work on finishing the API that connects the machine learning model and the dashboard  
