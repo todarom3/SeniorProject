@@ -15,4 +15,4 @@ Week 6: On this week I started working on getting the presentation setup for the
 
 Week 7: On this week I completed making our midterm presentation and help to figure out what is going to be done in the second half of the semester.  
 
-Week 8: On this week we presented the midterm presentation and helped work on finishing the API connection between the main components of our project, the dashboard and the machine learning model.  
+Week 8: On this week we presented the midterm presentation. I also worked on creating a more complex and realistic transaction generator that accounts for more patterns, and has more features. 
