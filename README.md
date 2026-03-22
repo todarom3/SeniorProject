@@ -97,6 +97,8 @@ Prepare to present in person on 3/17
 Week 8: Midterm Presentation and New Improvements:  
 Present the Midterm  
 Work on finishing the API that connects the machine learning model and the dashboard  
+Create a more complicated dataset 
+Add more fraud patterns and features to the transaction generator
 
 // Future weeks work TBD we will document as we go:  
 
