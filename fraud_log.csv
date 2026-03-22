@@ -1,0 +1,900 @@
+transaction_id,card_number,fraud_type,reason
+7,4074808105026642,over_limit,Charge 744.86 significantly exceeds grocery limit
+34,4435803369409541,drainer,Burst charge 1 of 7 (Velocity)
+35,4435803369409541,drainer,Burst charge 2 of 7 (Velocity)
+36,4435803369409541,drainer,Burst charge 3 of 7 (Velocity)
+37,4435803369409541,drainer,Burst charge 4 of 7 (Velocity)
+38,4435803369409541,drainer,Burst charge 5 of 7 (Velocity)
+39,4435803369409541,drainer,Burst charge 6 of 7 (Velocity)
+40,4435803369409541,drainer,Burst charge 7 of 7 (Velocity)
+90,4399568464638894,test_charge,Probing charge 1 of 3
+91,4399568464638894,test_charge,Probing charge 2 of 3
+92,4399568464638894,test_charge,Probing charge 3 of 3
+93,4399568464638894,test_charge,Main hit after probing IDs: [90, 91, 92]
+139,4259968397072414,repeat_tx,Duplicate amount 97.72 (Repeat 1)
+140,4259968397072414,repeat_tx,Duplicate amount 97.72 (Repeat 2)
+141,4259968397072414,repeat_tx,Duplicate amount 97.72 (Repeat 3)
+207,4003284019973114,repeat_tx,Duplicate amount 63.16 (Repeat 1)
+208,4003284019973114,repeat_tx,Duplicate amount 63.16 (Repeat 2)
+209,4003284019973114,repeat_tx,Duplicate amount 63.16 (Repeat 3)
+210,4225047887565200,over_limit,Charge 104.71 significantly exceeds subscription limit
+214,4872450182259145,drainer,Burst charge 1 of 3 (Velocity)
+215,4872450182259145,drainer,Burst charge 2 of 3 (Velocity)
+216,4872450182259145,drainer,Burst charge 3 of 3 (Velocity)
+271,4458846862094250,location_jump,Jump to OR shortly after ID:270
+284,4420891116511676,repeat_tx,Duplicate amount 45.98 (Repeat 1)
+285,4420891116511676,repeat_tx,Duplicate amount 45.98 (Repeat 2)
+286,4420891116511676,repeat_tx,Duplicate amount 45.98 (Repeat 3)
+287,4420891116511676,repeat_tx,Duplicate amount 45.98 (Repeat 4)
+310,4053745002810452,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+311,4053745002810452,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+324,4516577509794967,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+340,4632310565044009,over_limit,Charge 391.22 significantly exceeds gas limit
+350,4633991532191477,test_charge,Probing charge 1 of 2
+351,4633991532191477,test_charge,Probing charge 2 of 2
+352,4633991532191477,test_charge,Main hit after probing IDs: [350, 351]
+380,4065041381616761,location_jump,Jump to OH shortly after ID:379
+396,4078807628829367,over_limit,Charge 282.07 significantly exceeds food limit
+415,4776858640647736,drainer,Burst charge 1 of 8 (Velocity)
+416,4776858640647736,drainer,Burst charge 2 of 8 (Velocity)
+417,4776858640647736,drainer,Burst charge 3 of 8 (Velocity)
+418,4776858640647736,drainer,Burst charge 4 of 8 (Velocity)
+419,4776858640647736,drainer,Burst charge 5 of 8 (Velocity)
+420,4776858640647736,drainer,Burst charge 6 of 8 (Velocity)
+421,4776858640647736,drainer,Burst charge 7 of 8 (Velocity)
+422,4776858640647736,drainer,Burst charge 8 of 8 (Velocity)
+499,4456616339437437,repeat_tx,Duplicate amount 78.25 (Repeat 1)
+500,4456616339437437,repeat_tx,Duplicate amount 78.25 (Repeat 2)
+513,4195696552295108,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+514,4195696552295108,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+515,4195696552295108,midnight_surge,Anomalous night activity at 1 AM (Tx 3)
+560,4759752182960669,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+561,4759752182960669,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+574,4232176556371644,repeat_tx,Duplicate amount 73.67 (Repeat 1)
+575,4232176556371644,repeat_tx,Duplicate amount 73.67 (Repeat 2)
+576,4232176556371644,repeat_tx,Duplicate amount 73.67 (Repeat 3)
+616,4872450182259145,test_charge,Probing charge 1 of 1
+617,4872450182259145,test_charge,Main hit after probing IDs: [616]
+629,4598915055102467,repeat_tx,Duplicate amount 42.6 (Repeat 1)
+630,4598915055102467,repeat_tx,Duplicate amount 42.6 (Repeat 2)
+631,4598915055102467,repeat_tx,Duplicate amount 42.6 (Repeat 3)
+660,4626901131115550,drainer,Burst charge 1 of 6 (Velocity)
+661,4626901131115550,drainer,Burst charge 2 of 6 (Velocity)
+662,4626901131115550,drainer,Burst charge 3 of 6 (Velocity)
+663,4626901131115550,drainer,Burst charge 4 of 6 (Velocity)
+664,4626901131115550,drainer,Burst charge 5 of 6 (Velocity)
+665,4626901131115550,drainer,Burst charge 6 of 6 (Velocity)
+735,4152579410454716,test_charge,Probing charge 1 of 3
+736,4152579410454716,test_charge,Probing charge 2 of 3
+737,4152579410454716,test_charge,Probing charge 3 of 3
+738,4152579410454716,test_charge,Main hit after probing IDs: [735, 736, 737]
+770,4260815664679167,drainer,Burst charge 1 of 5 (Velocity)
+771,4260815664679167,drainer,Burst charge 2 of 5 (Velocity)
+772,4260815664679167,drainer,Burst charge 3 of 5 (Velocity)
+773,4260815664679167,drainer,Burst charge 4 of 5 (Velocity)
+774,4260815664679167,drainer,Burst charge 5 of 5 (Velocity)
+828,4449042178524554,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+844,4200246004766789,drainer,Burst charge 1 of 5 (Velocity)
+845,4200246004766789,drainer,Burst charge 2 of 5 (Velocity)
+846,4200246004766789,drainer,Burst charge 3 of 5 (Velocity)
+847,4200246004766789,drainer,Burst charge 4 of 5 (Velocity)
+848,4200246004766789,drainer,Burst charge 5 of 5 (Velocity)
+901,4078223950990913,over_limit,Charge 4311.91 significantly exceeds electronics limit
+917,4372666705466045,drainer,Burst charge 1 of 8 (Velocity)
+918,4372666705466045,drainer,Burst charge 2 of 8 (Velocity)
+919,4372666705466045,drainer,Burst charge 3 of 8 (Velocity)
+920,4372666705466045,drainer,Burst charge 4 of 8 (Velocity)
+921,4372666705466045,drainer,Burst charge 5 of 8 (Velocity)
+922,4372666705466045,drainer,Burst charge 6 of 8 (Velocity)
+923,4372666705466045,drainer,Burst charge 7 of 8 (Velocity)
+924,4372666705466045,drainer,Burst charge 8 of 8 (Velocity)
+994,4854306401613516,repeat_tx,Duplicate amount 90.75 (Repeat 1)
+995,4854306401613516,repeat_tx,Duplicate amount 90.75 (Repeat 2)
+1016,4801086763943733,drainer,Burst charge 1 of 7 (Velocity)
+1017,4801086763943733,drainer,Burst charge 2 of 7 (Velocity)
+1018,4801086763943733,drainer,Burst charge 3 of 7 (Velocity)
+1019,4801086763943733,drainer,Burst charge 4 of 7 (Velocity)
+1020,4801086763943733,drainer,Burst charge 5 of 7 (Velocity)
+1021,4801086763943733,drainer,Burst charge 6 of 7 (Velocity)
+1022,4801086763943733,drainer,Burst charge 7 of 7 (Velocity)
+1090,4303459687634600,over_limit,Charge 374.93 significantly exceeds gas limit
+1103,4526268472475943,test_charge,Probing charge 1 of 2
+1104,4526268472475943,test_charge,Probing charge 2 of 2
+1105,4526268472475943,test_charge,Main hit after probing IDs: [1103, 1104]
+1136,4479326623762398,repeat_tx,Duplicate amount 35.95 (Repeat 1)
+1137,4479326623762398,repeat_tx,Duplicate amount 35.95 (Repeat 2)
+1138,4479326623762398,repeat_tx,Duplicate amount 35.95 (Repeat 3)
+1188,4744609607299070,location_jump,Jump to TN shortly after ID:1187
+1191,4694220158541029,drainer,Burst charge 1 of 4 (Velocity)
+1192,4694220158541029,drainer,Burst charge 2 of 4 (Velocity)
+1193,4694220158541029,drainer,Burst charge 3 of 4 (Velocity)
+1194,4694220158541029,drainer,Burst charge 4 of 4 (Velocity)
+1226,4871254756433487,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+1237,4758746719706998,location_jump,Jump to AK shortly after ID:1236
+1248,4201218643922214,test_charge,Probing charge 1 of 3
+1249,4201218643922214,test_charge,Probing charge 2 of 3
+1250,4201218643922214,test_charge,Probing charge 3 of 3
+1251,4201218643922214,test_charge,Main hit after probing IDs: [1248, 1249, 1250]
+1295,4045876133578864,drainer,Burst charge 1 of 5 (Velocity)
+1296,4045876133578864,drainer,Burst charge 2 of 5 (Velocity)
+1297,4045876133578864,drainer,Burst charge 3 of 5 (Velocity)
+1298,4045876133578864,drainer,Burst charge 4 of 5 (Velocity)
+1299,4045876133578864,drainer,Burst charge 5 of 5 (Velocity)
+1346,4092095406314898,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+1347,4092095406314898,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+1348,4092095406314898,midnight_surge,Anomalous night activity at 3 AM (Tx 3)
+1383,4854306401613516,drainer,Burst charge 1 of 3 (Velocity)
+1384,4854306401613516,drainer,Burst charge 2 of 3 (Velocity)
+1385,4854306401613516,drainer,Burst charge 3 of 3 (Velocity)
+1417,4428806714669081,repeat_tx,Duplicate amount 95.12 (Repeat 1)
+1418,4428806714669081,repeat_tx,Duplicate amount 95.12 (Repeat 2)
+1419,4428806714669081,repeat_tx,Duplicate amount 95.12 (Repeat 3)
+1446,4809267002525679,over_limit,Charge 4324.19 significantly exceeds electronics limit
+1458,4809267002525679,test_charge,Probing charge 1 of 3
+1459,4809267002525679,test_charge,Probing charge 2 of 3
+1460,4809267002525679,test_charge,Probing charge 3 of 3
+1461,4809267002525679,test_charge,Main hit after probing IDs: [1458, 1459, 1460]
+1502,4363290223146498,over_limit,Charge 1199.9 significantly exceeds retail limit
+1522,4934113114804139,drainer,Burst charge 1 of 5 (Velocity)
+1523,4934113114804139,drainer,Burst charge 2 of 5 (Velocity)
+1524,4934113114804139,drainer,Burst charge 3 of 5 (Velocity)
+1525,4934113114804139,drainer,Burst charge 4 of 5 (Velocity)
+1526,4934113114804139,drainer,Burst charge 5 of 5 (Velocity)
+1569,4046816582718838,repeat_tx,Duplicate amount 96.99 (Repeat 1)
+1570,4046816582718838,repeat_tx,Duplicate amount 96.99 (Repeat 2)
+1571,4046816582718838,repeat_tx,Duplicate amount 96.99 (Repeat 3)
+1572,4046816582718838,repeat_tx,Duplicate amount 96.99 (Repeat 4)
+1619,4708175328295626,over_limit,Charge 4581.56 significantly exceeds electronics limit
+1634,4381984512886610,drainer,Burst charge 1 of 5 (Velocity)
+1635,4381984512886610,drainer,Burst charge 2 of 5 (Velocity)
+1636,4381984512886610,drainer,Burst charge 3 of 5 (Velocity)
+1637,4381984512886610,drainer,Burst charge 4 of 5 (Velocity)
+1638,4381984512886610,drainer,Burst charge 5 of 5 (Velocity)
+1679,4070204724162239,over_limit,Charge 4227.94 significantly exceeds electronics limit
+1696,4165776009584651,location_jump,Jump to HI shortly after ID:1695
+1706,4488642425896427,test_charge,Probing charge 1 of 2
+1707,4488642425896427,test_charge,Probing charge 2 of 2
+1708,4488642425896427,test_charge,Main hit after probing IDs: [1706, 1707]
+1738,4559102990719908,drainer,Burst charge 1 of 5 (Velocity)
+1739,4559102990719908,drainer,Burst charge 2 of 5 (Velocity)
+1740,4559102990719908,drainer,Burst charge 3 of 5 (Velocity)
+1741,4559102990719908,drainer,Burst charge 4 of 5 (Velocity)
+1742,4559102990719908,drainer,Burst charge 5 of 5 (Velocity)
+1792,4615352566200091,drainer,Burst charge 1 of 3 (Velocity)
+1793,4615352566200091,drainer,Burst charge 2 of 3 (Velocity)
+1794,4615352566200091,drainer,Burst charge 3 of 3 (Velocity)
+1835,4743932557470983,repeat_tx,Duplicate amount 72.07 (Repeat 1)
+1836,4743932557470983,repeat_tx,Duplicate amount 72.07 (Repeat 2)
+1837,4743932557470983,repeat_tx,Duplicate amount 72.07 (Repeat 3)
+1865,4995923370166515,location_jump,Jump to IA shortly after ID:1864
+1869,4712404391843035,drainer,Burst charge 1 of 7 (Velocity)
+1870,4712404391843035,drainer,Burst charge 2 of 7 (Velocity)
+1871,4712404391843035,drainer,Burst charge 3 of 7 (Velocity)
+1872,4712404391843035,drainer,Burst charge 4 of 7 (Velocity)
+1873,4712404391843035,drainer,Burst charge 5 of 7 (Velocity)
+1874,4712404391843035,drainer,Burst charge 6 of 7 (Velocity)
+1875,4712404391843035,drainer,Burst charge 7 of 7 (Velocity)
+1951,4387546613070922,location_jump,Jump to OK shortly after ID:1950
+1963,4726877331816525,test_charge,Probing charge 1 of 1
+1964,4726877331816525,test_charge,Main hit after probing IDs: [1963]
+1986,4551785954628811,test_charge,Probing charge 1 of 3
+1987,4551785954628811,test_charge,Probing charge 2 of 3
+1988,4551785954628811,test_charge,Probing charge 3 of 3
+1989,4551785954628811,test_charge,Main hit after probing IDs: [1986, 1987, 1988]
+2030,4164321372033485,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+2031,4164321372033485,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+2075,4969766446625493,drainer,Burst charge 1 of 8 (Velocity)
+2076,4969766446625493,drainer,Burst charge 2 of 8 (Velocity)
+2077,4969766446625493,drainer,Burst charge 3 of 8 (Velocity)
+2078,4969766446625493,drainer,Burst charge 4 of 8 (Velocity)
+2079,4969766446625493,drainer,Burst charge 5 of 8 (Velocity)
+2080,4969766446625493,drainer,Burst charge 6 of 8 (Velocity)
+2081,4969766446625493,drainer,Burst charge 7 of 8 (Velocity)
+2082,4969766446625493,drainer,Burst charge 8 of 8 (Velocity)
+2137,4348327211912871,test_charge,Probing charge 1 of 2
+2138,4348327211912871,test_charge,Probing charge 2 of 2
+2139,4348327211912871,test_charge,Main hit after probing IDs: [2137, 2138]
+2169,4871254756433487,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+2170,4871254756433487,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+2171,4871254756433487,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+2203,4582440042901781,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+2204,4582440042901781,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+2224,4934113114804139,repeat_tx,Duplicate amount 59.45 (Repeat 1)
+2225,4934113114804139,repeat_tx,Duplicate amount 59.45 (Repeat 2)
+2249,4791406663990544,over_limit,Charge 637.88 significantly exceeds pharmacy limit
+2265,4768951935488306,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+2271,4526477790583880,drainer,Burst charge 1 of 6 (Velocity)
+2272,4526477790583880,drainer,Burst charge 2 of 6 (Velocity)
+2273,4526477790583880,drainer,Burst charge 3 of 6 (Velocity)
+2274,4526477790583880,drainer,Burst charge 4 of 6 (Velocity)
+2275,4526477790583880,drainer,Burst charge 5 of 6 (Velocity)
+2276,4526477790583880,drainer,Burst charge 6 of 6 (Velocity)
+2362,4091258564983840,drainer,Burst charge 1 of 7 (Velocity)
+2363,4091258564983840,drainer,Burst charge 2 of 7 (Velocity)
+2364,4091258564983840,drainer,Burst charge 3 of 7 (Velocity)
+2365,4091258564983840,drainer,Burst charge 4 of 7 (Velocity)
+2366,4091258564983840,drainer,Burst charge 5 of 7 (Velocity)
+2367,4091258564983840,drainer,Burst charge 6 of 7 (Velocity)
+2368,4091258564983840,drainer,Burst charge 7 of 7 (Velocity)
+2422,4126927142993012,test_charge,Probing charge 1 of 2
+2423,4126927142993012,test_charge,Probing charge 2 of 2
+2424,4126927142993012,test_charge,Main hit after probing IDs: [2422, 2423]
+2447,4936225676528930,drainer,Burst charge 1 of 4 (Velocity)
+2448,4936225676528930,drainer,Burst charge 2 of 4 (Velocity)
+2449,4936225676528930,drainer,Burst charge 3 of 4 (Velocity)
+2450,4936225676528930,drainer,Burst charge 4 of 4 (Velocity)
+2490,4994175822454256,test_charge,Probing charge 1 of 2
+2491,4994175822454256,test_charge,Probing charge 2 of 2
+2492,4994175822454256,test_charge,Main hit after probing IDs: [2490, 2491]
+2525,4004538774731877,test_charge,Probing charge 1 of 1
+2526,4004538774731877,test_charge,Main hit after probing IDs: [2525]
+2547,4345558199214247,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+2548,4345558199214247,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+2573,4908550531115596,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+2602,4927995224661695,repeat_tx,Duplicate amount 41.68 (Repeat 1)
+2603,4927995224661695,repeat_tx,Duplicate amount 41.68 (Repeat 2)
+2607,4961042310857973,test_charge,Probing charge 1 of 2
+2608,4961042310857973,test_charge,Probing charge 2 of 2
+2609,4961042310857973,test_charge,Main hit after probing IDs: [2607, 2608]
+2644,4263272616734766,drainer,Burst charge 1 of 4 (Velocity)
+2645,4263272616734766,drainer,Burst charge 2 of 4 (Velocity)
+2646,4263272616734766,drainer,Burst charge 3 of 4 (Velocity)
+2647,4263272616734766,drainer,Burst charge 4 of 4 (Velocity)
+2686,4015010668005156,drainer,Burst charge 1 of 5 (Velocity)
+2687,4015010668005156,drainer,Burst charge 2 of 5 (Velocity)
+2688,4015010668005156,drainer,Burst charge 3 of 5 (Velocity)
+2689,4015010668005156,drainer,Burst charge 4 of 5 (Velocity)
+2690,4015010668005156,drainer,Burst charge 5 of 5 (Velocity)
+2736,4410011999411984,drainer,Burst charge 1 of 5 (Velocity)
+2737,4410011999411984,drainer,Burst charge 2 of 5 (Velocity)
+2738,4410011999411984,drainer,Burst charge 3 of 5 (Velocity)
+2739,4410011999411984,drainer,Burst charge 4 of 5 (Velocity)
+2740,4410011999411984,drainer,Burst charge 5 of 5 (Velocity)
+2808,4687402090185460,test_charge,Probing charge 1 of 3
+2809,4687402090185460,test_charge,Probing charge 2 of 3
+2810,4687402090185460,test_charge,Probing charge 3 of 3
+2811,4687402090185460,test_charge,Main hit after probing IDs: [2808, 2809, 2810]
+2852,4557941821218801,over_limit,Charge 246.39 significantly exceeds gas limit
+2857,4003284019973114,over_limit,Charge 3532.73 significantly exceeds electronics limit
+2865,4539334122568020,location_jump,Jump to NY shortly after ID:2864
+2869,4678549816180158,location_jump,Jump to MA shortly after ID:2868
+2883,4002647263763682,drainer,Burst charge 1 of 8 (Velocity)
+2884,4002647263763682,drainer,Burst charge 2 of 8 (Velocity)
+2885,4002647263763682,drainer,Burst charge 3 of 8 (Velocity)
+2886,4002647263763682,drainer,Burst charge 4 of 8 (Velocity)
+2887,4002647263763682,drainer,Burst charge 5 of 8 (Velocity)
+2888,4002647263763682,drainer,Burst charge 6 of 8 (Velocity)
+2889,4002647263763682,drainer,Burst charge 7 of 8 (Velocity)
+2890,4002647263763682,drainer,Burst charge 8 of 8 (Velocity)
+2983,4723498564751010,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+2984,4723498564751010,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+2992,4159429324960997,repeat_tx,Duplicate amount 43.23 (Repeat 1)
+2993,4159429324960997,repeat_tx,Duplicate amount 43.23 (Repeat 2)
+2994,4159429324960997,repeat_tx,Duplicate amount 43.23 (Repeat 3)
+2995,4159429324960997,repeat_tx,Duplicate amount 43.23 (Repeat 4)
+3036,4559102990719908,location_jump,Jump to RI shortly after ID:3035
+3073,4014665680001669,drainer,Burst charge 1 of 4 (Velocity)
+3074,4014665680001669,drainer,Burst charge 2 of 4 (Velocity)
+3075,4014665680001669,drainer,Burst charge 3 of 4 (Velocity)
+3076,4014665680001669,drainer,Burst charge 4 of 4 (Velocity)
+3095,4336378537722055,drainer,Burst charge 1 of 7 (Velocity)
+3096,4336378537722055,drainer,Burst charge 2 of 7 (Velocity)
+3097,4336378537722055,drainer,Burst charge 3 of 7 (Velocity)
+3098,4336378537722055,drainer,Burst charge 4 of 7 (Velocity)
+3099,4336378537722055,drainer,Burst charge 5 of 7 (Velocity)
+3100,4336378537722055,drainer,Burst charge 6 of 7 (Velocity)
+3101,4336378537722055,drainer,Burst charge 7 of 7 (Velocity)
+3183,4438180898019842,drainer,Burst charge 1 of 6 (Velocity)
+3184,4438180898019842,drainer,Burst charge 2 of 6 (Velocity)
+3185,4438180898019842,drainer,Burst charge 3 of 6 (Velocity)
+3186,4438180898019842,drainer,Burst charge 4 of 6 (Velocity)
+3187,4438180898019842,drainer,Burst charge 5 of 6 (Velocity)
+3188,4438180898019842,drainer,Burst charge 6 of 6 (Velocity)
+3240,4479326623762398,test_charge,Probing charge 1 of 3
+3241,4479326623762398,test_charge,Probing charge 2 of 3
+3242,4479326623762398,test_charge,Probing charge 3 of 3
+3243,4479326623762398,test_charge,Main hit after probing IDs: [3240, 3241, 3242]
+3289,4355965413559319,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+3292,4232176556371644,over_limit,Charge 1053.15 significantly exceeds retail limit
+3304,4868100274395891,repeat_tx,Duplicate amount 53.18 (Repeat 1)
+3305,4868100274395891,repeat_tx,Duplicate amount 53.18 (Repeat 2)
+3328,4110351370228795,over_limit,Charge 575.49 significantly exceeds pharmacy limit
+3354,4227947483715731,drainer,Burst charge 1 of 3 (Velocity)
+3355,4227947483715731,drainer,Burst charge 2 of 3 (Velocity)
+3356,4227947483715731,drainer,Burst charge 3 of 3 (Velocity)
+3380,4382762841312405,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+3381,4382762841312405,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+3392,4297056068700263,drainer,Burst charge 1 of 5 (Velocity)
+3393,4297056068700263,drainer,Burst charge 2 of 5 (Velocity)
+3394,4297056068700263,drainer,Burst charge 3 of 5 (Velocity)
+3395,4297056068700263,drainer,Burst charge 4 of 5 (Velocity)
+3396,4297056068700263,drainer,Burst charge 5 of 5 (Velocity)
+3457,4165776009584651,location_jump,Jump to GA shortly after ID:3456
+3462,4919970458055637,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+3463,4919970458055637,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+3485,4539334122568020,drainer,Burst charge 1 of 8 (Velocity)
+3486,4539334122568020,drainer,Burst charge 2 of 8 (Velocity)
+3487,4539334122568020,drainer,Burst charge 3 of 8 (Velocity)
+3488,4539334122568020,drainer,Burst charge 4 of 8 (Velocity)
+3489,4539334122568020,drainer,Burst charge 5 of 8 (Velocity)
+3490,4539334122568020,drainer,Burst charge 6 of 8 (Velocity)
+3491,4539334122568020,drainer,Burst charge 7 of 8 (Velocity)
+3492,4539334122568020,drainer,Burst charge 8 of 8 (Velocity)
+3580,4935734791520460,location_jump,Jump to AK shortly after ID:3579
+3584,4479326623762398,test_charge,Probing charge 1 of 2
+3585,4479326623762398,test_charge,Probing charge 2 of 2
+3586,4479326623762398,test_charge,Main hit after probing IDs: [3584, 3585]
+3637,4172890429280390,drainer,Burst charge 1 of 8 (Velocity)
+3638,4172890429280390,drainer,Burst charge 2 of 8 (Velocity)
+3639,4172890429280390,drainer,Burst charge 3 of 8 (Velocity)
+3640,4172890429280390,drainer,Burst charge 4 of 8 (Velocity)
+3641,4172890429280390,drainer,Burst charge 5 of 8 (Velocity)
+3642,4172890429280390,drainer,Burst charge 6 of 8 (Velocity)
+3643,4172890429280390,drainer,Burst charge 7 of 8 (Velocity)
+3644,4172890429280390,drainer,Burst charge 8 of 8 (Velocity)
+3708,4504248801138783,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+3727,4064271655927303,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+3740,4303459687634600,location_jump,Jump to FL shortly after ID:3739
+3749,4263272616734766,repeat_tx,Duplicate amount 38.51 (Repeat 1)
+3750,4263272616734766,repeat_tx,Duplicate amount 38.51 (Repeat 2)
+3751,4263272616734766,repeat_tx,Duplicate amount 38.51 (Repeat 3)
+3784,4429648863041775,location_jump,Jump to MT shortly after ID:3783
+3788,4647370125332841,drainer,Burst charge 1 of 6 (Velocity)
+3789,4647370125332841,drainer,Burst charge 2 of 6 (Velocity)
+3790,4647370125332841,drainer,Burst charge 3 of 6 (Velocity)
+3791,4647370125332841,drainer,Burst charge 4 of 6 (Velocity)
+3792,4647370125332841,drainer,Burst charge 5 of 6 (Velocity)
+3793,4647370125332841,drainer,Burst charge 6 of 6 (Velocity)
+3859,4862198303610924,repeat_tx,Duplicate amount 45.34 (Repeat 1)
+3860,4862198303610924,repeat_tx,Duplicate amount 45.34 (Repeat 2)
+3871,4225047887565200,location_jump,Jump to WY shortly after ID:3870
+3883,4541001446950825,over_limit,Charge 276.75 significantly exceeds food limit
+3895,4773764378929883,over_limit,Charge 5052.35 significantly exceeds electronics limit
+3914,4154430105356279,over_limit,Charge 263.92 significantly exceeds food limit
+3916,4096124219335733,test_charge,Probing charge 1 of 2
+3917,4096124219335733,test_charge,Probing charge 2 of 2
+3918,4096124219335733,test_charge,Main hit after probing IDs: [3916, 3917]
+3950,4583619574509041,repeat_tx,Duplicate amount 41.51 (Repeat 1)
+3951,4583619574509041,repeat_tx,Duplicate amount 41.51 (Repeat 2)
+4003,4711057257678741,location_jump,Jump to KY shortly after ID:4002
+4011,4429648863041775,test_charge,Probing charge 1 of 2
+4012,4429648863041775,test_charge,Probing charge 2 of 2
+4013,4429648863041775,test_charge,Main hit after probing IDs: [4011, 4012]
+4028,4488841599372010,over_limit,Charge 291.05 significantly exceeds gas limit
+4032,4670298537603812,drainer,Burst charge 1 of 8 (Velocity)
+4033,4670298537603812,drainer,Burst charge 2 of 8 (Velocity)
+4034,4670298537603812,drainer,Burst charge 3 of 8 (Velocity)
+4035,4670298537603812,drainer,Burst charge 4 of 8 (Velocity)
+4036,4670298537603812,drainer,Burst charge 5 of 8 (Velocity)
+4037,4670298537603812,drainer,Burst charge 6 of 8 (Velocity)
+4038,4670298537603812,drainer,Burst charge 7 of 8 (Velocity)
+4039,4670298537603812,drainer,Burst charge 8 of 8 (Velocity)
+4149,4115093857496099,location_jump,Jump to CA shortly after ID:4148
+4160,4938749649003351,repeat_tx,Duplicate amount 82.37 (Repeat 1)
+4161,4938749649003351,repeat_tx,Duplicate amount 82.37 (Repeat 2)
+4162,4938749649003351,repeat_tx,Duplicate amount 82.37 (Repeat 3)
+4166,4460180162993640,repeat_tx,Duplicate amount 36.78 (Repeat 1)
+4167,4460180162993640,repeat_tx,Duplicate amount 36.78 (Repeat 2)
+4182,4640556833967154,over_limit,Charge 4344.16 significantly exceeds electronics limit
+4192,4164321372033485,drainer,Burst charge 1 of 8 (Velocity)
+4193,4164321372033485,drainer,Burst charge 2 of 8 (Velocity)
+4194,4164321372033485,drainer,Burst charge 3 of 8 (Velocity)
+4195,4164321372033485,drainer,Burst charge 4 of 8 (Velocity)
+4196,4164321372033485,drainer,Burst charge 5 of 8 (Velocity)
+4197,4164321372033485,drainer,Burst charge 6 of 8 (Velocity)
+4198,4164321372033485,drainer,Burst charge 7 of 8 (Velocity)
+4199,4164321372033485,drainer,Burst charge 8 of 8 (Velocity)
+4279,4139963020815377,test_charge,Probing charge 1 of 3
+4280,4139963020815377,test_charge,Probing charge 2 of 3
+4281,4139963020815377,test_charge,Probing charge 3 of 3
+4282,4139963020815377,test_charge,Main hit after probing IDs: [4279, 4280, 4281]
+4330,4680158983935946,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+4343,4992791924889768,repeat_tx,Duplicate amount 49.1 (Repeat 1)
+4344,4992791924889768,repeat_tx,Duplicate amount 49.1 (Repeat 2)
+4345,4992791924889768,repeat_tx,Duplicate amount 49.1 (Repeat 3)
+4346,4992791924889768,repeat_tx,Duplicate amount 49.1 (Repeat 4)
+4385,4281523902362140,location_jump,Jump to LA shortly after ID:4384
+4397,4201194748794718,location_jump,Jump to OR shortly after ID:4396
+4426,4192667541094669,drainer,Burst charge 1 of 6 (Velocity)
+4427,4192667541094669,drainer,Burst charge 2 of 6 (Velocity)
+4428,4192667541094669,drainer,Burst charge 3 of 6 (Velocity)
+4429,4192667541094669,drainer,Burst charge 4 of 6 (Velocity)
+4430,4192667541094669,drainer,Burst charge 5 of 6 (Velocity)
+4431,4192667541094669,drainer,Burst charge 6 of 6 (Velocity)
+4470,4462791954644122,repeat_tx,Duplicate amount 33.42 (Repeat 1)
+4471,4462791954644122,repeat_tx,Duplicate amount 33.42 (Repeat 2)
+4496,4822069691437231,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+4497,4822069691437231,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+4518,4312045347470243,over_limit,Charge 365.11 significantly exceeds food limit
+4527,4779860702861086,location_jump,Jump to AK shortly after ID:4526
+4540,4962413648795800,test_charge,Probing charge 1 of 2
+4541,4962413648795800,test_charge,Probing charge 2 of 2
+4542,4962413648795800,test_charge,Main hit after probing IDs: [4540, 4541]
+4568,4419260709492904,test_charge,Probing charge 1 of 1
+4569,4419260709492904,test_charge,Main hit after probing IDs: [4568]
+4599,4834204617082285,location_jump,Jump to TX shortly after ID:4598
+4604,4919970458055637,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+4605,4919970458055637,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+4637,4118229483522246,location_jump,Jump to NC shortly after ID:4636
+4647,4853415932637389,location_jump,Jump to ME shortly after ID:4646
+4655,4054931947101454,location_jump,Jump to TX shortly after ID:4654
+4665,4743871635123035,drainer,Burst charge 1 of 8 (Velocity)
+4666,4743871635123035,drainer,Burst charge 2 of 8 (Velocity)
+4667,4743871635123035,drainer,Burst charge 3 of 8 (Velocity)
+4668,4743871635123035,drainer,Burst charge 4 of 8 (Velocity)
+4669,4743871635123035,drainer,Burst charge 5 of 8 (Velocity)
+4670,4743871635123035,drainer,Burst charge 6 of 8 (Velocity)
+4671,4743871635123035,drainer,Burst charge 7 of 8 (Velocity)
+4672,4743871635123035,drainer,Burst charge 8 of 8 (Velocity)
+4748,4344101372301293,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+4749,4344101372301293,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+4789,4096915852877663,over_limit,Charge 946.29 significantly exceeds grocery limit
+4792,4292940746701820,over_limit,Charge 430.09 significantly exceeds food limit
+4794,4005113446459447,drainer,Burst charge 1 of 8 (Velocity)
+4795,4005113446459447,drainer,Burst charge 2 of 8 (Velocity)
+4796,4005113446459447,drainer,Burst charge 3 of 8 (Velocity)
+4797,4005113446459447,drainer,Burst charge 4 of 8 (Velocity)
+4798,4005113446459447,drainer,Burst charge 5 of 8 (Velocity)
+4799,4005113446459447,drainer,Burst charge 6 of 8 (Velocity)
+4800,4005113446459447,drainer,Burst charge 7 of 8 (Velocity)
+4801,4005113446459447,drainer,Burst charge 8 of 8 (Velocity)
+4882,4070204724162239,over_limit,Charge 255.97 significantly exceeds gas limit
+4896,4038372770918033,over_limit,Charge 1530.5 significantly exceeds retail limit
+4908,4853415932637389,repeat_tx,Duplicate amount 81.36 (Repeat 1)
+4909,4853415932637389,repeat_tx,Duplicate amount 81.36 (Repeat 2)
+4910,4853415932637389,repeat_tx,Duplicate amount 81.36 (Repeat 3)
+4911,4853415932637389,repeat_tx,Duplicate amount 81.36 (Repeat 4)
+4951,4015010668005156,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+4952,4015010668005156,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+4953,4015010668005156,midnight_surge,Anomalous night activity at 1 AM (Tx 3)
+4980,4078223950990913,repeat_tx,Duplicate amount 64.95 (Repeat 1)
+4981,4078223950990913,repeat_tx,Duplicate amount 64.95 (Repeat 2)
+5010,4877324096438002,drainer,Burst charge 1 of 5 (Velocity)
+5011,4877324096438002,drainer,Burst charge 2 of 5 (Velocity)
+5012,4877324096438002,drainer,Burst charge 3 of 5 (Velocity)
+5013,4877324096438002,drainer,Burst charge 4 of 5 (Velocity)
+5014,4877324096438002,drainer,Burst charge 5 of 5 (Velocity)
+5060,4103368378111590,repeat_tx,Duplicate amount 61.65 (Repeat 1)
+5061,4103368378111590,repeat_tx,Duplicate amount 61.65 (Repeat 2)
+5062,4103368378111590,repeat_tx,Duplicate amount 61.65 (Repeat 3)
+5094,4716474458835429,over_limit,Charge 245.13 significantly exceeds food limit
+5106,4775856438285753,location_jump,Jump to WA shortly after ID:5105
+5120,4957295009106470,drainer,Burst charge 1 of 3 (Velocity)
+5121,4957295009106470,drainer,Burst charge 2 of 3 (Velocity)
+5122,4957295009106470,drainer,Burst charge 3 of 3 (Velocity)
+5153,4788830337529702,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+5154,4788830337529702,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+5155,4788830337529702,midnight_surge,Anomalous night activity at 1 AM (Tx 3)
+5179,4760509462803769,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+5180,4760509462803769,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+5181,4760509462803769,midnight_surge,Anomalous night activity at 3 AM (Tx 3)
+5222,4097140779019566,location_jump,Jump to AZ shortly after ID:5221
+5231,4229834168960479,repeat_tx,Duplicate amount 58.9 (Repeat 1)
+5232,4229834168960479,repeat_tx,Duplicate amount 58.9 (Repeat 2)
+5246,4571681255890925,test_charge,Probing charge 1 of 3
+5247,4571681255890925,test_charge,Probing charge 2 of 3
+5248,4571681255890925,test_charge,Probing charge 3 of 3
+5249,4571681255890925,test_charge,Main hit after probing IDs: [5246, 5247, 5248]
+5319,4305144256789891,test_charge,Probing charge 1 of 1
+5320,4305144256789891,test_charge,Main hit after probing IDs: [5319]
+5322,4935664270937618,drainer,Burst charge 1 of 3 (Velocity)
+5323,4935664270937618,drainer,Burst charge 2 of 3 (Velocity)
+5324,4935664270937618,drainer,Burst charge 3 of 3 (Velocity)
+5348,4317379729900831,drainer,Burst charge 1 of 3 (Velocity)
+5349,4317379729900831,drainer,Burst charge 2 of 3 (Velocity)
+5350,4317379729900831,drainer,Burst charge 3 of 3 (Velocity)
+5384,4211722906406564,location_jump,Jump to AK shortly after ID:5383
+5409,4851439582247499,over_limit,Charge 912.38 significantly exceeds retail limit
+5419,4848030543275310,location_jump,Jump to TN shortly after ID:5418
+5420,4316918085467052,over_limit,Charge 1281.61 significantly exceeds retail limit
+5430,4945407456501130,drainer,Burst charge 1 of 5 (Velocity)
+5431,4945407456501130,drainer,Burst charge 2 of 5 (Velocity)
+5432,4945407456501130,drainer,Burst charge 3 of 5 (Velocity)
+5433,4945407456501130,drainer,Burst charge 4 of 5 (Velocity)
+5434,4945407456501130,drainer,Burst charge 5 of 5 (Velocity)
+5485,4045876133578864,over_limit,Charge 112.57 significantly exceeds subscription limit
+5501,4937304683695323,location_jump,Jump to AR shortly after ID:5500
+5508,4161006516354971,repeat_tx,Duplicate amount 77.63 (Repeat 1)
+5509,4161006516354971,repeat_tx,Duplicate amount 77.63 (Repeat 2)
+5510,4161006516354971,repeat_tx,Duplicate amount 77.63 (Repeat 3)
+5511,4161006516354971,repeat_tx,Duplicate amount 77.63 (Repeat 4)
+5557,4329703076325570,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+5558,4329703076325570,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+5559,4329703076325570,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+5585,4726877331816525,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+5586,4726877331816525,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+5587,4726877331816525,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+5623,4224896604255591,test_charge,Probing charge 1 of 2
+5624,4224896604255591,test_charge,Probing charge 2 of 2
+5625,4224896604255591,test_charge,Main hit after probing IDs: [5623, 5624]
+5647,4848030543275310,drainer,Burst charge 1 of 4 (Velocity)
+5648,4848030543275310,drainer,Burst charge 2 of 4 (Velocity)
+5649,4848030543275310,drainer,Burst charge 3 of 4 (Velocity)
+5650,4848030543275310,drainer,Burst charge 4 of 4 (Velocity)
+5703,4214018620647536,test_charge,Probing charge 1 of 1
+5704,4214018620647536,test_charge,Main hit after probing IDs: [5703]
+5720,4594243933336102,drainer,Burst charge 1 of 7 (Velocity)
+5721,4594243933336102,drainer,Burst charge 2 of 7 (Velocity)
+5722,4594243933336102,drainer,Burst charge 3 of 7 (Velocity)
+5723,4594243933336102,drainer,Burst charge 4 of 7 (Velocity)
+5724,4594243933336102,drainer,Burst charge 5 of 7 (Velocity)
+5725,4594243933336102,drainer,Burst charge 6 of 7 (Velocity)
+5726,4594243933336102,drainer,Burst charge 7 of 7 (Velocity)
+5824,4651569720209731,test_charge,Probing charge 1 of 1
+5825,4651569720209731,test_charge,Main hit after probing IDs: [5824]
+5827,4744609607299070,over_limit,Charge 859.42 significantly exceeds retail limit
+5836,4755773104331394,repeat_tx,Duplicate amount 89.26 (Repeat 1)
+5837,4755773104331394,repeat_tx,Duplicate amount 89.26 (Repeat 2)
+5838,4755773104331394,repeat_tx,Duplicate amount 89.26 (Repeat 3)
+5868,4187050450872437,test_charge,Probing charge 1 of 1
+5869,4187050450872437,test_charge,Main hit after probing IDs: [5868]
+5880,4792065131784992,drainer,Burst charge 1 of 4 (Velocity)
+5881,4792065131784992,drainer,Burst charge 2 of 4 (Velocity)
+5882,4792065131784992,drainer,Burst charge 3 of 4 (Velocity)
+5883,4792065131784992,drainer,Burst charge 4 of 4 (Velocity)
+5940,4296959920443853,test_charge,Probing charge 1 of 1
+5941,4296959920443853,test_charge,Main hit after probing IDs: [5940]
+5946,4417045902254506,repeat_tx,Duplicate amount 79.99 (Repeat 1)
+5947,4417045902254506,repeat_tx,Duplicate amount 79.99 (Repeat 2)
+5948,4417045902254506,repeat_tx,Duplicate amount 79.99 (Repeat 3)
+5985,4467484680120837,over_limit,Charge 4258.62 significantly exceeds electronics limit
+6000,4366069712127622,drainer,Burst charge 1 of 4 (Velocity)
+6001,4366069712127622,drainer,Burst charge 2 of 4 (Velocity)
+6002,4366069712127622,drainer,Burst charge 3 of 4 (Velocity)
+6003,4366069712127622,drainer,Burst charge 4 of 4 (Velocity)
+6050,4114416156466703,repeat_tx,Duplicate amount 80.87 (Repeat 1)
+6051,4114416156466703,repeat_tx,Duplicate amount 80.87 (Repeat 2)
+6074,4876338183061113,location_jump,Jump to NM shortly after ID:6073
+6076,4101461690958817,over_limit,Charge 253.49 significantly exceeds gas limit
+6089,4911620984570643,test_charge,Probing charge 1 of 2
+6090,4911620984570643,test_charge,Probing charge 2 of 2
+6091,4911620984570643,test_charge,Main hit after probing IDs: [6089, 6090]
+6115,4402131804145769,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+6116,4402131804145769,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+6137,4846382449228538,test_charge,Probing charge 1 of 1
+6138,4846382449228538,test_charge,Main hit after probing IDs: [6137]
+6157,4474390151400524,repeat_tx,Duplicate amount 64.52 (Repeat 1)
+6158,4474390151400524,repeat_tx,Duplicate amount 64.52 (Repeat 2)
+6159,4474390151400524,repeat_tx,Duplicate amount 64.52 (Repeat 3)
+6160,4474390151400524,repeat_tx,Duplicate amount 64.52 (Repeat 4)
+6213,4257203754999198,location_jump,Jump to NE shortly after ID:6212
+6214,4868100274395891,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+6215,4868100274395891,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+6216,4868100274395891,midnight_surge,Anomalous night activity at 3 AM (Tx 3)
+6249,4802045360722918,test_charge,Probing charge 1 of 1
+6250,4802045360722918,test_charge,Main hit after probing IDs: [6249]
+6289,4723498564751010,location_jump,Jump to AZ shortly after ID:6288
+6290,4496072905343910,drainer,Burst charge 1 of 3 (Velocity)
+6291,4496072905343910,drainer,Burst charge 2 of 3 (Velocity)
+6292,4496072905343910,drainer,Burst charge 3 of 3 (Velocity)
+6314,4638867936757704,repeat_tx,Duplicate amount 76.39 (Repeat 1)
+6315,4638867936757704,repeat_tx,Duplicate amount 76.39 (Repeat 2)
+6316,4638867936757704,repeat_tx,Duplicate amount 76.39 (Repeat 3)
+6317,4638867936757704,repeat_tx,Duplicate amount 76.39 (Repeat 4)
+6362,4660395870906069,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+6370,4540044560827858,drainer,Burst charge 1 of 3 (Velocity)
+6371,4540044560827858,drainer,Burst charge 2 of 3 (Velocity)
+6372,4540044560827858,drainer,Burst charge 3 of 3 (Velocity)
+6419,4248148676373258,over_limit,Charge 1250.97 significantly exceeds retail limit
+6431,4500984958049443,drainer,Burst charge 1 of 6 (Velocity)
+6432,4500984958049443,drainer,Burst charge 2 of 6 (Velocity)
+6433,4500984958049443,drainer,Burst charge 3 of 6 (Velocity)
+6434,4500984958049443,drainer,Burst charge 4 of 6 (Velocity)
+6435,4500984958049443,drainer,Burst charge 5 of 6 (Velocity)
+6436,4500984958049443,drainer,Burst charge 6 of 6 (Velocity)
+6480,4981519208644869,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+6497,4069947835852431,location_jump,Jump to WY shortly after ID:6496
+6518,4400748424723238,location_jump,Jump to NV shortly after ID:6517
+6520,4758746719706998,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+6537,4615352566200091,repeat_tx,Duplicate amount 54.91 (Repeat 1)
+6538,4615352566200091,repeat_tx,Duplicate amount 54.91 (Repeat 2)
+6539,4615352566200091,repeat_tx,Duplicate amount 54.91 (Repeat 3)
+6560,4537779516481266,drainer,Burst charge 1 of 6 (Velocity)
+6561,4537779516481266,drainer,Burst charge 2 of 6 (Velocity)
+6562,4537779516481266,drainer,Burst charge 3 of 6 (Velocity)
+6563,4537779516481266,drainer,Burst charge 4 of 6 (Velocity)
+6564,4537779516481266,drainer,Burst charge 5 of 6 (Velocity)
+6565,4537779516481266,drainer,Burst charge 6 of 6 (Velocity)
+6627,4853415932637389,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+6628,4853415932637389,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+6629,4853415932637389,midnight_surge,Anomalous night activity at 1 AM (Tx 3)
+6660,4224896604255591,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+6661,4224896604255591,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+6709,4865234592313002,drainer,Burst charge 1 of 7 (Velocity)
+6710,4865234592313002,drainer,Burst charge 2 of 7 (Velocity)
+6711,4865234592313002,drainer,Burst charge 3 of 7 (Velocity)
+6712,4865234592313002,drainer,Burst charge 4 of 7 (Velocity)
+6713,4865234592313002,drainer,Burst charge 5 of 7 (Velocity)
+6714,4865234592313002,drainer,Burst charge 6 of 7 (Velocity)
+6715,4865234592313002,drainer,Burst charge 7 of 7 (Velocity)
+6760,4952401063690501,over_limit,Charge 1590.5 significantly exceeds retail limit
+6783,4815461650336205,location_jump,Jump to MS shortly after ID:6782
+6791,4996316641076202,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+6792,4996316641076202,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+6812,4214018620647536,over_limit,Charge 363.87 significantly exceeds gas limit
+6813,4324557788921636,drainer,Burst charge 1 of 6 (Velocity)
+6814,4324557788921636,drainer,Burst charge 2 of 6 (Velocity)
+6815,4324557788921636,drainer,Burst charge 3 of 6 (Velocity)
+6816,4324557788921636,drainer,Burst charge 4 of 6 (Velocity)
+6817,4324557788921636,drainer,Burst charge 5 of 6 (Velocity)
+6818,4324557788921636,drainer,Burst charge 6 of 6 (Velocity)
+6880,4323781563884325,repeat_tx,Duplicate amount 65.44 (Repeat 1)
+6881,4323781563884325,repeat_tx,Duplicate amount 65.44 (Repeat 2)
+6882,4323781563884325,repeat_tx,Duplicate amount 65.44 (Repeat 3)
+6926,4261360589397118,drainer,Burst charge 1 of 7 (Velocity)
+6927,4261360589397118,drainer,Burst charge 2 of 7 (Velocity)
+6928,4261360589397118,drainer,Burst charge 3 of 7 (Velocity)
+6929,4261360589397118,drainer,Burst charge 4 of 7 (Velocity)
+6930,4261360589397118,drainer,Burst charge 5 of 7 (Velocity)
+6931,4261360589397118,drainer,Burst charge 6 of 7 (Velocity)
+6932,4261360589397118,drainer,Burst charge 7 of 7 (Velocity)
+7000,4348086350575884,location_jump,Jump to WV shortly after ID:6999
+7018,4502934529734978,over_limit,Charge 2953.93 significantly exceeds travel limit
+7037,4572867224848540,over_limit,Charge 1190.45 significantly exceeds retail limit
+7042,4755773104331394,test_charge,Probing charge 1 of 1
+7043,4755773104331394,test_charge,Main hit after probing IDs: [7042]
+7054,4602821529768867,drainer,Burst charge 1 of 5 (Velocity)
+7055,4602821529768867,drainer,Burst charge 2 of 5 (Velocity)
+7056,4602821529768867,drainer,Burst charge 3 of 5 (Velocity)
+7057,4602821529768867,drainer,Burst charge 4 of 5 (Velocity)
+7058,4602821529768867,drainer,Burst charge 5 of 5 (Velocity)
+7113,4805897971059368,over_limit,Charge 105.9 significantly exceeds subscription limit
+7114,4391800908060520,test_charge,Probing charge 1 of 2
+7115,4391800908060520,test_charge,Probing charge 2 of 2
+7116,4391800908060520,test_charge,Main hit after probing IDs: [7114, 7115]
+7146,4002508686738434,over_limit,Charge 1307.54 significantly exceeds retail limit
+7158,4368846099817268,repeat_tx,Duplicate amount 95.04 (Repeat 1)
+7159,4368846099817268,repeat_tx,Duplicate amount 95.04 (Repeat 2)
+7188,4379588304532428,location_jump,Jump to OH shortly after ID:7187
+7202,4774437620689600,drainer,Burst charge 1 of 5 (Velocity)
+7203,4774437620689600,drainer,Burst charge 2 of 5 (Velocity)
+7204,4774437620689600,drainer,Burst charge 3 of 5 (Velocity)
+7205,4774437620689600,drainer,Burst charge 4 of 5 (Velocity)
+7206,4774437620689600,drainer,Burst charge 5 of 5 (Velocity)
+7246,4718782933362309,drainer,Burst charge 1 of 5 (Velocity)
+7247,4718782933362309,drainer,Burst charge 2 of 5 (Velocity)
+7248,4718782933362309,drainer,Burst charge 3 of 5 (Velocity)
+7249,4718782933362309,drainer,Burst charge 4 of 5 (Velocity)
+7250,4718782933362309,drainer,Burst charge 5 of 5 (Velocity)
+7302,4296959920443853,over_limit,Charge 698.78 significantly exceeds pharmacy limit
+7315,4892968247152923,location_jump,Jump to IN shortly after ID:7314
+7350,4417031232995591,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+7352,4211722906406564,repeat_tx,Duplicate amount 43.75 (Repeat 1)
+7353,4211722906406564,repeat_tx,Duplicate amount 43.75 (Repeat 2)
+7359,4556358509097719,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+7360,4556358509097719,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+7379,4088530463898195,drainer,Burst charge 1 of 4 (Velocity)
+7380,4088530463898195,drainer,Burst charge 2 of 4 (Velocity)
+7381,4088530463898195,drainer,Burst charge 3 of 4 (Velocity)
+7382,4088530463898195,drainer,Burst charge 4 of 4 (Velocity)
+7431,4474420409058849,location_jump,Jump to SC shortly after ID:7430
+7437,4001536503292903,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+7438,4001536503292903,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+7439,4001536503292903,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+7468,4818671929942675,over_limit,Charge 3017.46 significantly exceeds travel limit
+7484,4125072532421403,over_limit,Charge 4124.22 significantly exceeds travel limit
+7509,4642819941532795,repeat_tx,Duplicate amount 82.13 (Repeat 1)
+7510,4642819941532795,repeat_tx,Duplicate amount 82.13 (Repeat 2)
+7511,4642819941532795,repeat_tx,Duplicate amount 82.13 (Repeat 3)
+7512,4642819941532795,repeat_tx,Duplicate amount 82.13 (Repeat 4)
+7549,4670298537603812,location_jump,Jump to UT shortly after ID:7548
+7557,4241933188963633,over_limit,Charge 2621.57 significantly exceeds electronics limit
+7568,4856151602486894,test_charge,Probing charge 1 of 2
+7569,4856151602486894,test_charge,Probing charge 2 of 2
+7570,4856151602486894,test_charge,Main hit after probing IDs: [7568, 7569]
+7602,4063326524211549,test_charge,Probing charge 1 of 1
+7603,4063326524211549,test_charge,Main hit after probing IDs: [7602]
+7613,4096124219335733,repeat_tx,Duplicate amount 61.59 (Repeat 1)
+7614,4096124219335733,repeat_tx,Duplicate amount 61.59 (Repeat 2)
+7615,4096124219335733,repeat_tx,Duplicate amount 61.59 (Repeat 3)
+7646,4135887287668272,repeat_tx,Duplicate amount 94.3 (Repeat 1)
+7647,4135887287668272,repeat_tx,Duplicate amount 94.3 (Repeat 2)
+7673,4840208425141383,test_charge,Probing charge 1 of 3
+7674,4840208425141383,test_charge,Probing charge 2 of 3
+7675,4840208425141383,test_charge,Probing charge 3 of 3
+7676,4840208425141383,test_charge,Main hit after probing IDs: [7673, 7674, 7675]
+7715,4902368245987619,repeat_tx,Duplicate amount 97.65 (Repeat 1)
+7716,4902368245987619,repeat_tx,Duplicate amount 97.65 (Repeat 2)
+7742,4156173801921802,over_limit,Charge 1398.08 significantly exceeds clothing limit
+7756,4666737102389098,test_charge,Probing charge 1 of 1
+7757,4666737102389098,test_charge,Main hit after probing IDs: [7756]
+7782,4991634746462805,drainer,Burst charge 1 of 6 (Velocity)
+7783,4991634746462805,drainer,Burst charge 2 of 6 (Velocity)
+7784,4991634746462805,drainer,Burst charge 3 of 6 (Velocity)
+7785,4991634746462805,drainer,Burst charge 4 of 6 (Velocity)
+7786,4991634746462805,drainer,Burst charge 5 of 6 (Velocity)
+7787,4991634746462805,drainer,Burst charge 6 of 6 (Velocity)
+7859,4161354247552386,test_charge,Probing charge 1 of 3
+7860,4161354247552386,test_charge,Probing charge 2 of 3
+7861,4161354247552386,test_charge,Probing charge 3 of 3
+7862,4161354247552386,test_charge,Main hit after probing IDs: [7859, 7860, 7861]
+7881,4599607402148231,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+7893,4770322779169274,over_limit,Charge 3489.78 significantly exceeds electronics limit
+7903,4656050548549875,drainer,Burst charge 1 of 3 (Velocity)
+7904,4656050548549875,drainer,Burst charge 2 of 3 (Velocity)
+7905,4656050548549875,drainer,Burst charge 3 of 3 (Velocity)
+7935,4273807853803515,test_charge,Probing charge 1 of 2
+7936,4273807853803515,test_charge,Probing charge 2 of 2
+7937,4273807853803515,test_charge,Main hit after probing IDs: [7935, 7936]
+7973,4521817355109230,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+7974,4521817355109230,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+7994,4962413648795800,repeat_tx,Duplicate amount 95.45 (Repeat 1)
+7995,4962413648795800,repeat_tx,Duplicate amount 95.45 (Repeat 2)
+8019,4715534569445235,over_limit,Charge 514.48 significantly exceeds pharmacy limit
+8044,4015010668005156,test_charge,Probing charge 1 of 2
+8045,4015010668005156,test_charge,Probing charge 2 of 2
+8046,4015010668005156,test_charge,Main hit after probing IDs: [8044, 8045]
+8072,4179163141123986,location_jump,Jump to TN shortly after ID:8071
+8076,4305019083173246,over_limit,Charge 149.64 significantly exceeds subscription limit
+8080,4253775785290559,repeat_tx,Duplicate amount 31.97 (Repeat 1)
+8081,4253775785290559,repeat_tx,Duplicate amount 31.97 (Repeat 2)
+8118,4183352205270890,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+8119,4183352205270890,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+8130,4326731676459188,location_jump,Jump to OH shortly after ID:8129
+8140,4417045902254506,repeat_tx,Duplicate amount 91.81 (Repeat 1)
+8141,4417045902254506,repeat_tx,Duplicate amount 91.81 (Repeat 2)
+8142,4417045902254506,repeat_tx,Duplicate amount 91.81 (Repeat 3)
+8177,4562529802457366,location_jump,Jump to CT shortly after ID:8176
+8196,4316918085467052,drainer,Burst charge 1 of 3 (Velocity)
+8197,4316918085467052,drainer,Burst charge 2 of 3 (Velocity)
+8198,4316918085467052,drainer,Burst charge 3 of 3 (Velocity)
+8213,4592012153607508,drainer,Burst charge 1 of 6 (Velocity)
+8214,4592012153607508,drainer,Burst charge 2 of 6 (Velocity)
+8215,4592012153607508,drainer,Burst charge 3 of 6 (Velocity)
+8216,4592012153607508,drainer,Burst charge 4 of 6 (Velocity)
+8217,4592012153607508,drainer,Burst charge 5 of 6 (Velocity)
+8218,4592012153607508,drainer,Burst charge 6 of 6 (Velocity)
+8293,4500984958049443,location_jump,Jump to ME shortly after ID:8292
+8300,4012730215246970,repeat_tx,Duplicate amount 60.78 (Repeat 1)
+8301,4012730215246970,repeat_tx,Duplicate amount 60.78 (Repeat 2)
+8302,4012730215246970,repeat_tx,Duplicate amount 60.78 (Repeat 3)
+8303,4012730215246970,repeat_tx,Duplicate amount 60.78 (Repeat 4)
+8343,4941556128201228,over_limit,Charge 454.39 significantly exceeds grocery limit
+8352,4651569720209731,test_charge,Probing charge 1 of 3
+8353,4651569720209731,test_charge,Probing charge 2 of 3
+8354,4651569720209731,test_charge,Probing charge 3 of 3
+8355,4651569720209731,test_charge,Main hit after probing IDs: [8352, 8353, 8354]
+8397,4713708933634790,over_limit,Charge 356.09 significantly exceeds pharmacy limit
+8404,4945407456501130,over_limit,Charge 1450.54 significantly exceeds retail limit
+8422,4381984512886610,drainer,Burst charge 1 of 4 (Velocity)
+8423,4381984512886610,drainer,Burst charge 2 of 4 (Velocity)
+8424,4381984512886610,drainer,Burst charge 3 of 4 (Velocity)
+8425,4381984512886610,drainer,Burst charge 4 of 4 (Velocity)
+8484,4974461017571137,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+8485,4040237274285298,midnight_surge,Anomalous night activity at 1 AM (Tx 1)
+8486,4040237274285298,midnight_surge,Anomalous night activity at 1 AM (Tx 2)
+8490,4797103476496633,over_limit,Charge 1715.78 significantly exceeds clothing limit
+8566,4613908957969779,drainer,Burst charge 1 of 6 (Velocity)
+8567,4613908957969779,drainer,Burst charge 2 of 6 (Velocity)
+8568,4613908957969779,drainer,Burst charge 3 of 6 (Velocity)
+8569,4613908957969779,drainer,Burst charge 4 of 6 (Velocity)
+8570,4613908957969779,drainer,Burst charge 5 of 6 (Velocity)
+8571,4613908957969779,drainer,Burst charge 6 of 6 (Velocity)
+8588,4653261930030791,drainer,Burst charge 1 of 3 (Velocity)
+8589,4653261930030791,drainer,Burst charge 2 of 3 (Velocity)
+8590,4653261930030791,drainer,Burst charge 3 of 3 (Velocity)
+8621,4091444303002821,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+8622,4091444303002821,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+8627,4995203904824945,repeat_tx,Duplicate amount 44.97 (Repeat 1)
+8628,4995203904824945,repeat_tx,Duplicate amount 44.97 (Repeat 2)
+8663,4797764437804639,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+8664,4797764437804639,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+8665,4797764437804639,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+8683,4054931947101454,repeat_tx,Duplicate amount 42.67 (Repeat 1)
+8684,4054931947101454,repeat_tx,Duplicate amount 42.67 (Repeat 2)
+8685,4054931947101454,repeat_tx,Duplicate amount 42.67 (Repeat 3)
+8721,4567171653351960,over_limit,Charge 148.28 significantly exceeds subscription limit
+8727,4258984537557629,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+8728,4258984537557629,midnight_surge,Anomalous night activity at 3 AM (Tx 2)
+8747,4855778857375074,repeat_tx,Duplicate amount 37.65 (Repeat 1)
+8748,4855778857375074,repeat_tx,Duplicate amount 37.65 (Repeat 2)
+8749,4855778857375074,repeat_tx,Duplicate amount 37.65 (Repeat 3)
+8784,4680158983935946,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+8794,4799846968978387,drainer,Burst charge 1 of 8 (Velocity)
+8795,4799846968978387,drainer,Burst charge 2 of 8 (Velocity)
+8796,4799846968978387,drainer,Burst charge 3 of 8 (Velocity)
+8797,4799846968978387,drainer,Burst charge 4 of 8 (Velocity)
+8798,4799846968978387,drainer,Burst charge 5 of 8 (Velocity)
+8799,4799846968978387,drainer,Burst charge 6 of 8 (Velocity)
+8800,4799846968978387,drainer,Burst charge 7 of 8 (Velocity)
+8801,4799846968978387,drainer,Burst charge 8 of 8 (Velocity)
+8884,4713708933634790,repeat_tx,Duplicate amount 85.8 (Repeat 1)
+8885,4713708933634790,repeat_tx,Duplicate amount 85.8 (Repeat 2)
+8886,4713708933634790,repeat_tx,Duplicate amount 85.8 (Repeat 3)
+8887,4713708933634790,repeat_tx,Duplicate amount 85.8 (Repeat 4)
+8925,4171453916620900,drainer,Burst charge 1 of 7 (Velocity)
+8926,4171453916620900,drainer,Burst charge 2 of 7 (Velocity)
+8927,4171453916620900,drainer,Burst charge 3 of 7 (Velocity)
+8928,4171453916620900,drainer,Burst charge 4 of 7 (Velocity)
+8929,4171453916620900,drainer,Burst charge 5 of 7 (Velocity)
+8930,4171453916620900,drainer,Burst charge 6 of 7 (Velocity)
+8931,4171453916620900,drainer,Burst charge 7 of 7 (Velocity)
+9008,4305144256789891,over_limit,Charge 1198.65 significantly exceeds retail limit
+9014,4243930803889394,over_limit,Charge 430.61 significantly exceeds food limit
+9025,4084161768996389,location_jump,Jump to CA shortly after ID:9024
+9040,4091444303002821,drainer,Burst charge 1 of 8 (Velocity)
+9041,4091444303002821,drainer,Burst charge 2 of 8 (Velocity)
+9042,4091444303002821,drainer,Burst charge 3 of 8 (Velocity)
+9043,4091444303002821,drainer,Burst charge 4 of 8 (Velocity)
+9044,4091444303002821,drainer,Burst charge 5 of 8 (Velocity)
+9045,4091444303002821,drainer,Burst charge 6 of 8 (Velocity)
+9046,4091444303002821,drainer,Burst charge 7 of 8 (Velocity)
+9047,4091444303002821,drainer,Burst charge 8 of 8 (Velocity)
+9125,4336316665440870,location_jump,Jump to SD shortly after ID:9124
+9142,4685133174110439,over_limit,Charge 3393.21 significantly exceeds electronics limit
+9149,4638066176586563,test_charge,Probing charge 1 of 2
+9150,4638066176586563,test_charge,Probing charge 2 of 2
+9151,4638066176586563,test_charge,Main hit after probing IDs: [9149, 9150]
+9197,4335055121885066,repeat_tx,Duplicate amount 43.56 (Repeat 1)
+9198,4335055121885066,repeat_tx,Duplicate amount 43.56 (Repeat 2)
+9199,4335055121885066,repeat_tx,Duplicate amount 43.56 (Repeat 3)
+9200,4335055121885066,repeat_tx,Duplicate amount 43.56 (Repeat 4)
+9231,4604908470073836,test_charge,Probing charge 1 of 1
+9232,4604908470073836,test_charge,Main hit after probing IDs: [9231]
+9250,4495500437391817,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+9251,4495500437391817,midnight_surge,Anomalous night activity at 2 AM (Tx 2)
+9252,4495500437391817,midnight_surge,Anomalous night activity at 2 AM (Tx 3)
+9291,4460735610781675,test_charge,Probing charge 1 of 2
+9292,4460735610781675,test_charge,Probing charge 2 of 2
+9293,4460735610781675,test_charge,Main hit after probing IDs: [9291, 9292]
+9325,4035510796352102,drainer,Burst charge 1 of 7 (Velocity)
+9326,4035510796352102,drainer,Burst charge 2 of 7 (Velocity)
+9327,4035510796352102,drainer,Burst charge 3 of 7 (Velocity)
+9328,4035510796352102,drainer,Burst charge 4 of 7 (Velocity)
+9329,4035510796352102,drainer,Burst charge 5 of 7 (Velocity)
+9330,4035510796352102,drainer,Burst charge 6 of 7 (Velocity)
+9331,4035510796352102,drainer,Burst charge 7 of 7 (Velocity)
+9396,4721364623093538,drainer,Burst charge 1 of 3 (Velocity)
+9397,4721364623093538,drainer,Burst charge 2 of 3 (Velocity)
+9398,4721364623093538,drainer,Burst charge 3 of 3 (Velocity)
+9433,4826981162911846,drainer,Burst charge 1 of 8 (Velocity)
+9434,4826981162911846,drainer,Burst charge 2 of 8 (Velocity)
+9435,4826981162911846,drainer,Burst charge 3 of 8 (Velocity)
+9436,4826981162911846,drainer,Burst charge 4 of 8 (Velocity)
+9437,4826981162911846,drainer,Burst charge 5 of 8 (Velocity)
+9438,4826981162911846,drainer,Burst charge 6 of 8 (Velocity)
+9439,4826981162911846,drainer,Burst charge 7 of 8 (Velocity)
+9440,4826981162911846,drainer,Burst charge 8 of 8 (Velocity)
+9517,4076650665625880,over_limit,Charge 403.22 significantly exceeds pharmacy limit
+9528,4460735610781675,location_jump,Jump to MS shortly after ID:9527
+9536,4397143376318094,drainer,Burst charge 1 of 3 (Velocity)
+9537,4397143376318094,drainer,Burst charge 2 of 3 (Velocity)
+9538,4397143376318094,drainer,Burst charge 3 of 3 (Velocity)
+9580,4856151602486894,location_jump,Jump to WV shortly after ID:9579
+9624,4853415932637389,repeat_tx,Duplicate amount 63.01 (Repeat 1)
+9625,4853415932637389,repeat_tx,Duplicate amount 63.01 (Repeat 2)
+9635,4112785306800987,over_limit,Charge 872.31 significantly exceeds grocery limit
+9649,4949790228719113,location_jump,Jump to IN shortly after ID:9648
+9656,4037851852701583,test_charge,Probing charge 1 of 2
+9657,4037851852701583,test_charge,Probing charge 2 of 2
+9658,4037851852701583,test_charge,Main hit after probing IDs: [9656, 9657]
+9660,4174364192330858,repeat_tx,Duplicate amount 85.17 (Repeat 1)
+9661,4174364192330858,repeat_tx,Duplicate amount 85.17 (Repeat 2)
+9662,4174364192330858,repeat_tx,Duplicate amount 85.17 (Repeat 3)
+9702,4264653079074386,over_limit,Charge 354.66 significantly exceeds gas limit
+9704,4414108625568530,test_charge,Probing charge 1 of 2
+9705,4414108625568530,test_charge,Probing charge 2 of 2
+9706,4414108625568530,test_charge,Main hit after probing IDs: [9704, 9705]
+9736,4541787321146653,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+9746,4046649732226409,midnight_surge,Anomalous night activity at 3 AM (Tx 1)
+9758,4723498564751010,test_charge,Probing charge 1 of 2
+9759,4723498564751010,test_charge,Probing charge 2 of 2
+9760,4723498564751010,test_charge,Main hit after probing IDs: [9758, 9759]
+9791,4325147649385856,midnight_surge,Anomalous night activity at 2 AM (Tx 1)
+9807,4487172894141375,location_jump,Jump to NE shortly after ID:9806
+9816,4037851852701583,over_limit,Charge 207.73 significantly exceeds gas limit
+9825,4191701914420056,drainer,Burst charge 1 of 6 (Velocity)
+9826,4191701914420056,drainer,Burst charge 2 of 6 (Velocity)
+9827,4191701914420056,drainer,Burst charge 3 of 6 (Velocity)
+9828,4191701914420056,drainer,Burst charge 4 of 6 (Velocity)
+9829,4191701914420056,drainer,Burst charge 5 of 6 (Velocity)
+9830,4191701914420056,drainer,Burst charge 6 of 6 (Velocity)
+9910,4726877331816525,drainer,Burst charge 1 of 8 (Velocity)
+9911,4726877331816525,drainer,Burst charge 2 of 8 (Velocity)
+9912,4726877331816525,drainer,Burst charge 3 of 8 (Velocity)
+9913,4726877331816525,drainer,Burst charge 4 of 8 (Velocity)
+9914,4726877331816525,drainer,Burst charge 5 of 8 (Velocity)
+9915,4726877331816525,drainer,Burst charge 6 of 8 (Velocity)
+9916,4726877331816525,drainer,Burst charge 7 of 8 (Velocity)
+9917,4726877331816525,drainer,Burst charge 8 of 8 (Velocity)
+9995,4421783016602139,over_limit,Charge 5038.2 significantly exceeds electronics limit
