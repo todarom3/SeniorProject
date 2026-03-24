@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, average_precision_score
 import joblib
 
-CSV_PATH = "transactions2.csv"   
+CSV_PATH = "transactions3.csv"   
 MODEL_OUT = "ml/model.joblib"
 
 df = pd.read_csv(CSV_PATH)
