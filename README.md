@@ -5,9 +5,9 @@ Group Members: John Cavanaugh, Matt Todaro, Derek Mendez
 
 ## Full Project Setup Guide
 
-First Clone the Repository
-git clone https://github.com/todarom3/SeniorProject.git
-cd SeniorProject
+First Clone the Repository  
+git clone https://github.com/todarom3/SeniorProject.git  
+cd SeniorProject  
 
 ## Fake Transaction Generator Setup and Run  
 The fake transaction generator is located in:  
