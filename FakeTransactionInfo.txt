@@ -1,0 +1,88 @@
+FAKE CREDIT CARD TRANSACTION GENERATOR - HOW IT WORKS
+
+This Java program creates a fake credit card transaction dataset for fraud detection testing.
+
+1. CARD AND USER SETUP
+The program first creates a pool of 1,000 fake credit cards.
+Each card gets:
+- a random card number
+- a home state
+- an average spending amount
+
+2. NORMAL TRANSACTIONS
+Most transactions are normal.
+For normal transactions, the program:
+- picks a random merchant
+- uses the merchant’s category
+- keeps the location in the cardholder’s home state
+- picks a device type (chip, swipe, online, mobile)
+- creates an amount based on the user’s average spending
+
+The amount is also capped so it stays realistic for the merchant category.
+For example:
+- gas stays lower
+- electronics can be higher
+- subscriptions stay small
+
+3. FRAUD TARGET RATE
+The program tries to keep fraud around 9% of all transactions.
+It constantly checks the current fraud rate while generating data.
+
+If the fraud rate is below the target, it sometimes creates a fraud pattern.
+
+4. FRAUD PATTERNS
+The generator includes several realistic fraud behaviors:
+
+TEST_CHARGE
+Small $1-$5 charges are made first to test the card.
+After that, one large purchase is made.
+
+DRAINER
+Creates 3 to 8 fast back-to-back charges.
+This simulates someone draining the card quickly.
+
+MIDNIGHT_SURGE
+Creates suspicious online transactions between 1 AM and 3 AM.
+These may be one large charge or multiple smaller ones.
+
+LOCATION_JUMP
+A normal transaction happens in the user’s home state.
+A second transaction happens only minutes later in a far different state.
+This simulates impossible travel.
+
+REPEAT_TX
+The same exact amount is charged multiple times within seconds.
+This represents duplicate or repeated fraud charges.
+
+OVER_LIMIT
+A transaction amount is created far above the normal expected amount for that merchant category.
+
+5. OUTPUT FILES
+The program writes two CSV files:
+
+transactions3.csv
+Contains every transaction:
+- transaction ID
+- card number
+- timestamp
+- merchant
+- category
+- location
+- device
+- amount
+
+fraud_log.csv
+Contains only fraudulent transactions and explains:
+- fraud type
+- why it was flagged
+- what suspicious behavior happened
+
+6. WHY THIS IS USEFUL
+This generator is useful for:
+- machine learning fraud detection models
+- anomaly detection testing
+- SQL fraud analysis projects
+- cybersecurity demonstrations
+- transaction pattern research
+
+The mix of normal and fraudulent behavior makes the dataset useful for training models to recognize suspicious spending activity.
