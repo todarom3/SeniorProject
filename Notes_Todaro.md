@@ -23,3 +23,9 @@ This week, I focuded on making several user interface improvements to the dashbo
 
 3/10 - 3/17: 
 This week, it was most important to focus on preparation for the presentation. Our group made a slideshow in order to show what we worked on so far. I also made flashcards so that I am prepared to speak during the presentation. I want to make sure everyone understands my role in the project and I can receive feedback in order to expand upon what has been created so far. 
+
+3/17 - 3/24: This week, I continued improving both the functionality and usability of the Fraud Detection Dashboard. I updated the backend and frontend so the dashboard can work with a newer transaction file format, and I expanded the transaction table so it displays all of the fields in the uploaded CSV, including card number, merchant, category, location, device, amount, and timestamp. I also made several interface improvements to help users work with larger datasets more effectively. I adjusted the chart layout, resized visual components, added an additional chart to show transactions by device, and created a tab-style sidebar so that multiple uploaded transaction files can be stored and switched between inside the dashboard. I then added local browser storage so uploaded tabs remain available even after the page is refreshed, making the dashboard feel more like a multi-session analytics workspace.
+
+3/24 - 3/31: This week, I focused on making the backend accessible beyond my local computer so that the dashboard could eventually work for all users online. I organized the project so the frontend and backend could be deployed separately, with the React dashboard hosted as one Vercel project and the FastAPI backend prepared as a second deployment. This is important because the dashboard depends on the backend API to process uploaded transaction files through the machine learning model and return fraud prediction results.
+
+3/31 - 4/7:
