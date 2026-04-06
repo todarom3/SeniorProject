@@ -7,9 +7,12 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+import sys
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+from model_config import get_model_path, get_model_name
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-MODEL_PATH = BASE_DIR / "ml" / "model.joblib"
+MODEL_PATH = BASE_DIR / get_model_path()
 TRANSACTIONS_PATH = BASE_DIR / "transactions.csv"
 OUTPUTS_DIR = BASE_DIR / "outputs"
 
@@ -79,10 +82,7 @@ def _parse_model_output(text: str) -> dict[str, Any]:
 
 def _load_model():
     if not MODEL_PATH.exists():
-        raise HTTPException(
-            status_code=404,
-            detail="Model not found. Run toyModel/model.py first.",
-        )
+        raise HTTPException(status_code=404, detail="Model not found. Run toyModel/model.py first.")
     return joblib.load(MODEL_PATH)
 
 
@@ -126,6 +126,28 @@ def _prepare_features(data: pd.DataFrame, model) -> pd.DataFrame:
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
+
+
+@app.get("/model/info")
+def model_info() -> dict[str, str]:
+    # Return information about the currently active model.
+    try:
+        model_name = get_model_name()
+        model_path = get_model_path()
+        model_exists = (BASE_DIR / model_path).exists()
+        
+        return {
+            "active_model": model_name,
+            "model_path": model_path,
+            "model_exists": model_exists,
+            "status": "ready" if model_exists else "model_not_found"
+        }
+    except Exception as e:
+        return {
+            "active_model": "unknown",
+            "status": "error",
+            "error": str(e)
+        }
 
 
 @app.get("/model/latest-run")

@@ -1,15 +1,18 @@
 import pandas as pd
+import numpy as np
 from pathlib import Path
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report, average_precision_score
 import joblib
+import warnings
+warnings.filterwarnings('ignore')
 
 CSV_PATH = "transactions3.csv"   
-MODEL_OUT = "ml/model.joblib"
+MODEL_OUT = "ml/neural_model.joblib"
 
 df = pd.read_csv(CSV_PATH)
 
@@ -41,9 +44,25 @@ preprocess = ColumnTransformer(
     remainder="drop",
 )
 
-model = LogisticRegression(max_iter=2000, class_weight="balanced")
+# Neural Network Configuration
+# Start with a moderate architecture - can be tuned for your specific dataset
+neural_net = MLPClassifier(
+    hidden_layer_sizes=(128, 64, 32),  # 3 hidden layers with decreasing neurons
+    activation='relu',                  # ReLU activation for hidden layers
+    solver='adam',                     # Adam optimizer for better convergence
+    alpha=0.001,                       # L2 regularization to prevent overfitting
+    batch_size='auto',                 # Automatic batch size selection
+    learning_rate='adaptive',          # Adaptive learning rate
+    learning_rate_init=0.001,         # Initial learning rate
+    max_iter=500,                     # Maximum iterations
+    early_stopping=True,              # Stop early if no improvement
+    validation_fraction=0.1,          # 10% of training data for validation
+    n_iter_no_change=20,              # Patience for early stopping
+    random_state=42,                  # Reproducible results
+    verbose=True                      # Show training progress
+)
 
-clf = Pipeline(steps=[("preprocess", preprocess), ("model", model)])
+clf = Pipeline(steps=[("preprocess", preprocess), ("model", neural_net)])
 
 # ---- 3) 80/10/10 split (train/validation/test) ----
 # First split: 80% train, 20% temp
@@ -60,6 +79,7 @@ print(f"Training data size: {len(X_train)}")
 print(f"Validation data size: {len(X_val)}")
 print(f"Testing data size: {len(X_test)}")
 
+print("\nTraining neural network...")
 clf.fit(X_train, y_train)
 
 # Validation evaluation
@@ -68,7 +88,7 @@ val_pred = (val_proba >= 0.5).astype(int)
 
 print("\nValidation metrics")
 print(classification_report(y_val, val_pred, digits=4))
-print("Validation PR-AUC:", average_precision_score(y_val, val_proba))
+print(f"Validation PR-AUC: {average_precision_score(y_val, val_proba):.4f}")
 
 # Test evaluation
 test_proba = clf.predict_proba(X_test)[:, 1]
@@ -76,8 +96,13 @@ test_pred = (test_proba >= 0.5).astype(int)
 
 print("\nTest metrics")
 print(classification_report(y_test, test_pred, digits=4))
-print("Test PR-AUC:", average_precision_score(y_test, test_proba))
+print(f"Test PR-AUC: {average_precision_score(y_test, test_proba):.4f}")
+
+# Neural network specific metrics
+print(f"\nNeural Network Info:")
+print(f"Training iterations: {clf.named_steps['model'].n_iter_}")
+print(f"Training loss: {clf.named_steps['model'].loss_:.4f}")
 
 Path(MODEL_OUT).parent.mkdir(parents=True, exist_ok=True)
 joblib.dump(clf, MODEL_OUT)
-print(f"Saved model to {MODEL_OUT}")
+print(f"Saved neural network model to {MODEL_OUT}")

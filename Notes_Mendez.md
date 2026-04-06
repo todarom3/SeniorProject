@@ -19,3 +19,6 @@ Each of these will more than likely be used, as I do more research i will add it
 
 3/15/2026 
 After the last meeting with Professor Curry, I finished up what I needed for the model and I worked on the API alongside Matt to connect the model to the dashboard. For the second half of the semester, I plan to implement a neural network that will help analyze the different fraud patterns (multiple instances of same transactions, known fraudulent IP Addresses, etc.) I also need to research more on APIs as well as find a way to make sure that the dashboard doesnt take in a file that isnt in the format of the csv transactions files that weve been using. I will work with Matt on that aspect. 
+
+3/24/26
+So essentially, the API doesnt connect to the model directly. instead it connects to the saved, trained model in model.joblib and the dashboard calls upon that model. I created a separate model that implements a neural network over a logistic regression model. I also have a new config file. I have yet to run this model. I will run it when I get home. the API is also updated with the new model. 
