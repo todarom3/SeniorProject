@@ -10,7 +10,6 @@ git clone https://github.com/todarom3/SeniorProject.git
 cd SeniorProject
 
 ## Fake Transaction Generator Setup and Run  
-3) Run the Java Fake Transaction Generator  
 The fake transaction generator is located in:  
 FakeTransactionGenerator/src/  
 
