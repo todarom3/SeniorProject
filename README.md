@@ -9,21 +9,21 @@ First Clone the Repository
 git clone https://github.com/todarom3/SeniorProject.git
 cd SeniorProject
 
-## Fake Transaction Generator Setup and Run
-3) Run the Java Fake Transaction Generator
-The fake transaction generator is located in:
-FakeTransactionGenerator/src/
+## Fake Transaction Generator Setup and Run  
+3) Run the Java Fake Transaction Generator  
+The fake transaction generator is located in:  
+FakeTransactionGenerator/src/  
 
-Compile
-From inside the src folder:
-javac CCTransactionGenerator2.java
+Compile  
+From inside the src folder:  
+javac CCTransactionGenerator2.java  
 
-Run
-java CCTransactionGenerator2
+Run  
+java CCTransactionGenerator2  
 
 This generates:  
 transactions3.csv and fraud_log.csv  
-These files are used for fraud analysis and model training.  
+These files are used for fraud analysis and model training.   
 
 
 ## Toy Model Setup & Run
