@@ -1,0 +1,40 @@
+Project Overview:  
+This project is an end-to-end data analytics platform focused on detecting financial fraud, particularly, fraudulent credit card transactions.  
+The system ingests transaction data, cleans and stores it in a relational database, applies rule-based analysis and machine learning techniques to identify potentially fraudulent behavior, and visualizes the results in a dashboard.  
+The goal is to simulate a real-world fraud detection system by building a complete data pipeline rather than relying on isolated scripts or notebooks.  
+
+Project Goal:  
+The goal of this project is to design and implement a full data analytics pipeline for fraud detection.  
+The system demonstrates how raw transaction data flows through ingestion, storage, analysis, and visualization while reinforcing concepts in software development, databases, and data analysis.  
+
+Project Domain:  
+The project domain is financial fraud detection   
+The system primarily uses synthetic transaction data designed to mimic real-world purchasing behavior   
+Public datasets may be referenced for validation and comparison  
+
+Expected Deliverables:  
+A complete data pipeline that ingests and processes transaction data  
+A relational SQL database populated with cleaned transaction data  
+Fraud detection logic using statistical analysis and or machine learning  
+A dashboard visualizing fraud trends and flagged transactions  
+A GitHub repository containing all source code and documentation  
+A final report/presentation explaining system design and results  
+High-Level Pipeline
+Ingest raw transaction data
+Clean and transform the data
+Store processed data in a SQL database
+Analyze data and detect potential fraud
+Visualize results in a dashboard
+
+Technologies Used:  
+Java for synthetic data generation and data ingestion into the database  
+Python for data analysis and machine learning using Pandas and scikit-learn  
+SQLite for relational database design and SQL querying  
+Custom ETL pipeline for data cleaning, transformation, and loading  
+FastAPI for building a REST API to expose fraud detection results  
+Streamlit for creating an interactive dashboard to visualize fraud trends and flagged transactions  
+
+Motivation:  
+The motivation for this project comes from our interest in building a system that combines skills we have already learned with new, practical technologies.
+We wanted to apply our knowledge of Java and SQL in a realistic project while also learning useful skills in Python, data analysis, and machine learning.
+Fraud detection is a relevant real-world problem that provides insight into how modern data pipelines and analytics systems are used in industry.
