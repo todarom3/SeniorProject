@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 import re
 from typing import Any, Optional
 
@@ -7,19 +8,27 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 
-# Project-relative paths used by the API for model loading, input data, and run logs.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODEL_PATH = BASE_DIR / "ml" / "model.joblib"
 TRANSACTIONS_PATH = BASE_DIR / "transactions.csv"
 OUTPUTS_DIR = BASE_DIR / "outputs"
 
-# Main FastAPI app instance.
 app = FastAPI(title="Fraud Detection API", version="0.1.0")
 
-# Allow requests from the local Vite frontend during development.
+extra_origin = os.getenv("FRONTEND_ORIGIN")
+
+allow_origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+if extra_origin:
+    allow_origins.append(extra_origin)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=allow_origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,15 +36,17 @@ app.add_middleware(
 
 
 def _get_latest_model_output_file() -> Optional[Path]:
-    # Return the newest model run output log (or None if no logs exist yet).
     if not OUTPUTS_DIR.exists():
         return None
-    candidates = sorted(OUTPUTS_DIR.glob("model_run_*.txt"), key=lambda p: p.stat().st_mtime, reverse=True)
+    candidates = sorted(
+        OUTPUTS_DIR.glob("model_run_*.txt"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
     return candidates[0] if candidates else None
 
 
 def _parse_model_output(text: str) -> dict[str, Any]:
-    # Extract key metrics from the text output produced by toyModel/model.py.
     parsed: dict[str, Any] = {}
 
     size_patterns = {
@@ -67,36 +78,64 @@ def _parse_model_output(text: str) -> dict[str, Any]:
 
 
 def _load_model():
-    # Load the trained scikit-learn pipeline from disk.
     if not MODEL_PATH.exists():
-        raise HTTPException(status_code=404, detail="Model not found. Run toyModel/model.py first.")
+        raise HTTPException(
+            status_code=404,
+            detail="Model not found. Run toyModel/model.py first.",
+        )
     return joblib.load(MODEL_PATH)
 
 
 def _load_transactions() -> pd.DataFrame:
-    # Load the default transactions dataset used for prediction endpoints.
     if not TRANSACTIONS_PATH.exists():
         raise HTTPException(status_code=404, detail="transactions.csv not found.")
     return pd.read_csv(TRANSACTIONS_PATH)
 
 
-def _prepare_features(data: pd.DataFrame) -> pd.DataFrame:
-    # Drop non-feature columns so input shape matches model training.
-    return data.drop(columns=["transaction_id", "is_fraud"], errors="ignore")
+def _prepare_features(data: pd.DataFrame, model) -> pd.DataFrame:
+    features = data.copy()
+
+    # These are never true model targets for prediction input
+    features = features.drop(columns=["transaction_id", "is_fraud"], errors="ignore")
+
+    # Your current saved model expects this column, but the new CSV does not include it.
+    if "is_potential_fraud" not in features.columns:
+        features["is_potential_fraud"] = 0
+
+    # If the model exposes the exact columns it was trained on, force the upload
+    # to match that order and fill any missing columns safely.
+    expected_columns = getattr(model, "feature_names_in_", None)
+
+    if expected_columns is not None:
+        expected_columns = list(expected_columns)
+
+        for col in expected_columns:
+            if col not in features.columns:
+                # Fill missing columns with safe defaults
+                if col in ["amount", "is_potential_fraud"]:
+                    features[col] = 0
+                else:
+                    features[col] = ""
+
+        # Drop any extra uploaded columns the model was not trained on
+        features = features.reindex(columns=expected_columns)
+
+    return features
 
 
 @app.get("/health")
 def health() -> dict[str, str]:
-    # Basic liveness endpoint.
     return {"status": "ok"}
 
 
 @app.get("/model/latest-run")
 def latest_run() -> dict[str, Any]:
-    # Return parsed metrics and raw text from the latest saved model run log.
     latest = _get_latest_model_output_file()
     if latest is None:
-        raise HTTPException(status_code=404, detail="No model run output files found in outputs/.")
+        raise HTTPException(
+            status_code=404,
+            detail="No model run output files found in outputs/.",
+        )
 
     text = latest.read_text(encoding="utf-8")
     parsed = _parse_model_output(text)
@@ -111,11 +150,10 @@ def latest_run() -> dict[str, Any]:
 
 @app.get("/model/predict-sample")
 def predict_sample(limit: int = Query(default=10, ge=1, le=100)) -> dict[str, Any]:
-    # Predict fraud labels/probabilities for the first N rows of transactions.csv.
     model = _load_model()
     data = _load_transactions().head(limit).copy()
 
-    features = _prepare_features(data)
+    features = _prepare_features(data, model)
 
     predictions = model.predict(features)
     probabilities = model.predict_proba(features)[:, 1]
@@ -130,12 +168,13 @@ def predict_sample(limit: int = Query(default=10, ge=1, le=100)) -> dict[str, An
 
 
 @app.get("/transactions/with-predictions")
-def transactions_with_predictions(limit: int = Query(default=200, ge=1, le=5000)) -> dict[str, Any]:
-    # Return a larger transaction payload with model predictions for dashboard views.
+def transactions_with_predictions(
+    limit: int = Query(default=200, ge=1, le=5000),
+) -> dict[str, Any]:
     model = _load_model()
     data = _load_transactions().head(limit).copy()
 
-    features = _prepare_features(data)
+    features = _prepare_features(data, model)
 
     data["predicted_is_fraud"] = model.predict(features)
     data["predicted_probability"] = model.predict_proba(features)[:, 1]
@@ -148,21 +187,22 @@ def transactions_with_predictions(limit: int = Query(default=200, ge=1, le=5000)
 
 @app.post("/transactions/upload")
 async def upload_transactions(file: UploadFile = File(...)) -> dict[str, Any]:
-    # Accept a user-uploaded CSV, run predictions, and return row-level + summary stats.
     if not file.filename or not file.filename.lower().endswith(".csv"):
         raise HTTPException(status_code=400, detail="Only CSV files are allowed.")
 
     try:
         data = pd.read_csv(file.file).copy()
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Could not read CSV file: {str(e)}")
+        raise HTTPException(
+            status_code=400,
+            detail=f"Could not read CSV file: {str(e)}",
+        )
 
     if data.empty:
         raise HTTPException(status_code=400, detail="Uploaded CSV is empty.")
 
     model = _load_model()
-
-    features = _prepare_features(data)
+    features = _prepare_features(data, model)
 
     try:
         data["predicted_is_fraud"] = model.predict(features)
@@ -170,17 +210,21 @@ async def upload_transactions(file: UploadFile = File(...)) -> dict[str, Any]:
     except Exception as e:
         raise HTTPException(
             status_code=400,
-            detail=f"Prediction failed. Check that the uploaded CSV has the correct columns and data types. Error: {str(e)}"
+            detail=(
+                "Prediction failed. Check that the uploaded CSV has the correct "
+                f"columns and data types. Error: {str(e)}"
+            ),
         )
 
     fraud_count = int(data["predicted_is_fraud"].sum())
     total_count = int(len(data))
-    # Fraud rate as a percentage for dashboard KPI cards.
     fraud_rate = float((fraud_count / total_count) * 100) if total_count > 0 else 0.0
 
     total_amount = 0.0
     if "amount" in data.columns:
-        total_amount = float(pd.to_numeric(data["amount"], errors="coerce").fillna(0).sum())
+        total_amount = float(
+            pd.to_numeric(data["amount"], errors="coerce").fillna(0).sum()
+        )
 
     return {
         "count": total_count,

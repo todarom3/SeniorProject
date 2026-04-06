@@ -14,8 +14,30 @@ import {
   Legend,
 } from "recharts";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
+const STORAGE_KEY = "fraud-dashboard-datasets";
+const ACTIVE_DATASET_KEY = "fraud-dashboard-active-dataset";
+
 export default function App() {
-  const [rows, setRows] = useState([]);
+  const [datasets, setDatasets] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const [activeDatasetId, setActiveDatasetId] = useState(() => {
+    try {
+      return localStorage.getItem(ACTIVE_DATASET_KEY);
+    } catch {
+      return null;
+    }
+  });
+
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -26,6 +48,7 @@ export default function App() {
     transactionsByState: false,
     fraudByLocation: false,
     fraudVsNonFraud: false,
+    transactionsByDevice: false,
     transactionsTable: false,
   });
 
@@ -45,6 +68,35 @@ export default function App() {
       document.head.appendChild(link);
     }
   }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(datasets));
+    } catch {
+      // ignore storage errors
+    }
+  }, [datasets]);
+
+  useEffect(() => {
+    try {
+      if (activeDatasetId) {
+        localStorage.setItem(ACTIVE_DATASET_KEY, activeDatasetId);
+      } else {
+        localStorage.removeItem(ACTIVE_DATASET_KEY);
+      }
+    } catch {
+      // ignore storage errors
+    }
+  }, [activeDatasetId]);
+
+  useEffect(() => {
+    if (datasets.length > 0 && !datasets.some((d) => d.id === activeDatasetId)) {
+      setActiveDatasetId(datasets[0].id);
+    }
+    if (datasets.length === 0 && activeDatasetId) {
+      setActiveDatasetId(null);
+    }
+  }, [datasets, activeDatasetId]);
 
   function toggleSection(sectionKey) {
     setCollapsedSections((prev) => ({
@@ -87,6 +139,42 @@ export default function App() {
     return `${hours}:${minutes} ${ampm}`;
   }
 
+  function formatAmount(value) {
+    const num = Number(value);
+    if (Number.isNaN(num)) return "";
+    return `$${num.toLocaleString(undefined, {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+  }
+
+  function createDatasetName(fileName) {
+    const now = new Date();
+    const timeLabel = now.toLocaleTimeString([], {
+      hour: "numeric",
+      minute: "2-digit",
+    });
+    return `${fileName} • ${timeLabel}`;
+  }
+
+  function switchDataset(datasetId) {
+    setActiveDatasetId(datasetId);
+    setPage(1);
+    setPageInput("1");
+    setError("");
+  }
+
+  function removeDataset(datasetId) {
+    setDatasets((prev) => prev.filter((dataset) => dataset.id !== datasetId));
+
+    if (datasetId === activeDatasetId) {
+      const remaining = datasets.filter((dataset) => dataset.id !== datasetId);
+      setActiveDatasetId(remaining.length > 0 ? remaining[0].id : null);
+      setPage(1);
+      setPageInput("1");
+    }
+  }
+
   async function handleUpload() {
     if (!selectedFile) {
       setError("Please choose a CSV file first.");
@@ -100,7 +188,7 @@ export default function App() {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const res = await fetch("http://127.0.0.1:8000/transactions/upload", {
+      const res = await fetch(`${API_BASE_URL}/transactions/upload`, {
         method: "POST",
         body: formData,
       });
@@ -117,15 +205,30 @@ export default function App() {
         _ts: tsToMillis(row.timestamp),
       }));
 
-      setRows(preparedRows);
+      const newDataset = {
+        id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        name: createDatasetName(selectedFile.name),
+        fileName: selectedFile.name,
+        uploadedAt: new Date().toLocaleString(),
+        rows: preparedRows,
+      };
+
+      setDatasets((prev) => [newDataset, ...prev]);
+      setActiveDatasetId(newDataset.id);
       setPage(1);
       setPageInput("1");
+      setSelectedFile(null);
     } catch (e) {
       setError(e.message || String(e));
     } finally {
       setIsUploading(false);
     }
   }
+
+  const activeDataset =
+    datasets.find((dataset) => dataset.id === activeDatasetId) || null;
+
+  const rows = activeDataset ? activeDataset.rows : [];
 
   const totalTransactions = rows.length;
   const fraudCount = rows.filter((r) => r.predicted_is_fraud).length;
@@ -173,6 +276,15 @@ export default function App() {
       }, {})
   ).sort((a, b) => b.fraudCount - a.fraudCount);
 
+  const transactionsByDevice = Object.values(
+    rows.reduce((acc, r) => {
+      const device = r.device || "Unknown";
+      acc[device] = acc[device] || { device, count: 0 };
+      acc[device].count += 1;
+      return acc;
+    }, {})
+  ).sort((a, b) => b.count - a.count);
+
   const pieData = [
     { name: "Fraud", value: fraudCount },
     { name: "Non-Fraud", value: nonFraudCount },
@@ -205,17 +317,111 @@ export default function App() {
     background: "#111827",
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-start",
-    padding: "32px 16px",
+    alignItems: "stretch",
+    padding: "16px",
     boxSizing: "border-box",
     fontFamily: '"Cabin", Arial, sans-serif',
+    gap: 16,
+  };
+
+  const sidebarStyle = {
+    width: 220,
+    minWidth: 220,
+    background: "#0f172a",
+    borderRadius: 16,
+    padding: 14,
+    boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
+    color: "white",
+    alignSelf: "stretch",
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+  };
+
+  const sidebarTitleStyle = {
+    fontSize: "1.05rem",
+    fontWeight: 700,
+    margin: 0,
+  };
+
+  const sidebarSubStyle = {
+    margin: 0,
+    color: "#cbd5e1",
+    fontSize: "0.84rem",
+    lineHeight: 1.45,
+  };
+
+  const datasetListStyle = {
+    display: "flex",
+    flexDirection: "column",
+    gap: 8,
+    overflowY: "auto",
+    paddingRight: 2,
+  };
+
+  const datasetTabStyle = {
+    background: "#1f2937",
+    color: "white",
+    border: "1px solid #374151",
+    borderRadius: 10,
+    padding: 10,
+    cursor: "pointer",
+    textAlign: "left",
+  };
+
+  const activeDatasetTabStyle = {
+    ...datasetTabStyle,
+    border: "1px solid #60a5fa",
+    background: "#1e293b",
+  };
+
+  const datasetHeaderRowStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    gap: 8,
+  };
+
+  const datasetNameStyle = {
+    margin: 0,
+    fontSize: "0.88rem",
+    fontWeight: 600,
+    lineHeight: 1.35,
+    wordBreak: "break-word",
+  };
+
+  const datasetMetaStyle = {
+    marginTop: 6,
+    color: "#cbd5e1",
+    fontSize: "0.74rem",
+    lineHeight: 1.3,
+    wordBreak: "break-word",
+  };
+
+  const removeTabButtonStyle = {
+    background: "transparent",
+    color: "#cbd5e1",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "0.95rem",
+    lineHeight: 1,
+    padding: 0,
+  };
+
+  const emptySidebarBoxStyle = {
+    background: "#1f2937",
+    borderRadius: 12,
+    padding: 12,
+    color: "#cbd5e1",
+    fontSize: "0.84rem",
+    lineHeight: 1.45,
   };
 
   const contentStyle = {
     width: "100%",
-    maxWidth: 1280,
+    maxWidth: 1700,
     margin: "0 auto",
-    padding: 32,
+    padding: 20,
     color: "white",
   };
 
@@ -233,6 +439,15 @@ export default function App() {
     color: "#cbd5e1",
     textAlign: "center",
     fontSize: "1.05rem",
+  };
+
+  const activeFileBannerStyle = {
+    background: "#0f172a",
+    color: "white",
+    borderRadius: 14,
+    padding: "12px 16px",
+    marginBottom: 18,
+    border: "1px solid #334155",
   };
 
   const metricsHeaderPanelStyle = {
@@ -299,11 +514,12 @@ export default function App() {
     marginBottom: 22,
   };
 
-  const chartsRowStyle = {
+  const lowerChartsRowStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))",
+    gridTemplateColumns: "1fr 1fr",
     gap: 24,
     marginBottom: 30,
+    alignItems: "start",
   };
 
   const sectionTitleStyle = {
@@ -377,7 +593,7 @@ export default function App() {
 
   const tableWrapStyle = {
     width: "100%",
-    overflowX: "auto",
+    overflowX: "visible",
     marginTop: 8,
     textAlign: "left",
   };
@@ -389,12 +605,17 @@ export default function App() {
     color: "white",
     borderRadius: 10,
     overflow: "hidden",
+    tableLayout: "auto",
   };
 
   const thTdStyle = {
     borderBottom: "1px solid #374151",
-    padding: "12px 10px",
+    padding: "10px 8px",
     textAlign: "left",
+    fontSize: "0.88rem",
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    verticalAlign: "top",
   };
 
   const goToPageWrapStyle = {
@@ -419,11 +640,62 @@ export default function App() {
 
   return (
     <div style={pageStyle}>
+      <aside style={sidebarStyle}>
+        <h2 style={sidebarTitleStyle}>Uploaded Files</h2>
+        <p style={sidebarSubStyle}>
+          Each CSV upload creates a new tab. Tabs stay saved after refresh on this
+          browser.
+        </p>
+
+        <div style={datasetListStyle}>
+          {datasets.length === 0 ? (
+            <div style={emptySidebarBoxStyle}>
+              No transaction files uploaded yet.
+            </div>
+          ) : (
+            datasets.map((dataset) => (
+              <div
+                key={dataset.id}
+                style={
+                  dataset.id === activeDatasetId
+                    ? activeDatasetTabStyle
+                    : datasetTabStyle
+                }
+                onClick={() => switchDataset(dataset.id)}
+              >
+                <div style={datasetHeaderRowStyle}>
+                  <p style={datasetNameStyle}>{dataset.name}</p>
+                  <button
+                    style={removeTabButtonStyle}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeDataset(dataset.id);
+                    }}
+                    title="Remove tab"
+                  >
+                    ×
+                  </button>
+                </div>
+                <div style={datasetMetaStyle}>
+                  <div>{dataset.rows.length} rows</div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </aside>
+
       <div style={contentStyle}>
         <h1 style={titleStyle}>Fraud Detection Dashboard</h1>
         <p style={subtitleStyle}>
           Upload transaction data, run fraud analysis, and review the results.
         </p>
+
+        {activeDataset && (
+          <div style={activeFileBannerStyle}>
+            <strong>Current dataset:</strong> {activeDataset.fileName}
+          </div>
+        )}
 
         <div style={uploadPanelStyle}>
           <div
@@ -470,12 +742,7 @@ export default function App() {
         )}
 
         <div style={metricsHeaderPanelStyle}>
-          <div
-            style={{
-              ...panelHeaderStyle,
-              marginBottom: collapsedSections.metricsRow ? 0 : 0,
-            }}
-          >
+          <div style={{ ...panelHeaderStyle, marginBottom: 0 }}>
             <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
               Key Summary Metrics
             </h2>
@@ -518,7 +785,7 @@ export default function App() {
             <div style={cardStyle}>
               <h3 style={{ marginTop: 0 }}>Total Amount</h3>
               <p style={{ fontSize: "1.8rem", marginBottom: 0 }}>
-                ${totalAmount.toLocaleString()}
+                {formatAmount(totalAmount)}
               </p>
             </div>
 
@@ -566,44 +833,54 @@ export default function App() {
           )}
         </div>
 
-        <div style={chartsRowStyle}>
+        <div
+          style={
+            collapsedSections.fraudByLocation ? collapsedPanelStyle : panelStyle
+          }
+        >
           <div
-            style={
-              collapsedSections.fraudByLocation ? collapsedPanelStyle : panelStyle
-            }
+            style={{
+              ...panelHeaderStyle,
+              marginBottom: collapsedSections.fraudByLocation ? 0 : 16,
+            }}
           >
-            <div
-              style={{
-                ...panelHeaderStyle,
-                marginBottom: collapsedSections.fraudByLocation ? 0 : 16,
-              }}
+            <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
+              Fraud by Location
+            </h2>
+            <button
+              onClick={() => toggleSection("fraudByLocation")}
+              style={smallButtonStyle}
             >
-              <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
-                Fraud by Location
-              </h2>
-              <button
-                onClick={() => toggleSection("fraudByLocation")}
-                style={smallButtonStyle}
-              >
-                {collapsedSections.fraudByLocation ? "Expand" : "Minimize"}
-              </button>
-            </div>
-
-            {!collapsedSections.fraudByLocation && (
-              <div style={{ width: "100%", height: 320 }}>
-                <ResponsiveContainer>
-                  <BarChart data={fraudByLocation}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-                    <XAxis dataKey="location" stroke="#e5e7eb" />
-                    <YAxis stroke="#e5e7eb" />
-                    <Tooltip />
-                    <Bar dataKey="fraudCount" fill="#60a5fa" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            )}
+              {collapsedSections.fraudByLocation ? "Expand" : "Minimize"}
+            </button>
           </div>
 
+          {!collapsedSections.fraudByLocation && (
+            <div style={{ width: "100%", height: 420 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={fraudByLocation}
+                  margin={{ top: 10, right: 20, left: 10, bottom: 90 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                  <XAxis
+                    dataKey="location"
+                    stroke="#e5e7eb"
+                    angle={-45}
+                    textAnchor="end"
+                    interval={0}
+                    height={90}
+                  />
+                  <YAxis stroke="#e5e7eb" />
+                  <Tooltip />
+                  <Bar dataKey="fraudCount" fill="#60a5fa" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
+        </div>
+
+        <div style={lowerChartsRowStyle}>
           <div
             style={
               collapsedSections.fraudVsNonFraud ? collapsedPanelStyle : panelStyle
@@ -627,14 +904,14 @@ export default function App() {
             </div>
 
             {!collapsedSections.fraudVsNonFraud && (
-              <div style={{ width: "100%", height: 320 }}>
+              <div style={{ width: "100%", height: 420 }}>
                 <ResponsiveContainer>
                   <PieChart>
                     <Pie
                       data={pieData}
                       cx="50%"
                       cy="50%"
-                      outerRadius={100}
+                      outerRadius={130}
                       dataKey="value"
                       nameKey="name"
                       label
@@ -649,6 +926,55 @@ export default function App() {
                     <Tooltip />
                     <Legend />
                   </PieChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </div>
+
+          <div
+            style={
+              collapsedSections.transactionsByDevice
+                ? collapsedPanelStyle
+                : panelStyle
+            }
+          >
+            <div
+              style={{
+                ...panelHeaderStyle,
+                marginBottom: collapsedSections.transactionsByDevice ? 0 : 16,
+              }}
+            >
+              <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
+                Transactions by Device
+              </h2>
+              <button
+                onClick={() => toggleSection("transactionsByDevice")}
+                style={smallButtonStyle}
+              >
+                {collapsedSections.transactionsByDevice ? "Expand" : "Minimize"}
+              </button>
+            </div>
+
+            {!collapsedSections.transactionsByDevice && (
+              <div style={{ width: "100%", height: 420 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={transactionsByDevice}
+                    margin={{ top: 10, right: 20, left: 10, bottom: 70 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis
+                      dataKey="device"
+                      stroke="#e5e7eb"
+                      angle={-20}
+                      textAnchor="end"
+                      interval={0}
+                      height={70}
+                    />
+                    <YAxis stroke="#e5e7eb" />
+                    <Tooltip />
+                    <Bar dataKey="count" fill="#f59e0b" />
+                  </BarChart>
                 </ResponsiveContainer>
               </div>
             )}
@@ -712,9 +1038,12 @@ export default function App() {
                 <table border="0" cellPadding="8" style={tableStyle}>
                   <thead>
                     <tr>
-                      <th style={thTdStyle}>ID</th>
+                      <th style={thTdStyle}>Transaction ID</th>
+                      <th style={thTdStyle}>Card Number</th>
                       <th style={thTdStyle}>Merchant</th>
+                      <th style={thTdStyle}>Category</th>
                       <th style={thTdStyle}>Location</th>
+                      <th style={thTdStyle}>Device</th>
                       <th style={thTdStyle}>Amount</th>
                       <th style={thTdStyle}>Date (MM/DD/YYYY)</th>
                       <th style={thTdStyle}>Time (AM/PM)</th>
@@ -726,9 +1055,12 @@ export default function App() {
                     {pagedRows.map((r) => (
                       <tr key={r._rowId}>
                         <td style={thTdStyle}>{r.transaction_id}</td>
+                        <td style={thTdStyle}>{r.card_number}</td>
                         <td style={thTdStyle}>{r.merchant}</td>
+                        <td style={thTdStyle}>{r.category}</td>
                         <td style={thTdStyle}>{r.location}</td>
-                        <td style={thTdStyle}>${r.amount}</td>
+                        <td style={thTdStyle}>{r.device}</td>
+                        <td style={thTdStyle}>{formatAmount(r.amount)}</td>
                         <td style={thTdStyle}>{formatDateMDY(r.timestamp)}</td>
                         <td style={thTdStyle}>{formatTimeAMPM(r.timestamp)}</td>
                         <td
