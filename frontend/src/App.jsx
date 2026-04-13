@@ -314,12 +314,18 @@ export default function App() {
       setSelectedFile(null);
 
       setAnalysisStatus("Analysis complete — model predictions loaded");
+
+      // Force the loading UI to the last step so the overlay looks fully complete
+      setLoadingStepIndex(loadingSteps.length - 1);
       setAnalysisFinished(true);
 
       await fetchModelInfo();
     } catch (e) {
       setError(e.message || String(e));
       setAnalysisStatus("Analysis failed");
+
+      // Also force the loading UI to the last step
+      setLoadingStepIndex(loadingSteps.length - 1);
       setAnalysisFinished(true);
     } finally {
       setIsUploading(false);
@@ -520,7 +526,9 @@ export default function App() {
   };
 
   const progressFillStyle = {
-    width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`,
+    width: analysisFinished
+      ? "100%"
+      : `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`,
     height: "100%",
     background: "linear-gradient(90deg, #38bdf8 0%, #60a5fa 100%)",
     borderRadius: 999,
@@ -927,12 +935,10 @@ export default function App() {
 
             <div style={loadingStepListStyle}>
               {loadingSteps.map((step, index) => {
-                // When finished, mark all steps up to current as complete
-                const isDone = analysisFinished
-                  ? index <= loadingStepIndex
-                  : index < loadingStepIndex;
+                // When analysis is finished, mark every step as complete
+                const isDone = analysisFinished ? true : index < loadingStepIndex;
 
-                // Only show active highlight while still processing
+                // Only highlight one active step while still processing
                 const isActive = !analysisFinished && index === loadingStepIndex;
 
                 return (
