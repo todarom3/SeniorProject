@@ -41,14 +41,30 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [modelInfo, setModelInfo] = useState(null);
+  const [modelInfoError, setModelInfoError] = useState("");
+  const [analysisStatus, setAnalysisStatus] = useState("Waiting for upload");
+  const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+
+  const loadingSteps = [
+    "Connecting to backend...",
+    "Uploading CSV...",
+    "Reading transaction data...",
+    "Preparing model input...",
+    "Running fraud detection model...",
+    "Calculating fraud probabilities...",
+    "Building dashboard results...",
+  ];
 
   const [collapsedSections, setCollapsedSections] = useState({
     upload: false,
+    modelStatus: false,
     metricsRow: false,
     transactionsByState: false,
     fraudByLocation: false,
     fraudVsNonFraud: false,
     transactionsByDevice: false,
+    highRiskTransactions: false,
     transactionsTable: false,
   });
 
@@ -97,6 +113,42 @@ export default function App() {
       setActiveDatasetId(null);
     }
   }, [datasets, activeDatasetId]);
+
+  useEffect(() => {
+    fetchModelInfo();
+  }, []);
+
+  useEffect(() => {
+    if (!isUploading) return;
+
+    setLoadingStepIndex(0);
+
+    const interval = setInterval(() => {
+      setLoadingStepIndex((prev) => {
+        if (prev >= loadingSteps.length - 1) return prev;
+        return prev + 1;
+      });
+    }, 700);
+
+    return () => clearInterval(interval);
+  }, [isUploading]);
+
+  async function fetchModelInfo() {
+    try {
+      setModelInfoError("");
+      const res = await fetch(`${API_BASE_URL}/model/info`);
+
+      if (!res.ok) {
+        throw new Error("Could not load model info.");
+      }
+
+      const data = await res.json();
+      setModelInfo(data);
+    } catch (e) {
+      setModelInfo(null);
+      setModelInfoError(e.message || "Could not load model info.");
+    }
+  }
 
   function toggleSection(sectionKey) {
     setCollapsedSections((prev) => ({
@@ -162,6 +214,7 @@ export default function App() {
     setPage(1);
     setPageInput("1");
     setError("");
+    setAnalysisStatus("Viewing saved analysis");
   }
 
   function removeDataset(datasetId) {
@@ -183,6 +236,7 @@ export default function App() {
 
     setError("");
     setIsUploading(true);
+    setAnalysisStatus("Starting analysis...");
 
     try {
       const formData = new FormData();
@@ -218,10 +272,14 @@ export default function App() {
       setPage(1);
       setPageInput("1");
       setSelectedFile(null);
+      setAnalysisStatus("Analysis complete — model predictions loaded");
+      await fetchModelInfo();
     } catch (e) {
       setError(e.message || String(e));
+      setAnalysisStatus("Analysis failed");
     } finally {
       setIsUploading(false);
+      setLoadingStepIndex(0);
     }
   }
 
@@ -237,6 +295,30 @@ export default function App() {
     ? ((fraudCount / totalTransactions) * 100).toFixed(2)
     : "0.00";
   const totalAmount = rows.reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
+
+  const averageFraudProbability = totalTransactions
+    ? (
+        (rows.reduce(
+          (sum, r) => sum + (Number(r.predicted_probability) || 0),
+          0
+        ) /
+          totalTransactions) *
+        100
+      ).toFixed(2)
+    : "0.00";
+
+  const highestFraudProbability = totalTransactions
+    ? (
+        Math.max(
+          ...rows.map((r) => Number(r.predicted_probability) || 0),
+          0
+        ) * 100
+      ).toFixed(2)
+    : "0.00";
+
+  const highConfidenceFraudCount = rows.filter(
+    (r) => Number(r.predicted_probability) >= 0.8
+  ).length;
 
   const transactionsByState = useMemo(() => {
     const acc = {};
@@ -292,6 +374,16 @@ export default function App() {
 
   const pieColors = ["#ef4444", "#22c55e"];
 
+  const highestRiskTransactions = useMemo(() => {
+    return [...rows]
+      .sort(
+        (a, b) =>
+          (Number(b.predicted_probability) || 0) -
+          (Number(a.predicted_probability) || 0)
+      )
+      .slice(0, 10);
+  }, [rows]);
+
   function handleGoToPage() {
     const requestedPage = Number(pageInput);
 
@@ -322,7 +414,86 @@ export default function App() {
     boxSizing: "border-box",
     fontFamily: '"Cabin", Arial, sans-serif',
     gap: 16,
+    position: "relative",
   };
+
+  const loadingOverlayStyle = {
+    position: "fixed",
+    inset: 0,
+    background: "rgba(3, 7, 18, 0.82)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 9999,
+    backdropFilter: "blur(4px)",
+  };
+
+  const loadingCardStyle = {
+    width: "min(92vw, 620px)",
+    background: "#0f172a",
+    border: "1px solid #334155",
+    borderRadius: 18,
+    padding: 26,
+    color: "white",
+    boxShadow: "0 20px 50px rgba(0,0,0,0.45)",
+  };
+
+  const loadingTitleStyle = {
+    marginTop: 0,
+    marginBottom: 8,
+    fontSize: "1.6rem",
+    fontWeight: 700,
+  };
+
+  const loadingSubtitleStyle = {
+    marginTop: 0,
+    marginBottom: 18,
+    color: "#cbd5e1",
+    lineHeight: 1.6,
+  };
+
+  const progressTrackStyle = {
+    width: "100%",
+    height: 12,
+    background: "#1e293b",
+    borderRadius: 999,
+    overflow: "hidden",
+    marginBottom: 18,
+    border: "1px solid #334155",
+  };
+
+  const progressFillStyle = {
+    width: `${((loadingStepIndex + 1) / loadingSteps.length) * 100}%`,
+    height: "100%",
+    background: "linear-gradient(90deg, #38bdf8 0%, #60a5fa 100%)",
+    borderRadius: 999,
+    transition: "width 0.35s ease",
+  };
+
+  const loadingStepListStyle = {
+    display: "grid",
+    gap: 10,
+  };
+
+  const loadingStepItemStyle = (isActive, isDone) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    padding: "10px 12px",
+    borderRadius: 10,
+    background: isActive ? "#1e293b" : "rgba(255,255,255,0.02)",
+    border: `1px solid ${isActive ? "#3b82f6" : "#334155"}`,
+    color: isDone || isActive ? "white" : "#94a3b8",
+  });
+
+  const loadingDotStyle = (isActive, isDone) => ({
+    width: 11,
+    height: 11,
+    borderRadius: "50%",
+    background: isDone ? "#22c55e" : isActive ? "#60a5fa" : "#475569",
+    flexShrink: 0,
+    boxShadow: isActive ? "0 0 0 6px rgba(96,165,250,0.12)" : "none",
+  });
 
   const sidebarStyle = {
     width: 220,
@@ -638,8 +809,81 @@ export default function App() {
     fontSize: "0.95rem",
   };
 
+  const modelGridStyle = {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+    gap: 16,
+  };
+
+  const modelCardStyle = {
+    background: "#111827",
+    border: "1px solid #374151",
+    borderRadius: 12,
+    padding: 16,
+    minHeight: 110,
+  };
+
+  const modelCardLabelStyle = {
+    margin: 0,
+    color: "#94a3b8",
+    fontSize: "0.82rem",
+    marginBottom: 8,
+  };
+
+  const modelCardValueStyle = {
+    margin: 0,
+    fontSize: "1.08rem",
+    fontWeight: 700,
+    lineHeight: 1.4,
+    wordBreak: "break-word",
+  };
+
+  const proofNoteStyle = {
+    marginTop: 18,
+    background: "#0f172a",
+    border: "1px solid #334155",
+    borderRadius: 12,
+    padding: 16,
+    color: "#dbeafe",
+    lineHeight: 1.6,
+  };
+
   return (
     <div style={pageStyle}>
+      {isUploading && (
+        <div style={loadingOverlayStyle}>
+          <div style={loadingCardStyle}>
+            <h2 style={loadingTitleStyle}>Running Fraud Analysis</h2>
+            <p style={loadingSubtitleStyle}>
+              Your file is being processed by the deployed backend and the saved
+              machine learning model. The dashboard will update as soon as the
+              results are ready.
+            </p>
+
+            <div style={progressTrackStyle}>
+              <div style={progressFillStyle}></div>
+            </div>
+
+            <div style={loadingStepListStyle}>
+              {loadingSteps.map((step, index) => {
+                const isDone = index < loadingStepIndex;
+                const isActive = index === loadingStepIndex;
+
+                return (
+                  <div
+                    key={step}
+                    style={loadingStepItemStyle(isActive, isDone)}
+                  >
+                    <div style={loadingDotStyle(isActive, isDone)}></div>
+                    <span>{step}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
       <aside style={sidebarStyle}>
         <h2 style={sidebarTitleStyle}>Uploaded Files</h2>
         <p style={sidebarSubStyle}>
@@ -740,6 +984,90 @@ export default function App() {
             <pre style={{ whiteSpace: "pre-wrap", marginBottom: 0 }}>{error}</pre>
           </div>
         )}
+
+        <div
+          style={
+            collapsedSections.modelStatus ? collapsedPanelStyle : panelStyle
+          }
+        >
+          <div
+            style={{
+              ...panelHeaderStyle,
+              marginBottom: collapsedSections.modelStatus ? 0 : 16,
+            }}
+          >
+            <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
+              Model Status and Proof of Analysis
+            </h2>
+            <button
+              onClick={() => toggleSection("modelStatus")}
+              style={smallButtonStyle}
+            >
+              {collapsedSections.modelStatus ? "Expand" : "Minimize"}
+            </button>
+          </div>
+
+          {!collapsedSections.modelStatus && (
+            <>
+              <div style={modelGridStyle}>
+                <div style={modelCardStyle}>
+                  <p style={modelCardLabelStyle}>Backend Status</p>
+                  <p style={modelCardValueStyle}>
+                    {modelInfo?.status || (modelInfoError ? "Unavailable" : "Loading")}
+                  </p>
+                </div>
+
+                <div style={modelCardStyle}>
+                  <p style={modelCardLabelStyle}>Active Model</p>
+                  <p style={modelCardValueStyle}>
+                    {modelInfo?.active_model || "Unknown"}
+                  </p>
+                </div>
+
+                <div style={modelCardStyle}>
+                  <p style={modelCardLabelStyle}>Model File</p>
+                  <p style={modelCardValueStyle}>
+                    {modelInfo?.model_path || "Unknown"}
+                  </p>
+                </div>
+
+                <div style={modelCardStyle}>
+                  <p style={modelCardLabelStyle}>Model Found</p>
+                  <p style={modelCardValueStyle}>
+                    {modelInfo
+                      ? modelInfo.model_exists
+                        ? "Yes"
+                        : "No"
+                      : "Unknown"}
+                  </p>
+                </div>
+              </div>
+
+              <div style={proofNoteStyle}>
+                <strong>Analysis Status:</strong> {analysisStatus}
+                <br />
+                <strong>Rows analyzed:</strong> {totalTransactions}
+                <br />
+                <strong>Fraud predictions returned:</strong> {fraudCount}
+                <br />
+                <strong>Average fraud probability:</strong>{" "}
+                {averageFraudProbability}%
+                <br />
+                <strong>Highest fraud probability:</strong>{" "}
+                {highestFraudProbability}%
+                <br />
+                <strong>High-confidence frauds (80%+):</strong>{" "}
+                {highConfidenceFraudCount}
+                {modelInfoError && (
+                  <>
+                    <br />
+                    <strong>Model info error:</strong> {modelInfoError}
+                  </>
+                )}
+              </div>
+            </>
+          )}
+        </div>
 
         <div style={metricsHeaderPanelStyle}>
           <div style={{ ...panelHeaderStyle, marginBottom: 0 }}>
@@ -979,6 +1307,81 @@ export default function App() {
               </div>
             )}
           </div>
+        </div>
+
+        <div
+          style={
+            collapsedSections.highRiskTransactions
+              ? collapsedPanelStyle
+              : panelStyle
+          }
+        >
+          <div
+            style={{
+              ...panelHeaderStyle,
+              marginBottom: collapsedSections.highRiskTransactions ? 0 : 16,
+            }}
+          >
+            <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
+              Top High-Risk Transactions
+            </h2>
+            <button
+              onClick={() => toggleSection("highRiskTransactions")}
+              style={smallButtonStyle}
+            >
+              {collapsedSections.highRiskTransactions ? "Expand" : "Minimize"}
+            </button>
+          </div>
+
+          {!collapsedSections.highRiskTransactions && (
+            <>
+              {highestRiskTransactions.length === 0 ? (
+                <p style={{ margin: 0, lineHeight: 1.6 }}>
+                  Upload a CSV to see the transactions with the highest fraud
+                  probabilities.
+                </p>
+              ) : (
+                <div style={tableWrapStyle}>
+                  <table border="0" cellPadding="8" style={tableStyle}>
+                    <thead>
+                      <tr>
+                        <th style={thTdStyle}>Transaction ID</th>
+                        <th style={thTdStyle}>Merchant</th>
+                        <th style={thTdStyle}>Location</th>
+                        <th style={thTdStyle}>Amount</th>
+                        <th style={thTdStyle}>Predicted Fraud?</th>
+                        <th style={thTdStyle}>Fraud Probability</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {highestRiskTransactions.map((r) => (
+                        <tr key={`high-risk-${r._rowId}`}>
+                          <td style={thTdStyle}>{r.transaction_id}</td>
+                          <td style={thTdStyle}>{r.merchant}</td>
+                          <td style={thTdStyle}>{r.location}</td>
+                          <td style={thTdStyle}>{formatAmount(r.amount)}</td>
+                          <td
+                            style={{
+                              ...thTdStyle,
+                              color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {r.predicted_is_fraud ? "YES" : "NO"}
+                          </td>
+                          <td style={thTdStyle}>
+                            {r.predicted_probability !== undefined
+                              ? `${(Number(r.predicted_probability) * 100).toFixed(2)}%`
+                              : ""}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         <div
