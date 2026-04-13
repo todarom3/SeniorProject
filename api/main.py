@@ -129,7 +129,7 @@ def health() -> dict[str, str]:
 
 
 @app.get("/model/info")
-def model_info() -> dict[str, str]:
+def model_info() -> dict[str, Any]:
     # Return information about the currently active model.
     try:
         model_name = get_model_name()
