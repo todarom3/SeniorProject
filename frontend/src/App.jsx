@@ -21,6 +21,7 @@ const STORAGE_KEY = "fraud-dashboard-datasets";
 const ACTIVE_DATASET_KEY = "fraud-dashboard-active-dataset";
 
 export default function App() {
+  // Main dataset storage for uploaded CSV results
   const [datasets, setDatasets] = useState(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -30,6 +31,7 @@ export default function App() {
     }
   });
 
+  // Tracks which uploaded dataset tab is currently active
   const [activeDatasetId, setActiveDatasetId] = useState(() => {
     try {
       return localStorage.getItem(ACTIVE_DATASET_KEY);
@@ -38,14 +40,24 @@ export default function App() {
     }
   });
 
+  // Basic UI state for errors, selected file, and upload in progress
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  // Backend / model info used to prove which model is active
   const [modelInfo, setModelInfo] = useState(null);
   const [modelInfoError, setModelInfoError] = useState("");
-  const [analysisStatus, setAnalysisStatus] = useState("Waiting for upload");
-  const [loadingStepIndex, setLoadingStepIndex] = useState(0);
 
+  // Human-readable status shown in the model proof section
+  const [analysisStatus, setAnalysisStatus] = useState("Waiting for upload");
+
+  // Loading overlay state
+  const [loadingStepIndex, setLoadingStepIndex] = useState(0);
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
+  const [analysisFinished, setAnalysisFinished] = useState(false);
+
+  // Messages shown in the loading overlay so the user can see what is happening
   const loadingSteps = [
     "Connecting to backend...",
     "Uploading CSV...",
@@ -56,6 +68,7 @@ export default function App() {
     "Building dashboard results...",
   ];
 
+  // Controls which sections can be minimized / expanded
   const [collapsedSections, setCollapsedSections] = useState({
     upload: false,
     modelStatus: false,
@@ -68,10 +81,12 @@ export default function App() {
     transactionsTable: false,
   });
 
+  // Pagination state for the main transactions table
   const [page, setPage] = useState(1);
   const [pageInput, setPageInput] = useState("1");
   const pageSize = 30;
 
+  // Loads the Cabin font once when the component first mounts
   useEffect(() => {
     const existingLink = document.getElementById("cabin-font-link");
 
@@ -85,6 +100,7 @@ export default function App() {
     }
   }, []);
 
+  // Saves uploaded datasets into localStorage so they stay after refresh
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(datasets));
@@ -93,6 +109,7 @@ export default function App() {
     }
   }, [datasets]);
 
+  // Saves the current active tab into localStorage
   useEffect(() => {
     try {
       if (activeDatasetId) {
@@ -105,6 +122,7 @@ export default function App() {
     }
   }, [activeDatasetId]);
 
+  // Keeps the active dataset valid if a tab is removed
   useEffect(() => {
     if (datasets.length > 0 && !datasets.some((d) => d.id === activeDatasetId)) {
       setActiveDatasetId(datasets[0].id);
@@ -114,12 +132,14 @@ export default function App() {
     }
   }, [datasets, activeDatasetId]);
 
+  // Fetches model info from the backend once on page load
   useEffect(() => {
     fetchModelInfo();
   }, []);
 
+  // Advances the loading overlay step-by-step while upload/analysis is running
   useEffect(() => {
-    if (!isUploading) return;
+    if (!showLoadingOverlay || analysisFinished) return;
 
     setLoadingStepIndex(0);
 
@@ -128,11 +148,12 @@ export default function App() {
         if (prev >= loadingSteps.length - 1) return prev;
         return prev + 1;
       });
-    }, 700);
+    }, 1400);
 
     return () => clearInterval(interval);
-  }, [isUploading]);
+  }, [showLoadingOverlay, analysisFinished]);
 
+  // Calls the backend to confirm which model is active and whether it exists
   async function fetchModelInfo() {
     try {
       setModelInfoError("");
@@ -150,6 +171,7 @@ export default function App() {
     }
   }
 
+  // Toggles minimize / expand on dashboard sections
   function toggleSection(sectionKey) {
     setCollapsedSections((prev) => ({
       ...prev,
@@ -157,6 +179,7 @@ export default function App() {
     }));
   }
 
+  // Converts timestamps into milliseconds for sorting
   function tsToMillis(ts) {
     if (!ts) return 0;
 
@@ -166,6 +189,7 @@ export default function App() {
     return Number.isNaN(ms) ? 0 : ms;
   }
 
+  // Formats a timestamp as MM/DD/YYYY
   function formatDateMDY(ts) {
     const ms = tsToMillis(ts);
     if (!ms) return "";
@@ -176,6 +200,7 @@ export default function App() {
     return `${mm}/${dd}/${yyyy}`;
   }
 
+  // Formats a timestamp as 12-hour time with AM/PM
   function formatTimeAMPM(ts) {
     const ms = tsToMillis(ts);
     if (!ms) return "";
@@ -191,6 +216,7 @@ export default function App() {
     return `${hours}:${minutes} ${ampm}`;
   }
 
+  // Formats currency values nicely for display
   function formatAmount(value) {
     const num = Number(value);
     if (Number.isNaN(num)) return "";
@@ -200,6 +226,7 @@ export default function App() {
     })}`;
   }
 
+  // Creates the name shown on each uploaded file tab
   function createDatasetName(fileName) {
     const now = new Date();
     const timeLabel = now.toLocaleTimeString([], {
@@ -209,6 +236,7 @@ export default function App() {
     return `${fileName} • ${timeLabel}`;
   }
 
+  // Switches to another uploaded dataset tab
   function switchDataset(datasetId) {
     setActiveDatasetId(datasetId);
     setPage(1);
@@ -217,6 +245,7 @@ export default function App() {
     setAnalysisStatus("Viewing saved analysis");
   }
 
+  // Removes an uploaded dataset tab
   function removeDataset(datasetId) {
     setDatasets((prev) => prev.filter((dataset) => dataset.id !== datasetId));
 
@@ -228,6 +257,14 @@ export default function App() {
     }
   }
 
+  // Lets the user close the loading overlay manually after analysis finishes
+  function handleContinueAfterLoading() {
+    setShowLoadingOverlay(false);
+    setAnalysisFinished(false);
+    setLoadingStepIndex(0);
+  }
+
+  // Uploads the CSV to the backend, receives fraud predictions, and saves the results
   async function handleUpload() {
     if (!selectedFile) {
       setError("Please choose a CSV file first.");
@@ -236,6 +273,9 @@ export default function App() {
 
     setError("");
     setIsUploading(true);
+    setShowLoadingOverlay(true);
+    setAnalysisFinished(false);
+    setLoadingStepIndex(0);
     setAnalysisStatus("Starting analysis...");
 
     try {
@@ -272,22 +312,27 @@ export default function App() {
       setPage(1);
       setPageInput("1");
       setSelectedFile(null);
+
       setAnalysisStatus("Analysis complete — model predictions loaded");
+      setAnalysisFinished(true);
+
       await fetchModelInfo();
     } catch (e) {
       setError(e.message || String(e));
       setAnalysisStatus("Analysis failed");
+      setAnalysisFinished(true);
     } finally {
       setIsUploading(false);
-      setLoadingStepIndex(0);
     }
   }
 
+  // Finds the currently selected dataset and its rows
   const activeDataset =
     datasets.find((dataset) => dataset.id === activeDatasetId) || null;
 
   const rows = activeDataset ? activeDataset.rows : [];
 
+  // Main summary metrics for the uploaded dataset
   const totalTransactions = rows.length;
   const fraudCount = rows.filter((r) => r.predicted_is_fraud).length;
   const nonFraudCount = totalTransactions - fraudCount;
@@ -296,6 +341,7 @@ export default function App() {
     : "0.00";
   const totalAmount = rows.reduce((sum, r) => sum + (Number(r.amount) || 0), 0);
 
+  // Extra proof/insight metrics based on the model's fraud probabilities
   const averageFraudProbability = totalTransactions
     ? (
         (rows.reduce(
@@ -320,6 +366,7 @@ export default function App() {
     (r) => Number(r.predicted_probability) >= 0.8
   ).length;
 
+  // Builds the "transactions by state" summary
   const transactionsByState = useMemo(() => {
     const acc = {};
     for (const r of rows) {
@@ -332,6 +379,7 @@ export default function App() {
       .sort((a, b) => b.count - a.count);
   }, [rows]);
 
+  // Sorts rows newest-first for the main table
   const sortedRows = useMemo(() => {
     return [...rows].sort((a, b) => {
       if (b._ts !== a._ts) return b._ts - a._ts;
@@ -339,6 +387,7 @@ export default function App() {
     });
   }, [rows]);
 
+  // Pagination calculations
   const totalPages = Math.max(1, Math.ceil(sortedRows.length / pageSize));
   const safePage = Math.min(Math.max(page, 1), totalPages);
   const startIndex = (safePage - 1) * pageSize;
@@ -347,6 +396,7 @@ export default function App() {
     return sortedRows.slice(startIndex, startIndex + pageSize);
   }, [sortedRows, startIndex]);
 
+  // Builds the "fraud by location" chart data
   const fraudByLocation = Object.values(
     rows
       .filter((r) => r.predicted_is_fraud)
@@ -358,6 +408,7 @@ export default function App() {
       }, {})
   ).sort((a, b) => b.fraudCount - a.fraudCount);
 
+  // Builds the "transactions by device" chart data
   const transactionsByDevice = Object.values(
     rows.reduce((acc, r) => {
       const device = r.device || "Unknown";
@@ -367,6 +418,7 @@ export default function App() {
     }, {})
   ).sort((a, b) => b.count - a.count);
 
+  // Data for the fraud vs non-fraud pie chart
   const pieData = [
     { name: "Fraud", value: fraudCount },
     { name: "Non-Fraud", value: nonFraudCount },
@@ -374,6 +426,7 @@ export default function App() {
 
   const pieColors = ["#ef4444", "#22c55e"];
 
+  // Finds the top 10 highest-risk transactions by fraud probability
   const highestRiskTransactions = useMemo(() => {
     return [...rows]
       .sort(
@@ -384,6 +437,7 @@ export default function App() {
       .slice(0, 10);
   }, [rows]);
 
+  // Handles the "Go to page" control for the main table
   function handleGoToPage() {
     const requestedPage = Number(pageInput);
 
@@ -397,12 +451,14 @@ export default function App() {
     setPageInput(String(boundedPage));
   }
 
+  // Lets the user press Enter in the page input box
   function handlePageInputKeyDown(e) {
     if (e.key === "Enter") {
       handleGoToPage();
     }
   }
 
+  // Main page-level layout styles
   const pageStyle = {
     minHeight: "100vh",
     width: "100%",
@@ -417,6 +473,7 @@ export default function App() {
     position: "relative",
   };
 
+  // Full-screen loading overlay styles
   const loadingOverlayStyle = {
     position: "fixed",
     inset: 0,
@@ -495,6 +552,7 @@ export default function App() {
     boxShadow: isActive ? "0 0 0 6px rgba(96,165,250,0.12)" : "none",
   });
 
+  // Sidebar styles
   const sidebarStyle = {
     width: 220,
     minWidth: 220,
@@ -588,6 +646,7 @@ export default function App() {
     lineHeight: 1.45,
   };
 
+  // Main content area styles
   const contentStyle = {
     width: "100%",
     maxWidth: 1700,
@@ -809,6 +868,7 @@ export default function App() {
     fontSize: "0.95rem",
   };
 
+  // Styles for the model/proof section
   const modelGridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
@@ -850,7 +910,8 @@ export default function App() {
 
   return (
     <div style={pageStyle}>
-      {isUploading && (
+      {/* Full-screen loading overlay shown while the backend is analyzing the uploaded CSV */}
+      {showLoadingOverlay && (
         <div style={loadingOverlayStyle}>
           <div style={loadingCardStyle}>
             <h2 style={loadingTitleStyle}>Running Fraud Analysis</h2>
@@ -866,8 +927,13 @@ export default function App() {
 
             <div style={loadingStepListStyle}>
               {loadingSteps.map((step, index) => {
-                const isDone = index < loadingStepIndex;
-                const isActive = index === loadingStepIndex;
+                // When finished, mark all steps up to current as complete
+                const isDone = analysisFinished
+                  ? index <= loadingStepIndex
+                  : index < loadingStepIndex;
+
+                // Only show active highlight while still processing
+                const isActive = !analysisFinished && index === loadingStepIndex;
 
                 return (
                   <div
@@ -880,10 +946,38 @@ export default function App() {
                 );
               })}
             </div>
+
+            {/* Show final message + continue button after analysis finishes */}
+            {analysisFinished && (
+              <div style={{ marginTop: 20, textAlign: "center" }}>
+                <p style={{ color: "#cbd5e1", marginBottom: 14, lineHeight: 1.6 }}>
+                  {analysisStatus === "Analysis failed"
+                    ? "The analysis stopped because an error occurred."
+                    : "The model finished running. Review the results when you continue."}
+                </p>
+
+                <button
+                  onClick={handleContinueAfterLoading}
+                  style={{
+                    padding: "10px 18px",
+                    borderRadius: 8,
+                    border: "1px solid #4b5563",
+                    background: "#111827",
+                    color: "white",
+                    cursor: "pointer",
+                    fontFamily: '"Cabin", Arial, sans-serif',
+                    fontSize: "0.95rem",
+                  }}
+                >
+                  Continue
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
 
+      {/* Sidebar showing all uploaded dataset tabs */}
       <aside style={sidebarStyle}>
         <h2 style={sidebarTitleStyle}>Uploaded Files</h2>
         <p style={sidebarSubStyle}>
@@ -929,6 +1023,7 @@ export default function App() {
         </div>
       </aside>
 
+      {/* Main dashboard content */}
       <div style={contentStyle}>
         <h1 style={titleStyle}>Fraud Detection Dashboard</h1>
         <p style={subtitleStyle}>
@@ -941,6 +1036,7 @@ export default function App() {
           </div>
         )}
 
+        {/* Upload area for CSV files */}
         <div style={uploadPanelStyle}>
           <div
             style={{
@@ -978,6 +1074,7 @@ export default function App() {
           )}
         </div>
 
+        {/* Error box shown if upload or model analysis fails */}
         {error && (
           <div style={{ ...panelStyle, border: "1px solid #ef4444" }}>
             <h3 style={{ marginTop: 0 }}>Error</h3>
@@ -985,6 +1082,7 @@ export default function App() {
           </div>
         )}
 
+        {/* Shows backend/model status and proof that the model returned analysis results */}
         <div
           style={
             collapsedSections.modelStatus ? collapsedPanelStyle : panelStyle
@@ -1069,6 +1167,7 @@ export default function App() {
           )}
         </div>
 
+        {/* Summary metric cards */}
         <div style={metricsHeaderPanelStyle}>
           <div style={{ ...panelHeaderStyle, marginBottom: 0 }}>
             <h2 style={{ ...sectionTitleStyle, marginBottom: 0 }}>
@@ -1128,6 +1227,7 @@ export default function App() {
           </div>
         )}
 
+        {/* Text summary for transactions by state */}
         <div
           style={
             collapsedSections.transactionsByState ? collapsedPanelStyle : panelStyle
@@ -1161,6 +1261,7 @@ export default function App() {
           )}
         </div>
 
+        {/* Bar chart showing how many frauds were found by location */}
         <div
           style={
             collapsedSections.fraudByLocation ? collapsedPanelStyle : panelStyle
@@ -1208,6 +1309,7 @@ export default function App() {
           )}
         </div>
 
+        {/* Lower row of charts: fraud split and device usage */}
         <div style={lowerChartsRowStyle}>
           <div
             style={
@@ -1309,6 +1411,7 @@ export default function App() {
           </div>
         </div>
 
+        {/* Highlights the transactions with the highest fraud probabilities */}
         <div
           style={
             collapsedSections.highRiskTransactions
@@ -1384,6 +1487,7 @@ export default function App() {
           )}
         </div>
 
+        {/* Main full transactions table with pagination */}
         <div
           style={
             collapsedSections.transactionsTable ? collapsedPanelStyle : panelStyle
