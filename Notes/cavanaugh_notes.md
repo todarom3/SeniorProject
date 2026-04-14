@@ -15,4 +15,14 @@ Week 6: On this week I started working on getting the presentation setup for the
 
 Week 7: On this week I completed making our midterm presentation and help to figure out what is going to be done in the second half of the semester.  
 
-Week 8: On this week we presented the midterm presentation. I also worked on creating a more complex and realistic transaction generator that accounts for more patterns, and has more features. 
+Week 8: On this week we presented the midterm presentation. I also worked on starting to create a more complex and realistic transaction generator.  
+
+Week 9: On this week I completed the more complex transaction generator that accounts for more fraud patterns, and has more features. 
+I also created a file called FakeTransactionInfo.txt which is located in the Transactions folder. This file clearly documents how the transaction generator works, and what fraud patterns it accounts for.  
+
+Week 10: Spring Break!  On this week I did some minor changes. I updated the readme description to no longer have random project info, and instead instructions on how to run/use the different parts of our project. The project info got moved into its own file called ProjectInfo.txt. Additionally, I helped plan out who is going to be working on the remaining parts of our project.  
+
+Week 11: On this week I focused on making a system diagram for our project that clearly shows how the different components of our project interact. All work relayed to the system diagram cam be found in the SystemDiagram folder. Other work this week TBD  
+
+
+
