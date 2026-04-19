@@ -1,0 +1,84 @@
+Using dataset: Transactions/transactions3.csv
+Training data size: 8000
+Validation data size: 1000
+Testing data size: 1000
+
+Training neural network...
+Iteration 1, loss = 0.49632051
+Validation score: 0.992500
+Iteration 2, loss = 0.08296304
+Validation score: 0.993750
+Iteration 3, loss = 0.01280462
+Validation score: 0.995000
+Iteration 4, loss = 0.00532071
+Validation score: 0.995000
+Iteration 5, loss = 0.00245530
+Validation score: 0.993750
+Iteration 6, loss = 0.00134873
+Validation score: 0.993750
+Iteration 7, loss = 0.00096956
+Validation score: 0.995000
+Iteration 8, loss = 0.00080118
+Validation score: 0.993750
+Iteration 9, loss = 0.00069244
+Validation score: 0.995000
+Iteration 10, loss = 0.00062931
+Validation score: 0.995000
+Iteration 11, loss = 0.00059312
+Validation score: 0.995000
+Iteration 12, loss = 0.00056675
+Validation score: 0.995000
+Iteration 13, loss = 0.00054557
+Validation score: 0.995000
+Iteration 14, loss = 0.00052778
+Validation score: 0.995000
+Iteration 15, loss = 0.00051271
+Validation score: 0.995000
+Iteration 16, loss = 0.00049972
+Validation score: 0.995000
+Iteration 17, loss = 0.00048808
+Validation score: 0.995000
+Iteration 18, loss = 0.00047717
+Validation score: 0.995000
+Iteration 19, loss = 0.00046680
+Validation score: 0.995000
+Iteration 20, loss = 0.00045759
+Validation score: 0.995000
+Iteration 21, loss = 0.00044888
+Validation score: 0.995000
+Iteration 22, loss = 0.00044087
+Validation score: 0.995000
+Iteration 23, loss = 0.00043317
+Validation score: 0.995000
+Iteration 24, loss = 0.00042601
+Validation score: 0.995000
+Validation score did not improve more than tol=0.000100 for 20 consecutive epochs. Stopping.
+
+Validation metrics
+              precision    recall  f1-score   support
+
+           0     0.9980    0.9990    0.9985       978
+           1     0.9524    0.9091    0.9302        22
+
+    accuracy                         0.9970      1000
+   macro avg     0.9752    0.9540    0.9643      1000
+weighted avg     0.9970    0.9970    0.9970      1000
+
+Validation PR-AUC: 0.9906
+
+Test metrics
+              precision    recall  f1-score   support
+
+           0     0.9969    1.0000    0.9985       979
+           1     1.0000    0.8571    0.9231        21
+
+    accuracy                         0.9970      1000
+   macro avg     0.9985    0.9286    0.9608      1000
+weighted avg     0.9970    0.9970    0.9969      1000
+
+Test PR-AUC: 0.9833
+
+Neural Network Info:
+Training iterations: 24
+Training loss: 0.0004
+Saved neural network model to ml/neural_model.joblib

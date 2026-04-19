@@ -1,0 +1,33 @@
+Using dataset: Transactions/transactions3.csv
+Training data size: 8000
+Validation data size: 1000
+Testing data size: 1000
+
+Validation metrics
+              precision    recall  f1-score   support
+
+           0     1.0000    0.9867    0.9933       978
+           1     0.6286    1.0000    0.7719        22
+
+    accuracy                         0.9870      1000
+   macro avg     0.8143    0.9934    0.8826      1000
+weighted avg     0.9918    0.9870    0.9884      1000
+
+Validation PR-AUC: 0.9888636363636364
+
+Test metrics
+              precision    recall  f1-score   support
+
+           0     1.0000    0.9857    0.9928       979
+           1     0.6000    1.0000    0.7500        21
+
+    accuracy                         0.9860      1000
+   macro avg     0.8000    0.9928    0.8714      1000
+weighted avg     0.9916    0.9860    0.9877      1000
+
+Test PR-AUC: 0.9978354978354981
+Decision threshold: 0.30
+Confusion matrix [[TN, FP], [FN, TP]]:
+[[965  14]
+ [  0  21]]
+Saved model to ml/model.joblib

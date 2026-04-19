@@ -4,6 +4,7 @@ import re
 from typing import Any, Optional
 
 import joblib
+import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
@@ -123,6 +124,58 @@ def _prepare_features(data: pd.DataFrame, model) -> pd.DataFrame:
     return features
 
 
+def _clean_feature_name(name: str) -> str:
+    # Make transformed feature names friendlier for dashboard display.
+    if "__" in name:
+        name = name.split("__", 1)[1]
+    return name
+
+
+def _top_reasons_for_fraud(model, features: pd.DataFrame, top_k: int = 3) -> list[list[dict[str, float]]]:
+    # Lightweight explainability for logistic regression models: contribution ~= x_i * coef_i.
+    pipeline_steps = getattr(model, "named_steps", {})
+    preprocess = pipeline_steps.get("preprocess")
+    estimator = pipeline_steps.get("model")
+
+    if preprocess is None or estimator is None or not hasattr(estimator, "coef_"):
+        return [[] for _ in range(len(features))]
+
+    transformed = preprocess.transform(features)
+    coef = estimator.coef_[0]
+    feature_names = [
+        _clean_feature_name(name) for name in preprocess.get_feature_names_out()
+    ]
+
+    all_reasons: list[list[dict[str, float]]] = []
+    for i in range(transformed.shape[0]):
+        row = transformed[i]
+        if hasattr(row, "toarray"):
+            row_vector = row.toarray().ravel()
+        else:
+            row_vector = np.asarray(row).ravel()
+
+        contributions = row_vector * coef
+        positive_idx = np.where(contributions > 0)[0]
+
+        if len(positive_idx) == 0:
+            all_reasons.append([])
+            continue
+
+        sorted_idx = positive_idx[np.argsort(contributions[positive_idx])[::-1]]
+        top_idx = sorted_idx[:top_k]
+
+        reasons = [
+            {
+                "feature": str(feature_names[j]),
+                "contribution": float(contributions[j]),
+            }
+            for j in top_idx
+        ]
+        all_reasons.append(reasons)
+
+    return all_reasons
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -179,9 +232,11 @@ def predict_sample(limit: int = Query(default=10, ge=1, le=100)) -> dict[str, An
 
     predictions = model.predict(features)
     probabilities = model.predict_proba(features)[:, 1]
+    reasons = _top_reasons_for_fraud(model, features)
 
     data["predicted_is_fraud"] = predictions
     data["predicted_probability"] = probabilities
+    data["top_reasons"] = reasons
 
     return {
         "count": len(data),
@@ -200,6 +255,7 @@ def transactions_with_predictions(
 
     data["predicted_is_fraud"] = model.predict(features)
     data["predicted_probability"] = model.predict_proba(features)[:, 1]
+    data["top_reasons"] = _top_reasons_for_fraud(model, features)
 
     return {
         "count": len(data),
@@ -229,6 +285,7 @@ async def upload_transactions(file: UploadFile = File(...)) -> dict[str, Any]:
     try:
         data["predicted_is_fraud"] = model.predict(features)
         data["predicted_probability"] = model.predict_proba(features)[:, 1]
+        data["top_reasons"] = _top_reasons_for_fraud(model, features)
     except Exception as e:
         raise HTTPException(
             status_code=400,

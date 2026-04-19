@@ -22,3 +22,16 @@ After the last meeting with Professor Curry, I finished up what I needed for the
 
 3/24/26
 So essentially, the API doesnt connect to the model directly. instead it connects to the saved, trained model in model.joblib and the dashboard calls upon that model. I created a separate model that implements a neural network over a logistic regression model. I also have a new config file. I have yet to run this model. I will run it when I get home. the API is also updated with the new model. 
+
+4-14-26
+I havent been able to touch the project much because of other classes as well as military commitments recently. 
+
+
+- Start testing neural model, then choose between Logistic regression and Neural model. 
+I decided to go with logisitic regression since it had a better recall value and it is already working with the dashboard end-to-end. So im going to stick with that. 
+- i changed the model to help correct the false positives by reducing the recall from 0.5 to 0.3 and then made sure the model can take in multiple csv files. 
+
+4/19/26
+- updated model script with: reliable dataset path detection, confusion matrix output, and lightweight tuning (C candidates + threshold sweep on validation set).
+- fixed terminal alias issues (`runmodel` path updated to `model/model.py`; neural alias also works).
+- added lightweight explanation support in API responses: prediction endpoints now include `top_reasons` per transaction (top positive logistic feature contributions) to show why a transaction was flagged.
