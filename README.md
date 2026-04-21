@@ -91,3 +91,7 @@ The dashboard is fully deployed using Vercel, so no local setup is required to u
 - The system uses **synthetic transaction data** (not real financial data)  
 - Transaction IDs reflect generation order, not timestamps  
 - The dashboard is designed to demonstrate a full data pipeline from input → model → visualization  
+
+## System Diagram  
+
+![System Diagram](./SystemDiagram/SystemDiagram.png)
