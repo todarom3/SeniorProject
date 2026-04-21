@@ -226,6 +226,113 @@ export default function App() {
     })}`;
   }
 
+  // Masks a card number so only the final 4 digits are visible
+  function maskCardNumber(cardNumber) {
+    if (cardNumber === null || cardNumber === undefined) return "";
+    const raw = String(cardNumber).trim();
+    if (!raw) return "";
+
+    const digitsOnly = raw.replace(/\D/g, "");
+    const last4 = digitsOnly.slice(-4) || raw.slice(-4);
+
+    return `**** **** **** ${last4}`;
+  }
+
+  // Caps shown fraud percentages so the dashboard never displays 100.0%
+  function formatProbability(probability) {
+    const value = Number(probability);
+    if (Number.isNaN(value)) return "";
+    const percent = Math.min(value * 100, 99.9);
+    return `${percent.toFixed(1)}%`;
+  }
+
+  // Makes backend feature names easier for people to read in the dashboard
+  function prettifyReasonFeature(feature) {
+    if (!feature) return "Unknown reason";
+
+    return String(feature)
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
+  // Keeps only positive model contributions and shows the strongest few
+  function getPositiveReasons(reasons) {
+    if (!Array.isArray(reasons)) return [];
+
+    return reasons
+      .map((reason) => ({
+        ...reason,
+        contribution: Number(reason?.contribution) || 0,
+      }))
+      .filter((reason) => reason.contribution > 0)
+      .sort((a, b) => b.contribution - a.contribution)
+      .slice(0, 3);
+  }
+
+  // Converts risk-share percentage into a simple label users can understand
+  function getRiskImpactLabel(sharePercent) {
+    if (sharePercent >= 50) return "High impact";
+    if (sharePercent >= 25) return "Medium impact";
+    return "Low impact";
+  }
+
+  // Renders the fraud reasoning cards returned by the backend's top_reasons field
+  function renderTopReasons(reasons, isFraud) {
+    if (!isFraud) {
+      return <span style={{ color: "#94a3b8" }}>Not flagged as fraud</span>;
+    }
+
+    const positiveReasons = getPositiveReasons(reasons);
+
+    if (positiveReasons.length === 0) {
+      return (
+        <span style={{ color: "#94a3b8" }}>
+          Flagged by the model overall, but no strong individual positive reason was returned.
+        </span>
+      );
+    }
+
+    const totalPositiveContribution = positiveReasons.reduce(
+      (sum, reason) => sum + reason.contribution,
+      0
+    );
+
+    return (
+      <div style={{ display: "grid", gap: 6 }}>
+        {positiveReasons.map((reason, index) => {
+          const sharePercent =
+            totalPositiveContribution > 0
+              ? (reason.contribution / totalPositiveContribution) * 100
+              : 0;
+
+          return (
+            <div
+              key={`${reason.feature}-${index}`}
+              style={{
+                background: "#0f172a",
+                border: "1px solid #334155",
+                borderRadius: 8,
+                padding: "6px 8px",
+                lineHeight: 1.35,
+              }}
+            >
+              <div style={{ fontWeight: 700 }}>
+                {prettifyReasonFeature(reason.feature)}
+              </div>
+              <div style={{ color: "#93c5fd", fontSize: "0.72rem" }}>
+                Increased fraud risk
+              </div>
+              <div style={{ color: "#cbd5e1", fontSize: "0.72rem", marginTop: 2 }}>
+                Reason Importance: {sharePercent.toFixed(1)}% •{" "}
+                {getRiskImpactLabel(sharePercent)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   // Creates the name shown on each uploaded file tab
   function createDatasetName(fileName) {
     const now = new Date();
@@ -360,13 +467,14 @@ export default function App() {
     : "0.00";
 
   const highestFraudProbability = totalTransactions
-    ? (
+    ? Math.min(
         Math.max(
-          ...rows.map((r) => Number(r.predicted_probability) || 0),
+          ...rows.map((r) => (Number(r.predicted_probability) || 0) * 100),
           0
-        ) * 100
-      ).toFixed(2)
-    : "0.00";
+        ),
+        99.9
+      ).toFixed(1)
+    : "0.0";
 
   const highConfidenceFraudCount = rows.filter(
     (r) => Number(r.predicted_probability) >= 0.8
@@ -385,11 +493,10 @@ export default function App() {
       .sort((a, b) => b.count - a.count);
   }, [rows]);
 
-  // Sorts rows newest-first for the main table
+  // Sorts rows by transaction ID (generation order)
   const sortedRows = useMemo(() => {
     return [...rows].sort((a, b) => {
-      if (b._ts !== a._ts) return b._ts - a._ts;
-      return a._rowId - b._rowId;
+      return Number(a.transaction_id) - Number(b.transaction_id);
     });
   }, [rows]);
 
@@ -475,7 +582,7 @@ export default function App() {
     padding: "16px",
     boxSizing: "border-box",
     fontFamily: '"Cabin", Arial, sans-serif',
-    gap: 16,
+    gap: 12,
     position: "relative",
   };
 
@@ -562,11 +669,11 @@ export default function App() {
 
   // Sidebar styles
   const sidebarStyle = {
-    width: 220,
-    minWidth: 220,
+    width: 190,
+    minWidth: 190,
     background: "#0f172a",
     borderRadius: 16,
-    padding: 14,
+    padding: 12,
     boxShadow: "0 8px 24px rgba(0,0,0,0.25)",
     color: "white",
     alignSelf: "stretch",
@@ -657,7 +764,7 @@ export default function App() {
   // Main content area styles
   const contentStyle = {
     width: "100%",
-    maxWidth: 1700,
+    maxWidth: 1820,
     margin: "0 auto",
     padding: 20,
     color: "white",
@@ -843,17 +950,24 @@ export default function App() {
     color: "white",
     borderRadius: 10,
     overflow: "hidden",
-    tableLayout: "auto",
+    tableLayout: "fixed",
   };
 
   const thTdStyle = {
     borderBottom: "1px solid #374151",
-    padding: "10px 8px",
+    padding: "8px 6px",
     textAlign: "left",
-    fontSize: "0.88rem",
+    fontSize: "0.72rem",
     whiteSpace: "normal",
     wordBreak: "break-word",
+    overflowWrap: "break-word",
     verticalAlign: "top",
+    lineHeight: 1.3,
+  };
+
+  const reasonsCellStyle = {
+    ...thTdStyle,
+    fontSize: "0.7rem",
   };
 
   const goToPageWrapStyle = {
@@ -914,6 +1028,18 @@ export default function App() {
     padding: 16,
     color: "#dbeafe",
     lineHeight: 1.6,
+  };
+
+  const tableNoteStyle = {
+    marginTop: 0,
+    marginBottom: 14,
+    background: "#0f172a",
+    border: "1px solid #334155",
+    borderRadius: 12,
+    padding: 14,
+    color: "#dbeafe",
+    lineHeight: 1.6,
+    fontSize: "0.9rem",
   };
 
   return (
@@ -1454,12 +1580,13 @@ export default function App() {
                   <table border="0" cellPadding="8" style={tableStyle}>
                     <thead>
                       <tr>
-                        <th style={thTdStyle}>Transaction ID</th>
+                        <th style={thTdStyle}>Transaction ID (Generation Order)</th>
                         <th style={thTdStyle}>Merchant</th>
                         <th style={thTdStyle}>Location</th>
                         <th style={thTdStyle}>Amount</th>
                         <th style={thTdStyle}>Predicted Fraud?</th>
                         <th style={thTdStyle}>Fraud Probability</th>
+                        <th style={reasonsCellStyle}>Why It Was Flagged</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1480,8 +1607,11 @@ export default function App() {
                           </td>
                           <td style={thTdStyle}>
                             {r.predicted_probability !== undefined
-                              ? `${(Number(r.predicted_probability) * 100).toFixed(2)}%`
+                              ? formatProbability(r.predicted_probability)
                               : ""}
+                          </td>
+                          <td style={reasonsCellStyle}>
+                            {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
                           </td>
                         </tr>
                       ))}
@@ -1516,6 +1646,12 @@ export default function App() {
 
           {!collapsedSections.transactionsTable && (
             <>
+              <div style={tableNoteStyle}>
+                <strong>Table note:</strong> Transaction ID shows the order the
+                transactions were generated in. Card numbers are masked so only the
+                last 4 digits are shown for security.
+              </div>
+
               <div style={buttonRowStyle}>
                 <button
                   style={safePage === 1 ? buttonDisabledStyle : buttonStyle}
@@ -1551,8 +1687,8 @@ export default function App() {
                 <table border="0" cellPadding="8" style={tableStyle}>
                   <thead>
                     <tr>
-                      <th style={thTdStyle}>Transaction ID</th>
-                      <th style={thTdStyle}>Card Number</th>
+                      <th style={thTdStyle}>Transaction ID (Generation Order)</th>
+                      <th style={thTdStyle}>Card Number (Last 4 Digits)</th>
                       <th style={thTdStyle}>Merchant</th>
                       <th style={thTdStyle}>Category</th>
                       <th style={thTdStyle}>Location</th>
@@ -1562,13 +1698,14 @@ export default function App() {
                       <th style={thTdStyle}>Time (AM/PM)</th>
                       <th style={thTdStyle}>Predicted Fraud?</th>
                       <th style={thTdStyle}>Fraud Probability</th>
+                      <th style={reasonsCellStyle}>Why It Was Flagged</th>
                     </tr>
                   </thead>
                   <tbody>
                     {pagedRows.map((r) => (
                       <tr key={r._rowId}>
                         <td style={thTdStyle}>{r.transaction_id}</td>
-                        <td style={thTdStyle}>{r.card_number}</td>
+                        <td style={thTdStyle}>{maskCardNumber(r.card_number)}</td>
                         <td style={thTdStyle}>{r.merchant}</td>
                         <td style={thTdStyle}>{r.category}</td>
                         <td style={thTdStyle}>{r.location}</td>
@@ -1587,8 +1724,11 @@ export default function App() {
                         </td>
                         <td style={thTdStyle}>
                           {r.predicted_probability !== undefined
-                            ? `${(Number(r.predicted_probability) * 100).toFixed(2)}%`
+                            ? formatProbability(r.predicted_probability)
                             : ""}
+                        </td>
+                        <td style={reasonsCellStyle}>
+                          {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
                         </td>
                       </tr>
                     ))}
