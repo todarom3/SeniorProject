@@ -9,14 +9,14 @@ Here is a cleaner, more polished version you can paste directly:
 
 ## Full Project Setup Guide
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/todarom3/SeniorProject.git
 cd SeniorProject
 ```
 
-### 2. Project Overview
+### Project Overview
 
 This project contains multiple components including:
 
