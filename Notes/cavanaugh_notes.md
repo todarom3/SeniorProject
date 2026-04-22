@@ -24,7 +24,7 @@ Week 10: On this week (Spring Break), I made improvements to the project documen
 
 Week 11: On this week I designed and finalized the system diagram that visually represents how all components of the project interact. I organized the diagram and related files into the SystemDiagram folder to ensure everything is clearly structured for presentation.
 
-Week 12: On this week I completed the first major draft of the project final presentation poster. I combined all major components of the project, including goals, system overview, technologies used, accomplishments, and future improvements, into a clean and organized layout suitable for presentation.
+Week 12: On this week I completed the first major draft of the project final presentation poster. I combined all major components of the project, including goals, system overview, technologies used, accomplishments, and future improvements, into a clean and organized layout suitable for presentation. Additionally, I updated the README to have more info on the data generator, and other key components of our project.
 
 
 
