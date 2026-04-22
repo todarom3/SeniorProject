@@ -8,60 +8,61 @@ Group Members: John Cavanaugh, Matt Todaro, Derek Mendez
 First Clone the Repository  
 git clone https://github.com/todarom3/SeniorProject.git  
 cd SeniorProject  
+---
 
-## Fake Transaction Generator Setup and Run  
-The fake transaction generator is located in:  
-FakeTransactionGenerator/src/  
-
-Compile  
-From inside the src folder:  
-javac CCTransactionGenerator2.java  
-
-Run  
-java CCTransactionGenerator2  
-
-This generates:  
-transactions3.csv and fraud_log.csv  
-These files are used for fraud analysis and model training.   
-Fake Transaction Generator Setup and Run
+## Fake Transaction Generator Setup and Run
 
 The fake transaction generator is located in:
-FakeTransactionGenerator/src/
+`FakeTransactionGenerator/src/`
 
-Compile
+### Compile
 
-From inside the src folder:
+From inside the `src` folder:
+
+```bash
 javac CCTransactionGenerator2.java
+```
 
-Run
+### Run
 
+```bash
 java CCTransactionGenerator2
+```
 
-Output Files
-transactions3.csv (10,000 total generated transactions)  
-fraud_log.csv (fraudulent transactions with explanations)
+---
+
+## Output Files
+
+* `transactions3.csv` → 10,000 total generated transactions
+* `fraud_log.csv` → fraudulent transactions with explanations
 
 These files are used for fraud detection training and analysis.
 
-How Transactions Were Generated:
+---
+
+## How Transactions Were Generated
 
 Transactions are synthetically generated using a Java program that simulates realistic credit card behavior:
 
-Generates 10,000 total transactions from 1,000 fake credit cards  
-Each card has realistic spending patterns and merchant interactions   
-Most transactions are normal, based on merchant, location, device, and spending behavior  
-Fraud is injected using realistic patterns such as location jumps, test charges, rapid purchases, and over-limit spending  
-Maintains an approximate 9% fraud rate  
+* Generates 10,000 total transactions from 1,000 fake credit cards
+* Each card has realistic spending patterns and merchant interactions
+* Most transactions are normal, based on merchant, location, device, and spending behavior
+* Fraud is injected using realistic patterns such as location jumps, test charges, rapid purchases, and over-limit spending
+* Maintains an approximate 9% fraud rate
 
-This produces a balanced dataset that mimics real-world financial transaction behavior for machine learning training.  
+This creates a balanced dataset that mimics real-world financial transaction behavior for machine learning training.
 
-For full details on generation logic and fraud patterns, see:  
-FakeTransactionInfo.txt
+For full details on generation logic and fraud patterns, see:
+[FakeTransactionInfo.txt](Transactions/FakeTransactionInfo.txt)
 
-## Dataset Split  
-Training set: 80%  
-Validation set: 10%  
-Test set: 10% (used to evaluate final model performance on unseen data)  
+---
+
+## Dataset Split
+
+* Training set: 80%
+* Validation set: 10%
+* Test set: 10% (used to evaluate final model performance on unseen data)
+
 
 ## Toy Model Setup & Run
 
