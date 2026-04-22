@@ -3,11 +3,30 @@ End-to-End Data Analytics Fraud Detection Platform
 
 Group Members: John Cavanaugh, Matt Todaro, Derek Mendez  
 
+Here is a cleaner, more polished version you can paste directly:
+
+---
+
 ## Full Project Setup Guide
 
-First Clone the Repository  
-git clone https://github.com/todarom3/SeniorProject.git  
-cd SeniorProject  
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/todarom3/SeniorProject.git
+cd SeniorProject
+```
+
+### 2. Project Overview
+
+This project contains multiple components including:
+
+* Synthetic data generation (Java)
+* Fraud detection model (Python)
+* Backend API (FastAPI)
+* Dashboard (React)
+
+Each component can be run separately following the setup instructions below.
+
 ---
 
 ## Fake Transaction Generator Setup and Run
