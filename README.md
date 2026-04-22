@@ -16,19 +16,6 @@ git clone https://github.com/todarom3/SeniorProject.git
 cd SeniorProject
 ```
 
-### Project Overview
-
-This project contains multiple components including:
-
-* Synthetic data generation (Java)
-* Fraud detection model (Python)
-* Backend API (FastAPI)
-* Dashboard (React)
-
-Each component can be run separately following the setup instructions below.
-
----
-
 ## Fake Transaction Generator Setup and Run
 
 The fake transaction generator is located in:
