@@ -9,7 +9,7 @@ Here is a cleaner, more polished version you can paste directly:
 
 ## Full Project Setup Guide
 
-### Clone the Repository
+### First Clone the Repository
 
 ```bash
 git clone https://github.com/todarom3/SeniorProject.git
