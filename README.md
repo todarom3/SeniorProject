@@ -79,8 +79,39 @@ From the project root:
 
 Run scripts:
 
-- Train and evaluate model (prints 80/10/10 split metrics and saves model): `./.venv/bin/python toyModel/model.py`
+- Train and evaluate model (prints 80/10/10 split metrics and saves model): `./.venv/bin/python model/model.py`
 - Inference sanity check (loads saved model and prints sample predictions): `./.venv/bin/python tests/testModel.py`
+- Run inference on new data directly: `./.venv/bin/python model/inference.py`
+
+## Running the Full Stack Locally
+
+### 1. Start the API backend
+
+From the project root:
+
+```bash
+./.venv/bin/python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+```
+
+Verify it's running: open http://127.0.0.1:8000/health — you should see `{"status": "ok"}`
+
+### 2. Start the frontend
+
+In a separate terminal:
+
+```bash
+cd frontend
+npm install   # only needed the first time
+npm run dev
+```
+
+Then open http://localhost:5173 in your browser.
+
+### 3. Use the dashboard
+
+1. Upload a CSV (e.g. `Transactions/transactions3.csv`)
+2. Click **"Upload and Analyze"**
+3. The backend runs fraud predictions and returns results to the dashboard
 
 ## Dashboard Usage (Deployed on Vercel)
 
