@@ -26,5 +26,7 @@ Week 11: On this week I designed and finalized the system diagram that visually 
 
 Week 12: On this week I completed the first major draft of the project final presentation poster. I combined all major components of the project, including goals, system overview, technologies used, accomplishments, and future improvements, into a clean and organized layout suitable for presentation. Additionally, I updated the README to have more info on the data generator, and other key components of our project.
 
+Week 13: On this week, I completed making our final presentation poster, and helped to prepare us for the final presentation next week.  
+
 
 
