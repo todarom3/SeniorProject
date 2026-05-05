@@ -276,66 +276,68 @@ export default function App() {
     return "Low impact";
   }
 
-  // NEW: Renders fraud reasons as horizontal cards below the transaction row
-  function renderHorizontalReasonCards(reasons, isFraud) {
-    if (!isFraud) return null;
+  // Renders the fraud reasoning cards returned by the backend's top_reasons field
+  // MODIFIED: Now displays reasons horizontally within the cell
+  function renderTopReasons(reasons, isFraud) {
+    if (!isFraud) {
+      return <span style={{ color: "#94a3b8" }}>Not flagged as fraud</span>;
+    }
 
     const positiveReasons = getPositiveReasons(reasons);
-    if (positiveReasons.length === 0) return null;
+
+    if (positiveReasons.length === 0) {
+      return (
+        <span style={{ color: "#94a3b8" }}>
+          Flagged by the model overall, but no strong individual positive reason was returned.
+        </span>
+      );
+    }
 
     const totalPositiveContribution = positiveReasons.reduce(
       (sum, reason) => sum + reason.contribution,
       0
     );
 
+    // MODIFIED: Changed from grid to flex horizontal layout
     return (
-      <tr style={{ background: "#0f172a" }}>
-        <td colSpan={11} style={{ padding: "12px 6px 12px 6px", borderBottom: "1px solid #334155" }}>
-          <div style={{ 
-            display: "flex", 
-            gap: 12, 
-            flexWrap: "wrap",
-            alignItems: "stretch"
-          }}>
-            {positiveReasons.map((reason, index) => {
-              const sharePercent =
-                totalPositiveContribution > 0
-                  ? (reason.contribution / totalPositiveContribution) * 100
-                  : 0;
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        {positiveReasons.map((reason, index) => {
+          const sharePercent =
+            totalPositiveContribution > 0
+              ? (reason.contribution / totalPositiveContribution) * 100
+              : 0;
 
-              return (
-                <div
-                  key={`reason-horizontal-${index}`}
-                  style={{
-                    flex: "1 1 180px",
-                    minWidth: "150px",
-                    background: "#1e293b",
-                    border: "1px solid #3b82f6",
-                    borderRadius: 8,
-                    padding: "10px 12px",
-                  }}
-                >
-                  <div style={{ fontWeight: 700, fontSize: "0.8rem", color: "#fbbf24" }}>
-                    {prettifyReasonFeature(reason.feature)}
-                  </div>
-                  <div style={{ color: "#93c5fd", fontSize: "0.7rem", marginTop: 4 }}>
-                    Increased fraud risk
-                  </div>
-                  <div style={{ color: "#cbd5e1", fontSize: "0.7rem", marginTop: 6 }}>
-                    Importance: {sharePercent.toFixed(1)}%<br />
-                    {getRiskImpactLabel(sharePercent)}
-                  </div>
-                  {reason.feature === "Timestamp" && reason.timestamp_value && (
-                    <div style={{ color: "#94a3b8", fontSize: "0.65rem", marginTop: 4 }}>
-                      {reason.timestamp_value}
-                    </div>
-                  )}
+          return (
+            <div
+              key={`${reason.feature}-${index}`}
+              style={{
+                flex: "1 1 auto",
+                minWidth: "120px",
+                background: "#0f172a",
+                border: "1px solid #3b82f6",
+                borderRadius: 8,
+                padding: "6px 10px",
+                lineHeight: 1.35,
+              }}
+            >
+              <div style={{ fontWeight: 700, fontSize: "0.7rem", color: "#fbbf24" }}>
+                {prettifyReasonFeature(reason.feature)}
+              </div>
+              <div style={{ color: "#93c5fd", fontSize: "0.65rem" }}>
+                Increased fraud risk
+              </div>
+              <div style={{ color: "#cbd5e1", fontSize: "0.65rem", marginTop: 2 }}>
+                Imp: {sharePercent.toFixed(1)}% • {getRiskImpactLabel(sharePercent)}
+              </div>
+              {reason.feature === "Timestamp" && reason.timestamp_value && (
+                <div style={{ color: "#94a3b8", fontSize: "0.6rem", marginTop: 2 }}>
+                  {reason.timestamp_value}
                 </div>
-              );
-            })}
-          </div>
-        </td>
-      </tr>
+              )}
+            </div>
+          );
+        })}
+      </div>
     );
   }
 
@@ -971,6 +973,14 @@ export default function App() {
     lineHeight: 1.3,
   };
 
+  // MODIFIED: Made the reasons column wider
+  const reasonsCellStyle = {
+    ...thTdStyle,
+    fontSize: "0.7rem",
+    minWidth: "280px",
+    width: "280px",
+  };
+
   const goToPageWrapStyle = {
     display: "flex",
     justifyContent: "center",
@@ -1581,49 +1591,40 @@ export default function App() {
                   <table border="0" cellPadding="8" style={tableStyle}>
                     <thead>
                       <tr>
-                        <th style={thTdStyle}>Transaction ID</th>
-                        <th style={thTdStyle}>Card (Last 4)</th>
+                        <th style={thTdStyle}>Transaction ID (Generation Order)</th>
                         <th style={thTdStyle}>Merchant</th>
-                        <th style={thTdStyle}>Category</th>
                         <th style={thTdStyle}>Location</th>
-                        <th style={thTdStyle}>Device</th>
                         <th style={thTdStyle}>Amount</th>
-                        <th style={thTdStyle}>Date</th>
-                        <th style={thTdStyle}>Time</th>
-                        <th style={thTdStyle}>Fraud?</th>
-                        <th style={thTdStyle}>Probability</th>
+                        <th style={thTdStyle}>Predicted Fraud?</th>
+                        <th style={thTdStyle}>Fraud Probability</th>
+                        <th style={reasonsCellStyle}>Why It Was Flagged</th>
                       </tr>
                     </thead>
                     <tbody>
                       {highestRiskTransactions.map((r) => (
-                        <React.Fragment key={`high-risk-${r._rowId}`}>
-                          <tr>
-                            <td style={thTdStyle}>{r.transaction_id}</td>
-                            <td style={thTdStyle}>{maskCardNumber(r.card_number)}</td>
-                            <td style={thTdStyle}>{r.merchant}</td>
-                            <td style={thTdStyle}>{r.category}</td>
-                            <td style={thTdStyle}>{r.location}</td>
-                            <td style={thTdStyle}>{r.device}</td>
-                            <td style={thTdStyle}>{formatAmount(r.amount)}</td>
-                            <td style={thTdStyle}>{formatDateMDY(r.timestamp)}</td>
-                            <td style={thTdStyle}>{formatTimeAMPM(r.timestamp)}</td>
-                            <td
-                              style={{
-                                ...thTdStyle,
-                                color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
-                                fontWeight: 700,
-                              }}
-                            >
-                              {r.predicted_is_fraud ? "YES" : "NO"}
-                            </td>
-                            <td style={thTdStyle}>
-                              {r.predicted_probability !== undefined
-                                ? formatProbability(r.predicted_probability)
-                                : ""}
-                            </td>
-                          </tr>
-                          {renderHorizontalReasonCards(r.top_reasons, r.predicted_is_fraud)}
-                        </React.Fragment>
+                        <tr key={`high-risk-${r._rowId}`}>
+                          <td style={thTdStyle}>{r.transaction_id}</td>
+                          <td style={thTdStyle}>{r.merchant}</td>
+                          <td style={thTdStyle}>{r.location}</td>
+                          <td style={thTdStyle}>{formatAmount(r.amount)}</td>
+                          <td
+                            style={{
+                              ...thTdStyle,
+                              color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {r.predicted_is_fraud ? "YES" : "NO"}
+                          </td>
+                          <td style={thTdStyle}>
+                            {r.predicted_probability !== undefined
+                              ? formatProbability(r.predicted_probability)
+                              : ""}
+                          </td>
+                          <td style={reasonsCellStyle}>
+                            {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
+                          </td>
+                        </tr>
                       ))}
                     </tbody>
                   </table>
@@ -1697,49 +1698,50 @@ export default function App() {
                 <table border="0" cellPadding="8" style={tableStyle}>
                   <thead>
                     <tr>
-                      <th style={thTdStyle}>ID</th>
-                      <th style={thTdStyle}>Card (Last 4)</th>
+                      <th style={thTdStyle}>Transaction ID (Generation Order)</th>
+                      <th style={thTdStyle}>Card Number (Last 4 Digits)</th>
                       <th style={thTdStyle}>Merchant</th>
                       <th style={thTdStyle}>Category</th>
                       <th style={thTdStyle}>Location</th>
                       <th style={thTdStyle}>Device</th>
                       <th style={thTdStyle}>Amount</th>
-                      <th style={thTdStyle}>Date</th>
-                      <th style={thTdStyle}>Time</th>
-                      <th style={thTdStyle}>Fraud?</th>
-                      <th style={thTdStyle}>Probability</th>
+                      <th style={thTdStyle}>Date (MM/DD/YYYY)</th>
+                      <th style={thTdStyle}>Time (AM/PM)</th>
+                      <th style={thTdStyle}>Predicted Fraud?</th>
+                      <th style={thTdStyle}>Fraud Probability</th>
+                      <th style={reasonsCellStyle}>Why It Was Flagged</th>
                     </tr>
                   </thead>
                   <tbody>
                     {pagedRows.map((r) => (
-                      <React.Fragment key={r._rowId}>
-                        <tr>
-                          <td style={thTdStyle}>{r.transaction_id}</td>
-                          <td style={thTdStyle}>{maskCardNumber(r.card_number)}</td>
-                          <td style={thTdStyle}>{r.merchant}</td>
-                          <td style={thTdStyle}>{r.category}</td>
-                          <td style={thTdStyle}>{r.location}</td>
-                          <td style={thTdStyle}>{r.device}</td>
-                          <td style={thTdStyle}>{formatAmount(r.amount)}</td>
-                          <td style={thTdStyle}>{formatDateMDY(r.timestamp)}</td>
-                          <td style={thTdStyle}>{formatTimeAMPM(r.timestamp)}</td>
-                          <td
-                            style={{
-                              ...thTdStyle,
-                              color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
-                              fontWeight: 700,
-                            }}
-                          >
-                            {r.predicted_is_fraud ? "YES" : "NO"}
-                          </td>
-                          <td style={thTdStyle}>
-                            {r.predicted_probability !== undefined
-                              ? formatProbability(r.predicted_probability)
-                              : ""}
-                          </td>
-                        </tr>
-                        {renderHorizontalReasonCards(r.top_reasons, r.predicted_is_fraud)}
-                      </React.Fragment>
+                      <tr key={r._rowId}>
+                        <td style={thTdStyle}>{r.transaction_id}</td>
+                        <td style={thTdStyle}>{maskCardNumber(r.card_number)}</td>
+                        <td style={thTdStyle}>{r.merchant}</td>
+                        <td style={thTdStyle}>{r.category}</td>
+                        <td style={thTdStyle}>{r.location}</td>
+                        <td style={thTdStyle}>{r.device}</td>
+                        <td style={thTdStyle}>{formatAmount(r.amount)}</td>
+                        <td style={thTdStyle}>{formatDateMDY(r.timestamp)}</td>
+                        <td style={thTdStyle}>{formatTimeAMPM(r.timestamp)}</td>
+                        <td
+                          style={{
+                            ...thTdStyle,
+                            color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
+                            fontWeight: 700,
+                          }}
+                        >
+                          {r.predicted_is_fraud ? "YES" : "NO"}
+                        </td>
+                        <td style={thTdStyle}>
+                          {r.predicted_probability !== undefined
+                            ? formatProbability(r.predicted_probability)
+                            : ""}
+                        </td>
+                        <td style={reasonsCellStyle}>
+                          {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
