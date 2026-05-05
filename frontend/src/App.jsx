@@ -276,19 +276,19 @@ export default function App() {
     return "Low impact";
   }
 
-  // Renders the fraud reasoning cards returned by the backend's top_reasons field
-  function renderTopReasons(reasons, isFraud) {
+  // UPDATED: Renders the fraud reasons inline below the fraud badge
+  function renderInlineReasons(reasons, isFraud) {
     if (!isFraud) {
-      return <span style={{ color: "#94a3b8" }}>Not flagged as fraud</span>;
+      return null;
     }
 
     const positiveReasons = getPositiveReasons(reasons);
 
     if (positiveReasons.length === 0) {
       return (
-        <span style={{ color: "#94a3b8" }}>
-          Flagged by the model overall, but no strong individual positive reason was returned.
-        </span>
+        <div style={{ marginTop: 8, fontSize: "0.7rem", color: "#94a3b8" }}>
+          Flagged by model
+        </div>
       );
     }
 
@@ -298,7 +298,7 @@ export default function App() {
     );
 
     return (
-      <div style={{ display: "grid", gap: 6 }}>
+      <div style={{ marginTop: 10 }}>
         {positiveReasons.map((reason, index) => {
           const sharePercent =
             totalPositiveContribution > 0
@@ -311,19 +311,20 @@ export default function App() {
               style={{
                 background: "#0f172a",
                 border: "1px solid #334155",
-                borderRadius: 8,
-                padding: "6px 8px",
-                lineHeight: 1.35,
+                borderRadius: 6,
+                padding: "5px 8px",
+                marginBottom: index === positiveReasons.length - 1 ? 0 : 6,
+                lineHeight: 1.3,
               }}
             >
-              <div style={{ fontWeight: 700 }}>
+              <div style={{ fontWeight: 600, fontSize: "0.7rem" }}>
                 {prettifyReasonFeature(reason.feature)}
               </div>
-              <div style={{ color: "#93c5fd", fontSize: "0.72rem" }}>
+              <div style={{ color: "#93c5fd", fontSize: "0.65rem" }}>
                 Increased fraud risk
               </div>
-              <div style={{ color: "#cbd5e1", fontSize: "0.72rem", marginTop: 2 }}>
-                Reason Importance: {sharePercent.toFixed(1)}% •{" "}
+              <div style={{ color: "#cbd5e1", fontSize: "0.65rem", marginTop: 2 }}>
+                Importance: {sharePercent.toFixed(1)}% •{" "}
                 {getRiskImpactLabel(sharePercent)}
               </div>
             </div>
@@ -965,9 +966,10 @@ export default function App() {
     lineHeight: 1.3,
   };
 
-  const reasonsCellStyle = {
+  // UPDATED: Style for the fraud status cell that can contain inline reasons
+  const fraudStatusCellStyle = {
     ...thTdStyle,
-    fontSize: "0.7rem",
+    verticalAlign: "top",
   };
 
   const goToPageWrapStyle = {
@@ -1586,7 +1588,6 @@ export default function App() {
                         <th style={thTdStyle}>Amount</th>
                         <th style={thTdStyle}>Predicted Fraud?</th>
                         <th style={thTdStyle}>Fraud Probability</th>
-                        <th style={reasonsCellStyle}>Why It Was Flagged</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1596,22 +1597,21 @@ export default function App() {
                           <td style={thTdStyle}>{r.merchant}</td>
                           <td style={thTdStyle}>{r.location}</td>
                           <td style={thTdStyle}>{formatAmount(r.amount)}</td>
-                          <td
-                            style={{
-                              ...thTdStyle,
-                              color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
-                              fontWeight: 700,
-                            }}
-                          >
-                            {r.predicted_is_fraud ? "YES" : "NO"}
+                          <td style={fraudStatusCellStyle}>
+                            <div
+                              style={{
+                                color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
+                                fontWeight: 700,
+                              }}
+                            >
+                              {r.predicted_is_fraud ? "YES" : "NO"}
+                            </div>
+                            {renderInlineReasons(r.top_reasons, r.predicted_is_fraud)}
                           </td>
                           <td style={thTdStyle}>
                             {r.predicted_probability !== undefined
                               ? formatProbability(r.predicted_probability)
                               : ""}
-                          </td>
-                          <td style={reasonsCellStyle}>
-                            {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
                           </td>
                         </tr>
                       ))}
@@ -1698,7 +1698,6 @@ export default function App() {
                       <th style={thTdStyle}>Time (AM/PM)</th>
                       <th style={thTdStyle}>Predicted Fraud?</th>
                       <th style={thTdStyle}>Fraud Probability</th>
-                      <th style={reasonsCellStyle}>Why It Was Flagged</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1713,22 +1712,21 @@ export default function App() {
                         <td style={thTdStyle}>{formatAmount(r.amount)}</td>
                         <td style={thTdStyle}>{formatDateMDY(r.timestamp)}</td>
                         <td style={thTdStyle}>{formatTimeAMPM(r.timestamp)}</td>
-                        <td
-                          style={{
-                            ...thTdStyle,
-                            color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
-                            fontWeight: 700,
-                          }}
-                        >
-                          {r.predicted_is_fraud ? "YES" : "NO"}
+                        <td style={fraudStatusCellStyle}>
+                          <div
+                            style={{
+                              color: r.predicted_is_fraud ? "#f87171" : "#4ade80",
+                              fontWeight: 700,
+                            }}
+                          >
+                            {r.predicted_is_fraud ? "YES" : "NO"}
+                          </div>
+                          {renderInlineReasons(r.top_reasons, r.predicted_is_fraud)}
                         </td>
                         <td style={thTdStyle}>
                           {r.predicted_probability !== undefined
                             ? formatProbability(r.predicted_probability)
                             : ""}
-                        </td>
-                        <td style={reasonsCellStyle}>
-                          {renderTopReasons(r.top_reasons, r.predicted_is_fraud)}
                         </td>
                       </tr>
                     ))}
