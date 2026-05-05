@@ -33,3 +33,7 @@ This week, it was most important to focus on preparation for the presentation. O
 4/7 - 4/14: This week, I commited my changes but still had to make some changes to the loading screen. The loading would finish before the loading screen was fully completed, so I needed to make changes to fix that. I also moved files into their respective folders and deleted files that we did not need anymore.
 
 4/14 - 4/21: This week, I added a new column to the dashboard that explains why fraudulent transactions were detected as fraudulent. I also had to fix the table, since some of the information was getting cut off the screen. Next, I made sure that people's credit card information was hidden, as that is sensitive data that should not be accessible to people using the dashboard. I also clarified that the transaction ID represents the generation order and updated the table sorting to reflect this instead of sorting by date.
+
+4/21 - 4/28: This week, we spent time working on our presentation poster. We filled out the outline with all of the information needed, and then made sure that everything would fit properly on the poster board. I also updated the README with more useful information that people would need when viewing our project and learning about it.
+
+4/28 - 5/5: This week, we glued everything to the poster board in preparation for the final presentation. I also made some last minute changes to the dashboard, making the "Why it was flagged" column wider so that it does not cause such a big gap in the display. 
